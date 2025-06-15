@@ -143,7 +143,10 @@ CREATE TABLE `exam` (
   KEY `instructor_id` (`instructor_id`),
   CONSTRAINT `exam_ibfk_1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`TopicID`),
   CONSTRAINT `exam_ibfk_2` FOREIGN KEY (`evaluator_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `exam_ibfk_3` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `exam_ibfk_3` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `exam_ibfk_4` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `exam_ibfk_5` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,7 +180,10 @@ CREATE TABLE `examresult` (
   KEY `exam_id` (`exam_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `examresult_ibfk_1` FOREIGN KEY (`exam_id`) REFERENCES `exam` (`exam_id`),
-  CONSTRAINT `examresult_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `examresult_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `examresult_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `examresult_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -213,7 +219,10 @@ CREATE TABLE `examsubmission` (
   KEY `ExamID` (`ExamID`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `examsubmission_ibfk_1` FOREIGN KEY (`ExamID`) REFERENCES `exam` (`exam_id`),
-  CONSTRAINT `examsubmission_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `examsubmission_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `examsubmission_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `examsubmission_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -244,7 +253,9 @@ CREATE TABLE `optiontable` (
   `updated_on` datetime DEFAULT NULL,
   PRIMARY KEY (`OptionID`),
   KEY `QuestionID` (`QuestionID`),
-  CONSTRAINT `optiontable_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `question` (`QuestionID`)
+  CONSTRAINT `optiontable_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `question` (`QuestionID`),
+  CONSTRAINT `optiontable_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `optiontable_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -276,7 +287,9 @@ CREATE TABLE `question` (
   `updated_on` datetime DEFAULT NULL,
   PRIMARY KEY (`QuestionID`),
   KEY `ExamID` (`ExamID`),
-  CONSTRAINT `question_ibfk_1` FOREIGN KEY (`ExamID`) REFERENCES `exam` (`exam_id`)
+  CONSTRAINT `question_ibfk_1` FOREIGN KEY (`ExamID`) REFERENCES `exam` (`exam_id`),
+  CONSTRAINT `question_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `question_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -310,7 +323,9 @@ CREATE TABLE `rating` (
   KEY `CourseID` (`CourseID`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
-  CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `rating_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `rating_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -348,7 +363,9 @@ CREATE TABLE `session` (
   KEY `instructor_id` (`instructor_id`),
   CONSTRAINT `session_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`CourseID`),
   CONSTRAINT `session_ibfk_2` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`TopicID`),
-  CONSTRAINT `session_ibfk_3` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `session_ibfk_3` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `session_ibfk_4` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `session_ibfk_5` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -378,7 +395,9 @@ CREATE TABLE `syllabus` (
   `updated_on` datetime DEFAULT NULL,
   PRIMARY KEY (`SyllabusID`),
   KEY `CourseID` (`CourseID`),
-  CONSTRAINT `syllabus_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`)
+  CONSTRAINT `syllabus_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`),
+  CONSTRAINT `syllabus_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `syllabus_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -413,7 +432,9 @@ CREATE TABLE `topic` (
   KEY `SyllabusID` (`SyllabusID`),
   KEY `instructor_id` (`instructor_id`),
   CONSTRAINT `topic_ibfk_1` FOREIGN KEY (`SyllabusID`) REFERENCES `syllabus` (`SyllabusID`),
-  CONSTRAINT `topic_ibfk_2` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `topic_ibfk_2` FOREIGN KEY (`instructor_id`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `topic_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `topic_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -461,7 +482,9 @@ CREATE TABLE `user` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`),
   KEY `role_id` (`role_id`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `userrole` (`role_id`)
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `userrole` (`role_id`),
+  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `user_ibfk_3` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -496,6 +519,8 @@ CREATE TABLE `userrole` (
   `created_on` datetime DEFAULT NULL,
   `updated_on` datetime DEFAULT NULL,
   PRIMARY KEY (`role_id`)
+  CONSTRAINT `examsubmission_ibfk_3` FOREIGN KEY (`created_by`) REFERENCES `user` (`user_id`),
+  CONSTRAINT `examsubmission_ibfk_4` FOREIGN KEY (`updated_by`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
