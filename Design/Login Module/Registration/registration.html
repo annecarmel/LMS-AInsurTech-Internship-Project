@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LMS Registration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background">
+    <div class="form-box">
+      <h1 class="form-title">LEARNING MANAGEMENT <br> SYSTEM</h1>
+      <div class="login-form">
+        <h2 class="form-title">Registration</h2>
+        <form>
+          <div class="row">
+            <div class="col">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" required />
+            </div>
+            <div class="col">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="col">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="password">Password <span class="show">Show</span></label>
+              <input type="password" id="password" name="password" required />
+            </div>
+            <div class="col">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" required />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" required />
+            </div>
+            <div class="col">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select gender</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="row">
+  <div class="col">
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" required />
+  </div>
+  <div class="col-row">
+    <div class="state-box">
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" required />
+    </div>
+    <div class="country-box">
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" required />
+    </div>
+  </div>
+</div>
+          <div class="terms center-align">
+            <input type="checkbox" id="terms" name="terms" required />
+            <label for="terms" class="terms-label">I agree to the <a href="#">Terms and Conditions</a></label>
+          </div>
+
+          <div class="center-button">
+            <button type="submit">Register</button>
+          </div>
+
+          <p class="signup">Already have an account? <a href="/Login/index.html">Log in</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+</html>
