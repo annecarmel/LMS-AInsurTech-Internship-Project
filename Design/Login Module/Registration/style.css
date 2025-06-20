@@ -1,0 +1,170 @@
+/* === RESET & BASE === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  background-color: #e6f0e6;
+  padding: 60px 0;
+}
+
+/* === BACKGROUND === */
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  padding: 40px 0;
+}
+
+/* === WHITE FORM BOX === */
+.form-box {
+  background-color: #fefefe;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 900px;
+  max-width: 95%;
+  margin: 40px auto;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 22px;
+  color: #004d26;
+  font-weight: 700;
+  margin-bottom: 25px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+/* === FORM LAYOUT === */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.col,
+.half,
+.state-box,
+.country-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.col-row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex: 1;
+}
+
+.country-box {
+  width: 120px;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #00331a;
+}
+
+input,
+select {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: white;
+  outline: none;
+}
+
+/* === TERMS & CONDITIONS === */
+.terms {
+  display: flex;
+  align-items: center;
+  margin: 20px auto 10px;
+  justify-content: center;
+}
+
+.terms input[type="checkbox"] {
+  margin-right: 8px;
+  margin-bottom: -1px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.terms-label {
+  font-size: 13px;
+  color: #00331a;
+}
+
+.terms-label a {
+  color: #006633;
+  text-decoration: underline;
+}
+
+/* === BUTTON & LINKS === */
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #006633;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004d26;
+}
+
+.signup {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+a {
+  color: #006633;
+  text-decoration: none;
+}
+
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.show {
+  float: right;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+  font-weight: normal;
+}
