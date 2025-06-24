@@ -1,76 +1,36 @@
-﻿using ASSNlearningManagementSystem.Models;
-using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using ASSNlearningManagementSystem.DataAccess;
 
 namespace ASSNlearningManagementSystem.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly string connectionString = "server=localhost;user=root;password=root;database=lmsdb";
+        private readonly UserRepository _userRepository;
 
-        // GET: /Account/Login
+        // Injecting UserRepository through constructor
+        public LoginController(UserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View("~/Views/Login/Login.cshtml");
         }
 
-        // POST: /Account/Login
         [HttpPost]
-        public IActionResult Login(User user)
+        public IActionResult Login(string username, string password)
         {
-            if (ModelState.IsValid)
+            if (_userRepository.ValidateUser(username, password))
             {
-                using (MySqlConnection con = new MySqlConnection(connectionString))
-                {
-                    con.Open();
-
-                    string query = "SELECT role_id FROM user WHERE username = @username AND password = @password";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@username", user.Username);
-                        cmd.Parameters.AddWithValue("@password", user.Password);
-
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
-                        {
-                            int roleId = Convert.ToInt32(result);
-
-                            switch (roleId)
-                            {
-                                case 1:
-                                    return RedirectToAction("Dashboard", "Admin");
-                                case 2:
-                                    return RedirectToAction("Dashboard", "Trainer");
-                                case 3:
-                                    return RedirectToAction("Dashboard", "Learner");
-                                default:
-                                    ViewBag.ErrorMessage = "User role unknown.";
-                                    return View();
-                            }
-                        }
-                        else
-                        {
-                            ViewBag.ErrorMessage = "Invalid username or password.";
-                            return View();
-                        }
-                    }
-                }
+                HttpContext.Session.SetString("Username", username);
+                return RedirectToAction("Dashboard", "Dashboard");
             }
 
-            return View();
-        }
-
-        // Optional default welcome page
-        public IActionResult Welcome()
-        {
-            return View();
-        }
-
-        public IActionResult Index()
-        {
-            return RedirectToAction("Login");
+            ViewBag.Error = "Invalid username or password";
+            return View("~/Views/Login/Login.cshtml");
         }
     }
 }

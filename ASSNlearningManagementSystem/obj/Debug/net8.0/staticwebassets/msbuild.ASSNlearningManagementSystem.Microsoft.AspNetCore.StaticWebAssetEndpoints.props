@@ -1,17 +1,5 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/ASSNlearningManagementSystem.aao21vinqy.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ASSNlearningManagementSystem.aao21vinqy.bundle.scp.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"aao21vinqy"},{"Name":"integrity","Value":"sha256-ckT\u002B4KiFiPhUOpWDY1WntuwcJGQFA4aDGjs\u002BB0O\u002B0qE="},{"Name":"label","Value":"_content/ASSNlearningManagementSystem/ASSNlearningManagementSystem.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1146"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ckT\u002B4KiFiPhUOpWDY1WntuwcJGQFA4aDGjs\u002BB0O\u002B0qE=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 09:23:17 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/ASSNlearningManagementSystem.bundle.scp.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ASSNlearningManagementSystem.aao21vinqy.bundle.scp.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ckT\u002B4KiFiPhUOpWDY1WntuwcJGQFA4aDGjs\u002BB0O\u002B0qE="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1146"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ckT\u002B4KiFiPhUOpWDY1WntuwcJGQFA4aDGjs\u002BB0O\u002B0qE=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 09:23:17 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/css/AdminSidebar.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\AdminSidebar.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
@@ -96,17 +84,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"5430"},{"Name":"Content-Type","Value":"image/x-icon"},{"Name":"ETag","Value":"\u0022Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 08:11:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/img/ai  2 .png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\ai  2 .png'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/img/ai2.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\ai2.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"11758"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774=\u0022"},{"Name":"Last-Modified","Value":"Mon, 02 Jun 2025 01:58:29 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"11758"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 16:17:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/img/ai  2 .z0spe6kjqw.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\ai  2 .png'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/img/ai2.z0spe6kjqw.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\ai2.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"z0spe6kjqw"},{"Name":"integrity","Value":"sha256-IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774="},{"Name":"label","Value":"_content/ASSNlearningManagementSystem/img/ai  2 .png"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"11758"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774=\u0022"},{"Name":"Last-Modified","Value":"Mon, 02 Jun 2025 01:58:29 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"z0spe6kjqw"},{"Name":"integrity","Value":"sha256-IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774="},{"Name":"label","Value":"_content/ASSNlearningManagementSystem/img/ai2.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"11758"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022IwCvEFicUoEsP6YiKlIMMhI3lHfpdHG5z1tPVmDm774=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 16:17:16 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/img/arrow.gqsdacdx6d.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\img\arrow.png'))</AssetFile>
