@@ -1,0 +1,91 @@
+﻿@model ASSNlearningManagementSystem.Models.User
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="@(Url.Content("~/css/style.css"))" />
+    <link rel="stylesheet" href="@(Url.Content("~/css/responsive.css"))" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="login_header">
+        <div class="container">
+            <nav>
+                <div class="nav_logo">
+                    <img src="~/img/ai2.png" alt="Logo" />
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Background Section -->
+    <div class="background_section">
+        <div class="login_card">
+            <!-- Left image -->
+            <div class="login_image">
+                <img src="~/img/login illustration.png" alt="Login Illustration" />
+            </div>
+
+            <!-- Right login form -->
+            <div class="login_form">
+                <form asp-action="Login" method="post">
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert-danger">@ViewBag.ErrorMessage</div>
+                    }
+
+                    <div class="form-group">
+                        <label asp-for="Username">Username</label>
+                        <input asp-for="Username" class="form-control" placeholder="Enter Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Enter Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="remember">
+                        <input type="checkbox" id="rememberMe" />
+                        <label for="rememberMe">Remember me on this machine</label>
+                    </div>
+
+                    <div class="button_group">
+                        <button type="submit" class="login-btn">Login</button>
+                        <a class="forgot-btn" href="#">Forgot Password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="back_footer">
+            <p>©2023 SMRT. All Rights Reserved | Developed by AInsurtech</p>
+        </div>
+    </footer>
+
+    <!-- Optional Client-Side Validation -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+</html>
