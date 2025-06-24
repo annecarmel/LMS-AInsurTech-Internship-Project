@@ -1,9 +1,11 @@
-using ASSNlearningManagementSystem.DataAccess;
+﻿using ASSNlearningManagementSystem.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services
 builder.Services.AddControllersWithViews();
 
+// Add session support
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -12,12 +14,11 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// ✅ Let DI inject IConfiguration into UserRepository automatically
+builder.Services.AddScoped<UserRepository>();
 
-builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
-
-// default constructor injection for EmployeeRepository
-
+// OPTIONAL: Register other repositories like EmployeeRepository
+// builder.Services.AddScoped<EmployeeRepository>();
 
 var app = builder.Build();
 
