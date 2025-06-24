@@ -1,0 +1,49 @@
+/* _content/ASSNlearningManagementSystem/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-ljg9joitsx] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-ljg9joitsx] {
+  color: #0077cc;
+}
+
+.btn-primary[b-ljg9joitsx] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-ljg9joitsx], .nav-pills .show > .nav-link[b-ljg9joitsx] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-ljg9joitsx] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-ljg9joitsx] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-ljg9joitsx] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-ljg9joitsx] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-ljg9joitsx] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
