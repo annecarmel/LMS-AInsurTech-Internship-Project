@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "De1AX0+JYq2ZuUpz4FtY59Z+iBnDy8+k3xDVbhbkUXA=",
+  "Hash": "KtAXmpLOKdjNXLAsmpnKmK0/5DEMEzqEuB1yfPaBaDk=",
   "Source": "ASSNlearningManagementSystem",
   "BasePath": "_content/ASSNlearningManagementSystem",
   "Mode": "Default",
@@ -115,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "r7uzdyb85c",
-      "Integrity": "tyitV+cXIdgZNlLVEEpfmf4rSqfIMON7RhNmRhTfG+M=",
+      "Fingerprint": "hc42z5e5vn",
+      "Integrity": "gdn8o7FPp/kYthtgwrSwGU3hbL5vaz7hR0VQOboZpPk=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
@@ -2003,11 +2003,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tyitV+cXIdgZNlLVEEpfmf4rSqfIMON7RhNmRhTfG+M=\""
+          "Value": "\"gdn8o7FPp/kYthtgwrSwGU3hbL5vaz7hR0VQOboZpPk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 03:49:47 GMT"
+          "Value": "Wed, 25 Jun 2025 04:42:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2017,12 +2017,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-tyitV+cXIdgZNlLVEEpfmf4rSqfIMON7RhNmRhTfG+M="
+          "Value": "sha256-gdn8o7FPp/kYthtgwrSwGU3hbL5vaz7hR0VQOboZpPk="
         }
       ]
     },
     {
-      "Route": "css/style.r7uzdyb85c.css",
+      "Route": "css/style.hc42z5e5vn.css",
       "AssetFile": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2040,11 +2040,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tyitV+cXIdgZNlLVEEpfmf4rSqfIMON7RhNmRhTfG+M=\""
+          "Value": "\"gdn8o7FPp/kYthtgwrSwGU3hbL5vaz7hR0VQOboZpPk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 24 Jun 2025 03:49:47 GMT"
+          "Value": "Wed, 25 Jun 2025 04:42:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2054,7 +2054,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r7uzdyb85c"
+          "Value": "hc42z5e5vn"
         },
         {
           "Name": "label",
@@ -2062,7 +2062,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-tyitV+cXIdgZNlLVEEpfmf4rSqfIMON7RhNmRhTfG+M="
+          "Value": "sha256-gdn8o7FPp/kYthtgwrSwGU3hbL5vaz7hR0VQOboZpPk="
         }
       ]
     },

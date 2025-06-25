@@ -30,6 +30,14 @@ namespace ASSNlearningManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SaveUser(UserViewModel user)
         {
+            // Fallback FullName auto-generation in case JS is disabled
+            if (string.IsNullOrWhiteSpace(user.FullName) &&
+                !string.IsNullOrWhiteSpace(user.FirstName) &&
+                !string.IsNullOrWhiteSpace(user.LastName))
+            {
+                user.FullName = $"{user.FirstName} {user.LastName}";
+            }
+
             if (ModelState.IsValid)
             {
                 _userRepository.AddUser(user);

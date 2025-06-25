@@ -12,9 +12,22 @@
 <link rel="stylesheet" href="~/css/style.css" />
 <link rel="stylesheet" href="~/css/responsive.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-
+<style>
+    .success-popup {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #28a745;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        z-index: 9999;
+        display: none;
+    }
+</style>
 
 <main>
     <div class="container">
@@ -25,52 +38,52 @@
                 </div>
             </div>
 
+            @* Success Popup *@
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="success-popup" id="successPopup">@TempData["SuccessMessage"]</div>
+            }
+
             <div class="container_emp mb-20">
                 <div class="empmaster_card">
-                    @if (TempData["SuccessMessage"] != null)
-                    {
-                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-                    }
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                     @using (Html.BeginForm("SaveUser", "User", FormMethod.Post))
                     {
                         @Html.AntiForgeryToken()
                         <div class="emp_form">
-                            <div class="emp_add_heading">
-                                <h3>Personal Details</h3>
-                            </div>
+                            <div class="emp_add_heading"><h3>Personal Details</h3></div>
+
                             <div class="form_row">
                                 <div class="form_group">
                                     <label>First Name</label>
-                                    @Html.TextBoxFor(m => m.User.FirstName, new { placeholder = "Enter First Name" })
+                                    @Html.TextBoxFor(m => m.User.FirstName, new { placeholder = "Enter First Name", id = "User_FirstName" })
                                 </div>
                                 <div class="form_group">
                                     <label>Last Name</label>
-                                    @Html.TextBoxFor(m => m.User.LastName, new { placeholder = "Enter Last Name" })
+                                    @Html.TextBoxFor(m => m.User.LastName, new { placeholder = "Enter Last Name", id = "User_LastName" })
                                 </div>
                             </div>
 
                             <div class="form_row">
                                 <div class="form_group">
                                     <label>Email</label>
-                                    @Html.TextBoxFor(m => m.User.Email, new { placeholder = "Enter Email", type = "email" })
+                                    @Html.TextBoxFor(m => m.User.Email, new { type = "email", placeholder = "Enter Email" })
                                 </div>
                                 <div class="form_group">
                                     <label>Date of Birth</label>
-                                    @Html.TextBoxFor(m => m.User.DateOfBirth, new { @class = "dob-input", placeholder = "Select Date of Birth", type = "date" })
+                                    @Html.TextBoxFor(m => m.User.DateOfBirth, new { type = "date", placeholder = "Select Date of Birth" })
                                 </div>
                             </div>
 
                             <div class="form_row">
-
                                 <div class="form_group">
                                     <label>Gender</label>
                                     @Html.DropDownListFor(m => m.User.Gender, new SelectList(new[] { "Male", "Female", "Other" }), "Choose Gender")
                                 </div>
                                 <div class="form_group">
                                     <label>Country</label>
-                                    @Html.TextBoxFor(m => m.User.City, new { placeholder = "Enter Country" })
+                                    @Html.TextBoxFor(m => m.User.Country, new { placeholder = "Enter Country" })
                                 </div>
                             </div>
 
@@ -85,17 +98,19 @@
                                 </div>
                             </div>
 
-                            <div class="emp_add_heading">
-                                <h3>User Details</h3>
-                            </div>
+                            <div class="emp_add_heading"><h3>User Details</h3></div>
+
                             <div class="form_row">
                                 <div class="form_group">
                                     <label>Full Name</label>
-                                    @Html.TextBoxFor(m => m.User.FullName, new { placeholder = "Enter Full Name" })
+                                    @Html.TextBoxFor(m => m.User.FullName, new { @readonly = "readonly", id = "fullName", placeholder = "Auto-filled" })
                                 </div>
                                 <div class="form_group">
                                     <label>Role</label>
-                                    @Html.DropDownListFor(m => m.User.RoleId, new SelectList(Model.User.RoleList, "role_id", "role_name"), "Select Role")
+                                    @Html.DropDownListFor(m => m.User.RoleId, new SelectList(new[] {
+                                new { role_id = 2, role_name = "Trainer" },
+                                new { role_id = 3, role_name = "Learner" }
+                                }, "role_id", "role_name"), "Select Role")
                                 </div>
                             </div>
 
@@ -106,22 +121,24 @@
                                 </div>
                                 <div class="form_group" style="position: relative;">
                                     <label>Password</label>
-                                    @Html.PasswordFor(m => m.User.Password, new { @class = "password-input", placeholder = "Enter a strong password", id = "password" })
-
+                                    @Html.PasswordFor(m => m.User.Password, new
+                                        {
+                                            @class = "password-input",
+                                            id = "password",
+                                            placeholder = "Enter Password",
+                                            style = "padding-right: 40px;"
+                                        })
                                     <i id="togglePassword" class="fa-solid fa-eye toggle-password"
                                        title="Show Password"
                                        style="position:absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer; color: #555;"></i>
-
                                 </div>
-
                             </div>
 
                             <div class="form_row">
                                 <div class="form_group">
                                     <label>Phone Number</label>
-                                    @Html.TextBoxFor(m => m.User.PhoneNumber, new { placeholder = "Enter Phone Number", type = "tel" })
+                                    @Html.TextBoxFor(m => m.User.PhoneNumber, new { type = "tel", placeholder = "Enter Phone Number" })
                                 </div>
-                                
                                 <div class="form_group">
                                     <label>Department</label>
                                     @Html.TextBoxFor(m => m.User.Department, new { placeholder = "Enter Department" })
@@ -130,7 +147,7 @@
 
                             <div class="form_row">
                                 <button type="submit" class="custom-button">Save</button>
-                                <button type="reset">Cancel</button>
+                                <button type="button" class="cancel-button" onclick="window.location.href='@Url.Action("Dashboard", "Dashboard")'">Cancel</button>
                             </div>
                         </div>
                     }
@@ -138,9 +155,7 @@
             </div>
 
             <div class="container_emp mb-20">
-                <div class="emp_head">
-                    <h3>User List</h3>
-                </div>
+                <div class="emp_head"><h3>User List</h3></div>
                 <div class="empmaster_card">
                     <div class="table-responsive">
                         <table class="emp_table table" id="userTable">
@@ -175,49 +190,42 @@
     </div>
 </main>
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function () {
-        $('#userTable').DataTable({
-            responsive: true
+        $('#userTable').DataTable({ responsive: true });
+
+        const popup = $('#successPopup');
+        if (popup.length) {
+            popup.fadeIn(400).delay(3000).fadeOut(400);
+        }
+
+        $('#User_FirstName, #User_LastName').on('input', function () {
+            const first = $('#User_FirstName').val();
+            const last = $('#User_LastName').val();
+            $('#fullName').val(first + ' ' + last);
+        });
+
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+
+        togglePassword?.addEventListener("click", function () {
+            const type = passwordInput.type === "password" ? "text" : "password";
+            passwordInput.type = type;
+            this.classList.toggle("fa-eye");
+            this.classList.toggle("fa-eye-slash");
+            this.title = type === "password" ? "Show Password" : "Hide Password";
+        });
+
+        togglePassword?.addEventListener("mouseover", function () {
+            this.style.color = "#007bff";
+        });
+
+        togglePassword?.addEventListener("mouseout", function () {
+            this.style.color = "#555";
         });
     });
 </script>
-<script>
-    function togglePassword() {
-        var input = document.getElementById("passwordInput");
-        input.type = input.type === "password" ? "text" : "password";
-    }
-</script>
-<script>
-    const togglePassword = document.getElementById("togglePassword");
-    const passwordInput = document.getElementById("password");
-
-    togglePassword.addEventListener("click", function () {
-        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
-        passwordInput.setAttribute("type", type);
-
-        this.classList.toggle("fa-eye");
-        this.classList.toggle("fa-eye-slash");
-
-        this.title = type === "password" ? "Show Password" : "Hide Password";
-    });
-
-    togglePassword.addEventListener("mouseover", function () {
-        this.style.color = "#007bff";
-    });
-
-    togglePassword.addEventListener("mouseout", function () {
-        this.style.color = "#555";
-    });
-</script>
-
-@Html.PasswordFor(m => m.User.Password, new
-    {
-        @class = "password-input",
-        placeholder = "Enter a strong password",
-        id = "password",
-        style = "padding-right: 40px;"
-    })
-

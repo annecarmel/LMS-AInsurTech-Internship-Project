@@ -30,8 +30,8 @@ namespace ASSNlearningManagementSystem.Models
 
         public string Gender { get; set; }
 
+        public string Country { get; set; } // ✅ Needed for Razor view
         public string City { get; set; }
-
         public string State { get; set; }
 
         // User Details
@@ -50,10 +50,10 @@ namespace ASSNlearningManagementSystem.Models
         [Display(Name = "Role ID")]
         public int RoleId { get; set; }
 
-        public string RoleName { get; set; } // To display in the User List
+        public string RoleName { get; set; } // Display in user list
 
-        // List for dropdown roles
-        public List<UserRoleViewModel> RoleList { get; set; } = new List<UserRoleViewModel>();
+        // ❌ Optional now unless you fetch roles from DB dynamically
+        // public List<UserRoleViewModel> RoleList { get; set; } = new List<UserRoleViewModel>();
     }
 
     public class UserRoleViewModel
@@ -62,7 +62,6 @@ namespace ASSNlearningManagementSystem.Models
         public string role_name { get; set; }
     }
 
-    // ✅ Add this class — missing earlier
     public class UserPageViewModel
     {
         public UserViewModel User { get; set; } = new UserViewModel();
