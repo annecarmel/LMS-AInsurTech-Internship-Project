@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/Employee/Employee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/Exam/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhhbVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -118,18 +122,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/Trainer/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5lclxEYXNoYm9hcmQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/User/Add.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBZGQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/User/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/User/User.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Lemra/Desktop/ASSNlearningManagementSystem/ASSNlearningManagementSystem/Views/_ViewImports.cshtml]

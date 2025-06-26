@@ -11,55 +11,64 @@ namespace ASSNlearningManagementSystem.Models
 
         [Required]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [EmailAddress]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Phone]
         [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         public DateTime? DateOfBirth { get; set; }
 
-        public string Gender { get; set; }
-
-        public string Country { get; set; } // ✅ Needed for Razor view
-        public string City { get; set; }
-        public string State { get; set; }
+        public string? Gender { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
 
         // User Details
         [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public string Username { get; set; } = string.Empty;
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
-        public string Department { get; set; }
+        public string? Department { get; set; }
 
         [Display(Name = "Role ID")]
         public int RoleId { get; set; }
 
-        public string RoleName { get; set; } // Display in user list
+        public string? RoleName { get; set; }
 
-        // ❌ Optional now unless you fetch roles from DB dynamically
-        // public List<UserRoleViewModel> RoleList { get; set; } = new List<UserRoleViewModel>();
+        public int? CourseId { get; set; }
+        public int? CreatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
+
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+
+        public string? EmploymentStatus { get; set; }
+
+        public int? Duration { get; set; }
+
+        public bool? IsActive { get; set; }
     }
 
     public class UserRoleViewModel
     {
-        public int role_id { get; set; }
-        public string role_name { get; set; }
+        public int RoleId { get; set; }
+        public string? RoleName { get; set; }
     }
 
     public class UserPageViewModel

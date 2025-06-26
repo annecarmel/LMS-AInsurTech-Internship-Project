@@ -141,3 +141,4 @@ C:\Users\Lemra\Desktop\ASSNlearningManagementSystem\ASSNlearningManagementSystem
 C:\Users\Lemra\Desktop\ASSNlearningManagementSystem\ASSNlearningManagementSystem\obj\Debug\net8.0\ASSNlearningManagementSystem.pdb
 C:\Users\Lemra\Desktop\ASSNlearningManagementSystem\ASSNlearningManagementSystem\obj\Debug\net8.0\ASSNlearningManagementSystem.genruntimeconfig.cache
 C:\Users\Lemra\Desktop\ASSNlearningManagementSystem\ASSNlearningManagementSystem\obj\Debug\net8.0\ref\ASSNlearningManagementSystem.dll
+C:\Users\Lemra\Desktop\ASSNlearningManagementSystem\ASSNlearningManagementSystem\bin\Debug\net8.0\Newtonsoft.Json.dll

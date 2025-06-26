@@ -1,0 +1,345 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\sessionoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\sessionoverview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\employeeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\employeepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\employeepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\dataaccess\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\dataaccess\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\userpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\userpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\dataaccess\\dashboardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\dataaccess\\dashboardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\dataaccess\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\dataaccess\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\coursepopularitybydepartment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\coursepopularitybydepartment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\courseenrollmentcount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\courseenrollmentcount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\models\\upcomingexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\models\\upcomingexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\views\\dashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\views\\dashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\views\\employee\\employee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\views\\employee\\employee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\wwwroot\\css\\responsive.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\wwwroot\\css\\responsive.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\assnlearningmanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\assnlearningmanagementsystem.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|c:\\users\\lemra\\desktop\\assnlearningmanagementsystem\\assnlearningmanagementsystem\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{346299B1-D033-4EC3-AE47-09BFB51A5616}|ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj|solutionrelative:assnlearningmanagementsystem\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 19,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\UserRepository.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\DataAccess\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\UserRepository.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\DataAccess\\UserRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAkwBoAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:49:14.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CoursePopularityByDepartment.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\CoursePopularityByDepartment.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\CoursePopularityByDepartment.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\CoursePopularityByDepartment.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\CoursePopularityByDepartment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:39:29.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\DataAccess\\EmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\EmployeeRepository.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\DataAccess\\EmployeeRepository.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAgwAAAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:34:34.696Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CourseEnrollmentCount.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\CourseEnrollmentCount.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\CourseEnrollmentCount.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\CourseEnrollmentCount.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\CourseEnrollmentCount.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:34:07.497Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmployeePageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\EmployeePageViewModel.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\EmployeePageViewModel.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\EmployeePageViewModel.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\EmployeePageViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:33:49.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmployeeViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\EmployeeViewModel.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\EmployeeViewModel.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\EmployeeViewModel.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\EmployeeViewModel.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowAQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:33:40.992Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SessionOverview.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\SessionOverview.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\SessionOverview.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\SessionOverview.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\SessionOverview.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:33:12.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UpcomingExam.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\UpcomingExam.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\UpcomingExam.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\UpcomingExam.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\UpcomingExam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:32:33.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Views\\Dashboard\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Views\\Dashboard\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Views\\Dashboard\\Dashboard.cshtml",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Views\\Dashboard\\Dashboard.cshtml",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-26T06:32:08.616Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Employee.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Views\\Employee\\Employee.cshtml",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Views\\Employee\\Employee.cshtml",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Views\\Employee\\Employee.cshtml",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Views\\Employee\\Employee.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAAAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-26T06:31:50.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Program.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Program.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Program.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:30:32.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DashboardRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\DashboardRepository.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\DataAccess\\DashboardRepository.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\DataAccess\\DashboardRepository.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\DataAccess\\DashboardRepository.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAowBAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:27:48.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Controllers\\EmployeeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:26:42.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAYwB8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-26T06:25:56.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "responsive.css",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\responsive.css",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\wwwroot\\css\\responsive.css",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\responsive.css",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\wwwroot\\css\\responsive.css",
+              "ViewState": "AgIAADIDAAAAAAAAAAAuwDwDAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-25T06:53:53.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
+              "ViewState": "AgIAAKADAAAAAAAAAAAQwKIDAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-25T04:35:32.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserPageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\UserPageViewModel.cs",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\Models\\UserPageViewModel.cs",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\Models\\UserPageViewModel.cs",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\Models\\UserPageViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-25T03:34:03.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": ".gitignore.txt",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\.gitignore.txt",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\.gitignore.txt",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\.gitignore.txt",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\.gitignore.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-06-24T20:15:27.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ASSNlearningManagementSystem.csproj",
+              "DocumentMoniker": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
+              "RelativeDocumentMoniker": "ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
+              "ToolTip": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
+              "RelativeToolTip": "ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-24T20:15:24.176Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{131369f2-062d-44a2-8671-91ff31efb4f4}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
