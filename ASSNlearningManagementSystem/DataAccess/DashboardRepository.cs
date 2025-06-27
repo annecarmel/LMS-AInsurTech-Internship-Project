@@ -17,8 +17,8 @@ namespace ASSNlearningManagementSystem.DataAccess
 
         public int GetTotalUsers()
         {
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM user", conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM user", conn))
             {
                 conn.Open();
                 return Convert.ToInt32(cmd.ExecuteScalar());
@@ -27,8 +27,8 @@ namespace ASSNlearningManagementSystem.DataAccess
 
         public int GetActiveCourses()
         {
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM course", conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM course", conn))
             {
                 conn.Open();
                 return Convert.ToInt32(cmd.ExecuteScalar());
@@ -37,8 +37,8 @@ namespace ASSNlearningManagementSystem.DataAccess
 
         public int GetScheduledExams()
         {
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM exam WHERE status IN ('Pending', 'Upcoming')", conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand("SELECT COUNT(*) FROM exam WHERE status IN ('Pending', 'Upcoming')", conn))
             {
                 conn.Open();
                 return Convert.ToInt32(cmd.ExecuteScalar());
@@ -54,11 +54,11 @@ namespace ASSNlearningManagementSystem.DataAccess
                 LEFT JOIN courseenrollments e ON c.CourseID = e.course_id
                 GROUP BY c.CourseName";
 
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand(query, conn))
             {
                 conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -73,27 +73,29 @@ namespace ASSNlearningManagementSystem.DataAccess
             return list;
         }
 
-        public List<CoursePopularityByDepartment> GetCoursePopularityByDepartment()
+        public List<CourseEnrollmentCount> GetTop5PopularCourses()
         {
-            var list = new List<CoursePopularityByDepartment>();
+            var list = new List<CourseEnrollmentCount>();
             string query = @"
-                SELECT u.department, COUNT(e.Enrollment_id) AS EnrollmentCount
-                FROM user u
-                INNER JOIN courseenrollments e ON u.user_id = e.user_id
-                GROUP BY u.department";
+                SELECT c.CourseName, COUNT(e.user_id) AS EnrollmentCount
+                FROM course c
+                LEFT JOIN courseenrollments e ON c.CourseID = e.course_id
+                GROUP BY c.CourseName
+                ORDER BY EnrollmentCount DESC
+                LIMIT 5";
 
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand(query, conn))
             {
                 conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        list.Add(new CoursePopularityByDepartment
+                        list.Add(new CourseEnrollmentCount
                         {
-                            Department = reader["department"].ToString(),
-                            EnrollmentCount = Convert.ToInt32(reader["EnrollmentCount"])
+                            CourseName = reader["CourseName"].ToString(),
+                            StudentCount = Convert.ToInt32(reader["EnrollmentCount"])
                         });
                     }
                 }
@@ -110,11 +112,11 @@ namespace ASSNlearningManagementSystem.DataAccess
                 WHERE status IN ('Pending', 'Upcoming')
                 ORDER BY exam_date ASC";
 
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand(query, conn))
             {
                 conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -148,11 +150,11 @@ namespace ASSNlearningManagementSystem.DataAccess
                 INNER JOIN topic t ON s.topic_id = t.TopicID
                 ORDER BY s.session_date DESC";
 
-            using (MySqlConnection conn = new MySqlConnection(_connectionString))
-            using (MySqlCommand cmd = new MySqlCommand(query, conn))
+            using (var conn = new MySqlConnection(_connectionString))
+            using (var cmd = new MySqlCommand(query, conn))
             {
                 conn.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -170,4 +172,3 @@ namespace ASSNlearningManagementSystem.DataAccess
         }
     }
 }
-

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@{
     Layout = "_AdminLayout";
 }
 
@@ -14,6 +16,44 @@
     <link rel="stylesheet" href="@Url.Content("~/css/style.css")" />
     <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <style>
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .color-box {
+            width: 25px;
+            height: 10px;
+            margin-right: 6px;
+            display: inline-block;
+        }
+
+        .motor_text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+            .motor_text h4 {
+                margin: 0;
+                font-size: 20px;
+                font-weight: 600;
+            }
+    </style>
 </head>
 
 <body>
@@ -56,26 +96,31 @@
 
                 <!-- Chart Section -->
                 <div class="policy_card">
+                    <!-- Course Enrollment Bar Chart -->
                     <div class="motor_card_box">
                         <div class="motor_text">
                             <h4>Course Enrollment</h4>
+                            <div class="chart-legend" id="barLegend"></div>
                         </div>
-                        <div class="chart-container" id="chart">
-                            <canvas id="enrollBarChart" style="width:100%; height:100%;"></canvas>
+                        <div class="chart-container">
+                            <canvas id="enrollBarChart"></canvas>
                         </div>
                     </div>
 
+                    <!-- Course Popularity Pie Chart -->
                     <div class="motor_card_box">
-                        <h4 style="font-weight: bold; font-size: 20px;">Course Popularity by Department</h4>
-                        <div class="chart-container" id="chart">
-                            <canvas id="donutChart" style="width:100%; height:100%;"></canvas>
+                        <div class="motor_text">
+                            <h4>Top 5 Courses by Enrollment</h4>
+                            <div class="chart-legend" id="pieLegend"></div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="pieChart"></canvas>
                         </div>
                     </div>
                 </div>
 
                 <!-- Tables Section -->
                 <div class="table_card">
-                    <!-- Upcoming Exams Table -->
                     <div class="motor_card_box">
                         <div class="details">
                             <div class="details-header">
@@ -113,7 +158,6 @@
                         </div>
                     </div>
 
-                    <!-- Session Overview Table -->
                     <div class="motor_card_box">
                         <div class="details">
                             <div class="details-header">
@@ -156,28 +200,39 @@
         </div>
     </main>
 
-    <!-- Chart Logic -->
+    <!-- Chart Script -->
     <script>
         const enrollmentData = @Html.Raw(ViewBag.EnrollmentDataJson ?? "[]");
         const popularityData = @Html.Raw(ViewBag.PopularityDataJson ?? "[]");
 
-        // Clean data: remove undefined or empty entries
         const filteredEnrollment = enrollmentData.filter(e => e.courseName && e.studentCount > 0);
-        const filteredPopularity = popularityData.filter(p => p.courseName && p.department && p.studentCount > 0);
+        const filteredPopularity = popularityData.filter(p => p.courseName && p.studentCount > 0);
 
-        // Bar Chart - Course Enrollment (hidden if no data)
+        const lmsPalette = [
+            '#FF7F50', '#FF69B4', '#87CEFA', '#ADD8E6', '#FFB6C1',
+            '#FF8C69', '#FFA07A', '#B0E0E6'
+        ];
+
+        function generateLegend(containerId, labels, colors) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = labels.map((label, i) => `
+                <span class="legend-item">
+                    <span class="color-box" style="background-color:${colors[i % colors.length]}"></span>${label}
+                </span>`).join('');
+        }
+
         if (filteredEnrollment.length > 0) {
             const barLabels = filteredEnrollment.map(e => e.courseName);
             const barValues = filteredEnrollment.map(e => e.studentCount);
+            const barColors = lmsPalette.slice(0, barLabels.length);
 
             new Chart(document.getElementById('enrollBarChart'), {
                 type: 'bar',
                 data: {
                     labels: barLabels,
                     datasets: [{
-                        // REMOVE THE LABEL TO HIDE LEGEND
                         data: barValues,
-                        backgroundColor: '#36A2EB'
+                        backgroundColor: barColors
                     }]
                 },
                 options: {
@@ -188,27 +243,22 @@
                     }
                 }
             });
+
+            generateLegend('barLegend', barLabels, barColors);
         }
 
-                // Donut Chart - Course Popularity by Department (hidden if no data)
         if (filteredPopularity.length > 0) {
-            const grouped = {};
-            filteredPopularity.forEach(item => {
-                const key = `${item.department}`;
-                grouped[key] = (grouped[key] || 0) + item.enrollmentCount;
-            });
+            const pieLabels = filteredPopularity.map(p => p.courseName);
+            const pieValues = filteredPopularity.map(p => p.studentCount);
+            const pieColors = lmsPalette.slice(0, pieLabels.length);
 
-            const donutLabels = Object.keys(grouped);
-            const donutValues = Object.values(grouped);
-            const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#2ECC71', '#8E44AD', '#3498DB', '#F39C12', '#1ABC9C'];
-
-            new Chart(document.getElementById('donutChart'), {
-                type: 'doughnut',
+            new Chart(document.getElementById('pieChart'), {
+                type: 'pie',
                 data: {
-                    labels: donutLabels,
+                    labels: pieLabels,
                     datasets: [{
-                        data: donutValues,
-                        backgroundColor: colors.slice(0, donutLabels.length)
+                        data: pieValues,
+                        backgroundColor: pieColors
                     }]
                 },
                 options: {
@@ -216,9 +266,9 @@
                     legend: { display: false }
                 }
             });
+
+            generateLegend('pieLegend', pieLabels, pieColors);
         }
-
     </script>
-
 </body>
 </html>

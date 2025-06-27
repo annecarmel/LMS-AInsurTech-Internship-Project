@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Session Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <style>
+        .status-green {
+            color: white;
+            background-color: #2ECC71;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+    </style>
+}
+
+<main class="container">
+    <div class="empmaster_card">
+        <div class="emp_add_heading">
+            <h3>Create New Session</h3>
+        </div>
+
+        <form class="emp_form">
+            <div class="form_row">
+                <div class="form_group">
+                    <label>Trainer</label>
+                    <select required>
+                        <option value="">Select Trainer</option>
+                        <option value="1">Trainer A</option>
+                        <option value="2">Trainer B</option>
+                    </select>
+                </div>
+
+                <div class="form_group">
+                    <label>Topic</label>
+                    <select required>
+                        <option value="">Select Topic</option>
+                        <option value="1">HTML Basics</option>
+                        <option value="2">CSS Styling</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_group">
+                    <label>Course</label>
+                    <select id="courseName" required>
+                        <option value="" disabled selected>Select Course</option>
+                        <option value="Full Stack Development">Full Stack Development</option>
+                        <option value="Data Science">Data Science</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                    </select>
+                </div>
+                <div class="form_group">
+                    <label>Session Date</label>
+                    <input type="date" required />
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_group">
+                    <label>Start Time</label>
+                    <input type="time" required />
+                </div>
+                <div class="form_group">
+                    <label>End Time</label>
+                    <input type="time" required />
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_group">
+                    <label>No. of Students</label>
+                    <input type="number" placeholder="Auto-calculated" readonly />
+                </div>
+            </div>
+
+            <div class="form_row">
+                <button type="submit" class="custom-button">Save Session</button>
+                <button type="reset" class="custom-button" style="background-color:#E6A325; color:#fff;">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <br>
+
+    <div class="empmaster_card syllabus-spacing">
+        <div class="emp_add_heading">
+            <h3>Upcoming & Past Sessions</h3>
+        </div>
+
+        <table class="emp_table">
+            <thead>
+                <tr>
+                    <th>Trainer</th>
+                    <th>Topic</th>
+                    <th>Course</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Students</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Trainer A</td>
+                    <td>HTML Basics</td>
+                    <td>Web Dev</td>
+                    <td>2025-07-01</td>
+                    <td>10:00 - 11:30</td>
+                    <td><span class="status-green">Scheduled</span></td>
+                    <td>25</td>
+                    <td>
+                        <i class="fa-solid fa-pen-to-square" title="Edit" style="cursor:pointer; margin-right:10px; color:#18AE90;"></i>
+                        <i class="fa-solid fa-trash" title="Delete" style="cursor:pointer; color:#CD2F74;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+@section Scripts {
+    <script>
+        // Optional future logic for dynamic dropdowns or validation
+    </script>
+}
