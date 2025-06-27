@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// File: Controllers/SessionController.cs
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASSNlearningManagementSystem.Controllers
 {
     public class SessionController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Session()
         {
             return View();
         }

@@ -2,7 +2,7 @@
 {
     public class CoursePopularityByDepartment
     {
-        public string Department { get; set; }
+        public string CourseName { get; set; }
         public int EnrollmentCount { get; set; }
     }
 }

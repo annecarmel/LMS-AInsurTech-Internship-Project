@@ -1,11 +1,27 @@
 ﻿using ASSNlearningManagementSystem.DataAccess;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add MVC
+// ✅ Get connection string
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// ✅ Register repositories with required dependencies
+builder.Services.AddScoped<CourseRepository>(provider => new CourseRepository(connectionString));
+builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
+builder.Services.AddScoped<DashboardRepository>(provider => new DashboardRepository(builder.Configuration));
+
+// ✅ Add MVC
 builder.Services.AddControllersWithViews();
 
-// Add session
+// ✅ Add Authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login/Login"; // fallback redirect if not logged in
+    });
+
+// ✅ Add Session
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -14,21 +30,16 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Fetch connection string from appsettings.json
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Register repositories with the DI container
-builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
-builder.Services.AddScoped<DashboardRepository>(provider => new DashboardRepository(builder.Configuration));
-
 var app = builder.Build();
 
-// Enable static files, routing, session
+// ✅ Middleware pipeline
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication(); // Enable authentication
+app.UseAuthorization();  // Enable authorization
 app.UseSession();
 
-// Default route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Login}/{id?}");

@@ -31,9 +31,9 @@ namespace ASSNlearningManagementSystem.Controllers
             ViewBag.ActiveCourses = _repo.GetActiveCourses();
             ViewBag.ScheduledExams = _repo.GetScheduledExams();
 
-            // === Bar & Donut Chart Data ===
-            var enrollmentData = _repo.GetCourseEnrollmentData();
-            var popularityData = _repo.GetCoursePopularityByDepartment();
+            // === Bar & Pie Chart Data ===
+            var enrollmentData = _repo.GetCourseEnrollmentData();         // Bar chart
+            var popularityData = _repo.GetTop5PopularCourses();          // Pie chart (Top 5 only)
 
             var camelCaseSettings = new JsonSerializerSettings
             {
