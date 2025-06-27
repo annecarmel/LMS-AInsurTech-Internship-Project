@@ -1,0 +1,307 @@
+﻿@{
+    Layout = "_AdminLayout" ; 
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="@Url.Content("~/css/style.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/responsive.css")" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+
+    <main>
+        <div class="container">
+            <div class="dashboard-contents">
+                <div class="hero_section">
+                    <div class="number_card">
+                        <div class="card1">
+                            <div class="card1_left">
+                                <img src="@Url.Content("~/img/Policies.png")" alt="Policies" />
+                            </div>
+                            <div class="card1_right">
+                                <h6>Assigned Courses</h6>
+                                <h1>39,890,789</h1>
+                            </div>
+                        </div>
+
+                        <div class="card2">
+                            <div class="card2_left">
+                                <img src="@Url.Content("~/img/Claims.png")" alt="Claims" />
+                            </div>
+                            <div class="card2_right">
+                                <h6>Number of learners</h6>
+                                <h1>80,987,098</h1>
+                            </div>
+                        </div>
+
+                        <div class="card3">
+                            <div class="card3_left">
+                                <img src="@Url.Content("~/img/Settlement.png")" alt="Settlements" />
+                            </div>
+                            <div class="card3_right">
+                                <h6>Assigned Topics</h6>
+                                <h1>8,908,908</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="policy_card">
+                    <div class="motor_card_box">
+                        <div class="motor_text">
+                            <h4>Motor Policy</h4>
+                        </div>
+
+                        <div class="chart-container" id="chart">
+                            <canvas id="mychart1" style="width:100%; height: 100%;"></canvas>
+
+                            <script>
+                                const ctx1 = document.getElementById('mychart1').getContext('2d');
+                                const mychart1 = new Chart(ctx1, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ["course1", "course2", "course3", "course4", "course5"],
+                                        datasets: [{
+                                            label: 'Course Enrolled',
+                                            data: [300, 150, 50, 100, 30],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.7)',
+                                                'rgba(54, 162, 235, 0.7)',
+                                                'rgba(255, 206, 86, 0.7)',
+                                                'rgba(75, 192, 192, 0.7)',
+                                                'rgba(153, 102, 255, 0.7)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="motor_card_box">
+                        <h2 style="font-weight: bold; font-size: 20px;">Travel Policy</h2>
+
+                        <div class="chart-container" id="chart">
+                            <canvas id="mychart" style="width:100%; height: 100%;"></canvas>
+
+                            <script>
+                                const ctx = document.getElementById('mychart').getContext('2d');
+                                const mychart = new Chart(ctx, {
+                                    type: 'pie',
+                                    data: {
+                                        labels: ["Active Policies", "Expired", "Pending", "Renewed", "Cancelled"],
+                                        datasets: [{
+                                            label: 'Sales',
+                                            data: [300, 150, 50, 100, 30],
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.7)',
+                                                'rgba(54, 162, 235, 0.7)',
+                                                'rgba(255, 206, 86, 0.7)',
+                                                'rgba(75, 192, 192, 0.7)',
+                                                'rgba(153, 102, 255, 0.7)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 206, 86, 1)',
+                                                'rgba(75, 192, 192, 1)',
+                                                'rgba(153, 102, 255, 1)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table_card">
+                    <!-- First Motor Card Box -->
+                    <div class="motor_card_box">
+                        <div class="details">
+                            <div class="details-header">
+                                <h6>Policy Details</h6>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Quotation</th>
+                                            <th>Policy Issue</th>
+                                            <th>Policy End</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>q/10/409</td>
+                                            <td>2023-01-01</td>
+                                            <td>2023-12-31</td>
+                                            <td>Building</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>q/10/410</td>
+                                            <td>2023-02-01</td>
+                                            <td>2023-12-31</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>q/10/411</td>
+                                            <td>2023-03-01</td>
+                                            <td>2023-12-31</td>
+                                            <td>Issued</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>q/10/412</td>
+                                            <td>2023-04-01</td>
+                                            <td>2023-12-31</td>
+                                            <td>Active</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Motor Card Box -->
+                    <div class="motor_card_box">
+                        <div class="details">
+                            <div class="details-header">
+                                <h6>Policy Details</h6>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table" id="table2">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Claim Number</th>
+                                            <th>Claim Date</th>
+                                            <th>Claim Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>clm-001</td>
+                                            <td>2023-01-15</td>
+                                            <td>$1500</td>
+                                            <td>Open</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>clm-002</td>
+                                            <td>2023-02-20</td>
+                                            <td>$2300</td>
+                                            <td>Closed</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>clm-003</td>
+                                            <td>2023-03-25</td>
+                                            <td>$1800</td>
+                                            <td>Pending</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" class="edit-icon"><img src="@Url.Content("~/img/edit Icon.png")" width="15" height="15" alt="Edit" /></a></td>
+                                            <td>clm-004</td>
+                                            <td>2023-04-30</td>
+                                            <td>$1200</td>
+                                            <td>Approved</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <form id="policyForm" action="#" method="post">
+                            <label for="policyNumber">Policy Number</label>
+                            <input type="text" id="policyNumber" name="policyNumber" required />
+
+                            <label for="policyType">Policy Type</label>
+                            <select id="policyType" name="policyType" required>
+                                <option value="motor">Motor Policy</option>
+                                <option value="travel">Travel Policy</option>
+                            </select>
+
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" name="startDate" required />
+
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" name="endDate" required />
+
+                            <label for="policyStatus">Policy Status</label>
+                            <select id="policyStatus" name="policyStatus" required>
+                                <option value="active">Active</option>
+                                <option value="expired">Expired</option>
+                                <option value="pending">Pending</option>
+                                <option value="renewed">Renewed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    // Modal logic
+                    const modal = document.getElementById("myModal");
+                    const openModalBtn = document.getElementById("openModalBtn");
+                    const closeModalBtn = document.getElementsByClassName("close")[0];
+
+                    openModalBtn.onclick = function () {
+                        modal.style.display = "block";
+                    };
+
+                    closeModalBtn.onclick = function () {
+                        modal.style.display = "none";
+                    };
+
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    };
+
+                    // Form submit handler 
+                    document.getElementById('policyForm').addEventListener('submit', function (event) {
+                        event.preventDefault();
+                        alert('Policy Created Successfully!');
+                        modal.style.display = "none";
+                        
+                    });
+                </script>
+            </div>
+        </div>
+    </main>
+
