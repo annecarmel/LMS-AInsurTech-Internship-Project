@@ -48,17 +48,17 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-pAGv4ietcJNk/EwsQZ5BN9\u002BK4MuNYS2a9wl4Jw\u002Bq9D0="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"362"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022pAGv4ietcJNk/EwsQZ5BN9\u002BK4MuNYS2a9wl4Jw\u002Bq9D0=\u0022"},{"Name":"Last-Modified","Value":"Tue, 24 Jun 2025 08:11:26 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/css/style.1lziq4k2e6.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"1lziq4k2e6"},{"Name":"integrity","Value":"sha256-W9H9LbbYdBfg4MZIKabEItXGAZGW5fWDCR2seSOP3Ns="},{"Name":"label","Value":"_content/ASSNlearningManagementSystem/css/style.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"17161"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022W9H9LbbYdBfg4MZIKabEItXGAZGW5fWDCR2seSOP3Ns=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 06:54:18 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/css/style.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-W9H9LbbYdBfg4MZIKabEItXGAZGW5fWDCR2seSOP3Ns="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"17161"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022W9H9LbbYdBfg4MZIKabEItXGAZGW5fWDCR2seSOP3Ns=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 06:54:18 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-bTzvDw7m04ZPVzX\u002BNX35oNl4dsEyxPX9Vfb\u002B\u002BwSOMlc="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"16581"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022bTzvDw7m04ZPVzX\u002BNX35oNl4dsEyxPX9Vfb\u002B\u002BwSOMlc=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 07:25:00 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/css/style.h33bge9nl1.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"h33bge9nl1"},{"Name":"integrity","Value":"sha256-bTzvDw7m04ZPVzX\u002BNX35oNl4dsEyxPX9Vfb\u002B\u002BwSOMlc="},{"Name":"label","Value":"_content/ASSNlearningManagementSystem/css/style.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"16581"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022bTzvDw7m04ZPVzX\u002BNX35oNl4dsEyxPX9Vfb\u002B\u002BwSOMlc=\u0022"},{"Name":"Last-Modified","Value":"Thu, 26 Jun 2025 07:25:00 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/ASSNlearningManagementSystem/css/TrainerSidebar.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\TrainerSidebar.css'))</AssetFile>
