@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using ASSNlearningManagementSystem.DataAccess;
 using Newtonsoft.Json;
-using System.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace ASSNlearningManagementSystem.Controllers
 {
@@ -31,19 +31,21 @@ namespace ASSNlearningManagementSystem.Controllers
             ViewBag.ActiveCourses = _repo.GetActiveCourses();
             ViewBag.ScheduledExams = _repo.GetScheduledExams();
 
-            // === Bar Chart: Course Enrollment ===
-            var enrollmentData = _repo.GetCourseEnrollmentData(); // returns list of { CourseName, Count }
-            ViewBag.EnrollmentDataJson = JsonConvert.SerializeObject(enrollmentData);
+            // === Bar & Donut Chart Data ===
+            var enrollmentData = _repo.GetCourseEnrollmentData();
+            var popularityData = _repo.GetCoursePopularityByDepartment();
 
-            // === Donut Chart: Course Popularity by Department ===
-            var popularityData = _repo.GetCoursePopularityByDepartment(); // returns list of { CourseName, Department, Count }
-            ViewBag.PopularityDataJson = JsonConvert.SerializeObject(popularityData);
+            var camelCaseSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
 
-            // === Upcoming Exams Table ===
-            ViewBag.UpcomingExams = _repo.GetUpcomingExams(); // returns list of { Title, Date, Duration, Status }
+            ViewBag.EnrollmentDataJson = JsonConvert.SerializeObject(enrollmentData, camelCaseSettings);
+            ViewBag.PopularityDataJson = JsonConvert.SerializeObject(popularityData, camelCaseSettings);
 
-            // === Session Overview Table ===
-            ViewBag.SessionOverview = _repo.GetSessionOverview(); // returns list of { Trainer, Topic, Students, Status }
+            // === Tables ===
+            ViewBag.UpcomingExams = _repo.GetUpcomingExams();
+            ViewBag.SessionOverview = _repo.GetSessionOverview();
 
             return View("Dashboard");
         }

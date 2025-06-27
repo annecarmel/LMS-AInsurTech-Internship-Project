@@ -8,7 +8,6 @@ namespace ASSNlearningManagementSystem.Controllers
     {
         private readonly UserRepository _userRepository;
 
-        // Injecting UserRepository through constructor
         public LoginController(UserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -23,10 +22,30 @@ namespace ASSNlearningManagementSystem.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            if (_userRepository.ValidateUser(username, password))
+            var user = _userRepository.GetUserByUsernameAndPassword(username, password);
+
+            if (user != null)
             {
-                HttpContext.Session.SetString("Username", username);
-                return RedirectToAction("Dashboard", "Dashboard");
+                HttpContext.Session.SetString("Username", user.Value.Username);
+                HttpContext.Session.SetString("Role", user.Value.Role); // ✅ fixed
+
+                // Redirect based on role
+                switch (user.Value.Role.ToLower())
+                {
+                    case "admin":
+                        return RedirectToAction("Dashboard", "Dashboard");
+
+                    case "trainer":
+                        return RedirectToAction("Dashboard", "Trainer");
+
+
+                    case "learner":
+                        return View("Dashboard", "Leaner");
+
+                    default:
+                        ViewBag.Error = "Unauthorized role";
+                        return View("~/Views/Login/Login.cshtml");
+                }
             }
 
             ViewBag.Error = "Invalid username or password";

@@ -190,12 +190,12 @@
             });
         }
 
-        // Donut Chart - Course Popularity by Department (hidden if no data)
+                // Donut Chart - Course Popularity by Department (hidden if no data)
         if (filteredPopularity.length > 0) {
             const grouped = {};
             filteredPopularity.forEach(item => {
-                const key = `${item.courseName} (${item.department})`;
-                grouped[key] = (grouped[key] || 0) + item.studentCount;
+                const key = `${item.department}`;
+                grouped[key] = (grouped[key] || 0) + item.enrollmentCount;
             });
 
             const donutLabels = Object.keys(grouped);
@@ -213,10 +213,11 @@
                 },
                 options: {
                     responsive: true,
-                    legend: { display: false } // hide legend here too
+                    legend: { display: false }
                 }
             });
         }
+
     </script>
 
 </body>
