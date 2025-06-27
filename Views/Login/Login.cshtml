@@ -1,0 +1,55 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div class="background_section">
+    <div class="login_card">
+        <div class="login_image">
+            <img src="~/img/login illustration.png" alt="Login Illustration" />
+        </div>
+        <div class="login_form">
+            <form id="myform" method="post" asp-controller="Login" asp-action="Login" asp-antiforgery="true">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required />
+                </div>
+                <div class="remember">
+                    <input type="checkbox" id="rememberMe" name="rememberMe" />
+                    <label for="rememberMe">Remember me in this machine</label>
+                </div>
+                <div class="button_group">
+                    <button type="submit" class="login-btn">Login</button>
+                    <button type="button" class="forgot-btn">Forgot Password</button>
+                </div>
+            </form>
+
+            @if (ViewBag.Error != null)
+            {
+                <div style="color:red; margin-top:10px;">@ViewBag.Error</div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"></script>
+    <script>
+        // client-side validation
+        $('#myform').submit(function (event) {
+            if ($("#username").val().trim() === '') {
+                alert("Username is required");
+                event.preventDefault();
+            } else if ($('#password').val().trim() === '') {
+                alert("Password is required");
+                event.preventDefault();
+            }
+        });
+    </script>
+}
