@@ -1,27 +1,31 @@
 ﻿using ASSNlearningManagementSystem.DataAccess;
+using ASSNlearningManagementSystem.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Get connection string
+// ✅ Get connection string from appsettings.json
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// ✅ Register repositories with required dependencies
+// ✅ Register custom repositories
 builder.Services.AddScoped<CourseRepository>(provider => new CourseRepository(connectionString));
 builder.Services.AddScoped<UserRepository>(provider => new UserRepository(connectionString));
 builder.Services.AddScoped<DashboardRepository>(provider => new DashboardRepository(builder.Configuration));
+builder.Services.AddScoped<SessionRepository>(provider => new SessionRepository(connectionString)); // ✅ Added this
 
-// ✅ Add MVC
+// ✅ Add MVC support
 builder.Services.AddControllersWithViews();
 
-// ✅ Add Authentication
+// ✅ Configure Cookie-based Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login/Login"; // fallback redirect if not logged in
+        options.LoginPath = "/Login/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.SlidingExpiration = true;
     });
 
-// ✅ Add Session
+// ✅ Configure Session State
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
@@ -30,16 +34,18 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// ✅ Build the app
 var app = builder.Build();
 
 // ✅ Middleware pipeline
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication(); // Enable authentication
-app.UseAuthorization();  // Enable authorization
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseSession();
 
+// ✅ Routing
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Login}/{id?}");

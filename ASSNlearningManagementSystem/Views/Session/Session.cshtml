@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ASSNlearningManagementSystem.Models.SessionViewModel
+
+@{
     ViewData["Title"] = "Session Management";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -12,78 +14,187 @@
             border-radius: 4px;
             font-size: 0.85rem;
         }
+
+        .status-yellow {
+            color: black;
+            background-color: #F1C40F;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .status-red {
+            color: white;
+            background-color: #E74C3C;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .form_row {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .form_group {
+            flex: 1;
+        }
+
+        .success-message {
+            background-color: #2ECC71;
+            color: white;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .danger-highlight {
+            background-color: #E74C3C !important;
+        }
+
+        .action-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .action-icons a,
+            .action-icons button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                margin: 0;
+                background: none;
+                border: none;
+            }
     </style>
 }
 
 <main class="container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        var successText = TempData["SuccessMessage"].ToString();
+        var isDelete = successText.ToLower().Contains("deleted");
+
+        <div class="success-message @(isDelete ? "danger-highlight" : "")">
+            @successText
+        </div>
+    }
+
     <div class="empmaster_card">
         <div class="emp_add_heading">
-            <h3>Create New Session</h3>
+            <h3>@(Model.NewSession != null && Model.NewSession.SessionID > 0 ? "Edit Session" : "Create New Session")</h3>
         </div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                <strong>Form contains errors:</strong>
+                <ul>
+                    @foreach (var state in ViewData.ModelState)
+                    {
+                        foreach (var error in state.Value.Errors)
+                        {
+                            <li><strong>@state.Key</strong>: @error.ErrorMessage</li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
 
-        <form class="emp_form">
+        @using (Html.BeginForm("SaveSession", "Session", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NewSession.SessionID)
+
             <div class="form_row">
                 <div class="form_group">
                     <label>Trainer</label>
-                    <select required>
-                        <option value="">Select Trainer</option>
-                        <option value="1">Trainer A</option>
-                        <option value="2">Trainer B</option>
-                    </select>
+                    @Html.DropDownListFor(
+                             m => m.NewSession.TrainerID,
+                             (SelectList)ViewBag.Trainers,
+                             "Select Trainer",
+                             new { @class = "form-control", required = "required" }
+                             )
                 </div>
-
                 <div class="form_group">
-                    <label>Topic</label>
-                    <select required>
-                        <option value="">Select Topic</option>
-                        <option value="1">HTML Basics</option>
-                        <option value="2">CSS Styling</option>
-                    </select>
+                    <label>Course</label>
+                    @Html.DropDownListFor(
+                             m => m.NewSession.CourseID,
+                             (SelectList)ViewBag.Courses,
+                             "Select Course",
+                             new { @class = "form-control", required = "required", id = "CourseID" }
+                             )
                 </div>
             </div>
 
             <div class="form_row">
                 <div class="form_group">
-                    <label>Course</label>
-                    <select id="courseName" required>
-                        <option value="" disabled selected>Select Course</option>
-                        <option value="Full Stack Development">Full Stack Development</option>
-                        <option value="Data Science">Data Science</option>
-                        <option value="Cyber Security">Cyber Security</option>
-                    </select>
+                    <label>Syllabus</label>
+                    @Html.DropDownListFor(
+                             m => m.NewSession.SyllabusID,
+                             (SelectList)ViewBag.Syllabuses,
+                             "Select Syllabus",
+                             new { @class = "form-control", id = "SyllabusID" }
+                             )
                 </div>
                 <div class="form_group">
+                    <label>Topic</label>
+                    @Html.DropDownListFor(
+                             m => m.NewSession.TopicID,
+                             (SelectList)ViewBag.Topics,
+                             "Select Topic",
+                             new { @class = "form-control", required = "required", id = "TopicID" }
+                             )
+                </div>
+            </div>
+
+            <div class="form_row">
+                <div class="form_group">
                     <label>Session Date</label>
-                    <input type="date" required />
+                    @Html.TextBoxFor(
+                             m => m.NewSession.SessionDate,
+                             "{0:yyyy-MM-dd}",
+                             new { @class = "form-control", type = "date", required = "required" }
+                             )
+                </div>
+                <div class="form_group">
+                    <label>No. of Students</label>
+                    @Html.TextBoxFor(
+                             m => m.NewSession.EnrolledLearnerCount,
+                             new { @class = "form-control", @readonly = "readonly", placeholder = "Auto-calculated", id = "StudentCount" }
+                             )
                 </div>
             </div>
 
             <div class="form_row">
                 <div class="form_group">
                     <label>Start Time</label>
-                    <input type="time" required />
+                    @Html.TextBoxFor(
+                             m => m.NewSession.StartTime,
+                             "{0:hh\\:mm}",
+                             new { @class = "form-control", type = "time", required = "required" }
+                             )
                 </div>
                 <div class="form_group">
                     <label>End Time</label>
-                    <input type="time" required />
-                </div>
-            </div>
-
-            <div class="form_row">
-                <div class="form_group">
-                    <label>No. of Students</label>
-                    <input type="number" placeholder="Auto-calculated" readonly />
+                    @Html.TextBoxFor(
+                             m => m.NewSession.EndTime,
+                             "{0:hh\\:mm}",
+                             new { @class = "form-control", type = "time", required = "required" }
+                             )
                 </div>
             </div>
 
             <div class="form_row">
                 <button type="submit" class="custom-button">Save Session</button>
-                <button type="reset" class="custom-button" style="background-color:#E6A325; color:#fff;">Cancel</button>
+                <a href="@Url.Action("Session", "Session")" class="custom-button" style="background-color:#E6A325; color:#fff;">Cancel</a>
             </div>
-        </form>
+        }
     </div>
 
-    <br>
+    <br />
 
     <div class="empmaster_card syllabus-spacing">
         <div class="emp_add_heading">
@@ -104,26 +215,108 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Trainer A</td>
-                    <td>HTML Basics</td>
-                    <td>Web Dev</td>
-                    <td>2025-07-01</td>
-                    <td>10:00 - 11:30</td>
-                    <td><span class="status-green">Scheduled</span></td>
-                    <td>25</td>
-                    <td>
-                        <i class="fa-solid fa-pen-to-square" title="Edit" style="cursor:pointer; margin-right:10px; color:#18AE90;"></i>
-                        <i class="fa-solid fa-trash" title="Delete" style="cursor:pointer; color:#CD2F74;"></i>
-                    </td>
-                </tr>
+                @foreach (var session in Model.SessionsList)
+                {
+                    <tr>
+                        <td>@session.TrainerName</td>
+                        <td>@session.TopicName</td>
+                        <td>@session.CourseName</td>
+                        <td>@session.SessionDate.ToString("yyyy-MM-dd")</td>
+                        <td>@session.StartTime.ToString(@"hh\:mm") - @session.EndTime.ToString(@"hh\:mm")</td>
+                        <td>
+                            @if (session.Status == "Scheduled")
+                            {
+                                <span class="status-yellow">Scheduled</span>
+                            }
+                            else if (session.Status == "Ongoing")
+                            {
+                                <span class="status-green">Ongoing</span>
+                            }
+                            else if (session.Status == "Completed")
+                            {
+                                <span class="status-red">Completed</span>
+                            }
+                        </td>
+                        <td>@session.EnrolledLearnerCount</td>
+                        <td>
+                            <div class="action-icons">
+                                @if (session.Status == "Scheduled")
+                                {
+                                    <a href="@Url.Action("Session", "Session", new { id = session.SessionID })" title="Edit">
+                                        <i class="fa-solid fa-pen-to-square" style="cursor:pointer; color:#18AE90;"></i>
+                                    </a>
+                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" onclick="return confirm('Are you sure?');">
+                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
+                                        </button>
+                                    }
+                                }
+                                else if (session.Status == "Completed")
+                                {
+                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" onclick="return confirm('Are you sure?');">
+                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
+                                        </button>
+                                    }
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
 </main>
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Optional future logic for dynamic dropdowns or validation
+        $(function () {
+            $('#CourseID').change(function () {
+                var courseId = $(this).val();
+                $('#SyllabusID').empty().append('<option>Select Syllabus</option>');
+                $('#TopicID').empty().append('<option>Select Topic</option>');
+                $('#StudentCount').val('');
+
+                if (courseId) {
+                    $.getJSON('@Url.Action("GetSyllabusesByCourse", "Session")', { courseId: courseId }, function (data) {
+                        $.each(data, function (i, item) {
+                            $('#SyllabusID').append($('<option>', { value: item.key, text: item.value }));
+                        });
+                    });
+                }
+            });
+
+            $('#SyllabusID').change(function () {
+                var syllabusId = $(this).val();
+                $('#TopicID').empty().append('<option>Select Topic</option>');
+                $('#StudentCount').val('');
+
+                if (syllabusId) {
+                    $.getJSON('@Url.Action("GetTopicsBySyllabus", "Session")', { syllabusId: syllabusId }, function (data) {
+                        $.each(data, function (i, item) {
+                            $('#TopicID').append($('<option>', { value: item.key, text: item.value }));
+                        });
+                    });
+                }
+            });
+
+            $('#TopicID').change(function () {
+                var courseId = $('#CourseID').val();
+                if (courseId) {
+                    $.getJSON('@Url.Action("GetEnrolledLearnerCount", "Session")', { courseId: courseId }, function (data) {
+                        $('#StudentCount').val(data.count);
+                    });
+                }
+            });
+
+            setTimeout(function () {
+                $('.success-message').fadeOut('slow');
+            }, 5000);
+        });
     </script>
 }
