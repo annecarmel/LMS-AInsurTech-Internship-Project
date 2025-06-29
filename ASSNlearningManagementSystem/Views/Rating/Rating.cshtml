@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Course Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        .action-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+            .action-icons i.fa-trash {
+                color: #CD2F74;
+                cursor: pointer;
+            }
+
+        .pink-stars {
+            color: #CD2F74;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="page-contents">
+
+                <div class="container_emp">
+                    <div class="emp_head">
+                        <h3>Rating List</h3>
+                    </div>
+                </div>
+
+                <div class="container_emp mb-20">
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table">
+                                <thead>
+                                    <tr>
+                                        <th>Rating ID</th>
+                                        <th>Course Name</th>
+                                        <th>Learner Name</th>
+                                        <th>Rating</th>
+                                        <th>Feedback</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Python Basics</td>
+                                        <td>Jane Doe</td>
+                                        <td>
+                                            <span class="pink-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </span>
+                                        </td>
+                                        <td>Very informative course!</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <a href="#" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Web Development</td>
+                                        <td>John Smith</td>
+                                        <td>
+                                            <span class="pink-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </span>
+                                        </td>
+                                        <td>Good content but could use more examples.</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <a href="#" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Data Science</td>
+                                        <td>Alice</td>
+                                        <td>
+                                            <span class="pink-stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </span>
+                                        </td>
+                                        <td>Excellent and detailed.</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <a href="#" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $('.emp_table').DataTable({
+            responsive: true
+          });
+        });
+    </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@ namespace ASSNlearningManagementSystem.Controllers
 {
     public class RatingController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Rating()
         {
             return View();
         }
