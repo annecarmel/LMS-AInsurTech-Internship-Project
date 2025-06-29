@@ -1,0 +1,224 @@
+﻿@{
+    ViewData["Title"] = "Course Management";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        .action-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+            .action-icons i.fa-pen-to-square {
+                color: #18AE90;
+                cursor: pointer;
+            }
+
+            .action-icons i.fa-trash {
+                color: #CD2F74;
+                cursor: pointer;
+            }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="page-contents">
+
+                <div class="container_emp">
+                    <div class="emp_head">
+                        <h3>Exam Master</h3>
+                    </div>
+                </div>
+
+                <div class="container_emp mb-20">
+                    <div class="empmaster_card">
+                        <form class="emp_form">
+                            <div class="form_row">
+                                <div class="form_group">
+                                    <label>Exam Title</label>
+                                    <input type="text" placeholder="Enter Exam Title">
+                                </div>
+                                <div class="form_group">
+                                    <label>Topic Name</label>
+                                    <select>
+                                        <option>Select Topic</option>
+                                        <option>Topic 1</option>
+                                        <option>Topic 2</option>
+                                        <option>Topic 3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form_row">
+                                <div class="form_group">
+                                    <label>Exam Date</label>
+                                    <input type="date">
+                                </div>
+                                <div class="form_group">
+                                    <label>Start Time</label>
+                                    <input type="time">
+                                </div>
+                                <div class="form_group">
+                                    <label>Duration</label>
+                                    <div style="display: flex; gap: 5px; align-items: center;">
+                                        <input type="number" placeholder="Hours" style="width: 70px;">
+                                        <span>hr</span>
+                                        <input type="number" placeholder="Minutes" style="width: 70px;">
+                                        <span>min</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form_row">
+                                <div class="form_group">
+                                    <label>Maximum Marks</label>
+                                    <input type="number" placeholder="Enter Max Marks">
+                                </div>
+                                <div class="form_group">
+                                    <label>Passing Marks</label>
+                                    <input type="number" placeholder="Enter Passing Marks">
+                                </div>
+                            </div>
+
+                            <div class="form_row">
+                                <div class="form_group">
+                                    <label>Instructor Name</label>
+                                    <select>
+                                        <option>Select Instructor</option>
+                                        <option>Instructor 1</option>
+                                        <option>Instructor 2</option>
+                                    </select>
+                                </div>
+                                <div class="form_group">
+                                    <label>Evaluator Name</label>
+                                    <select>
+                                        <option>Select Evaluator</option>
+                                        <option>Evaluator 1</option>
+                                        <option>Evaluator 2</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form_row">
+                                <a href="dashboard.html" class="custom-button">Save</a>
+                                <button type="reset">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="container_emp mb-20">
+                    <div class="emp_head">
+                        <h3>Exam List</h3>
+                    </div>
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table">
+                                <thead>
+                                    <tr>
+                                        <th>Exam ID</th>
+                                        <th>Exam Title</th>
+                                        <th>Topic Name</th>
+                                        <th>Exam Date</th>
+                                        <th>Start Time</th>
+                                        <th>Duration</th>
+                                        <th>Max Marks</th>
+                                        <th>Passing Marks</th>
+                                        <th>Instructor Name</th>
+                                        <th>Evaluator Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>101</td>
+                                        <td>Mid Term 1</td>
+                                        <td>Mathematics</td>
+                                        <td>2025-07-05</td>
+                                        <td>10:00</td>
+                                        <td>1 hr 0 mins</td>
+                                        <td>100</td>
+                                        <td>40</td>
+                                        <td>John Doe</td>
+                                        <td>Jane Smith</td>
+                                        <td>Scheduled</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <a href="#" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="#" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>102</td>
+                                        <td>Quarterly Test</td>
+                                        <td>Science</td>
+                                        <td>2025-06-28</td>
+                                        <td>09:30</td>
+                                        <td>0 hr 45 mins</td>
+                                        <td>80</td>
+                                        <td>32</td>
+                                        <td>Alice</td>
+                                        <td>Bob</td>
+                                        <td>Ongoing</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>103</td>
+                                        <td>Finals</td>
+                                        <td>History</td>
+                                        <td>2025-06-01</td>
+                                        <td>11:00</td>
+                                        <td>1 hr 30 mins</td>
+                                        <td>100</td>
+                                        <td>50</td>
+                                        <td>Emily</td>
+                                        <td>David</td>
+                                        <td>Completed</td>
+                                        <td>
+                                            <div class="action-icons">
+                                                <a href="#" title="Delete"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $('.emp_table').DataTable({
+            responsive: true
+          });
+        });
+    </script>
+</body>
+
+</html>

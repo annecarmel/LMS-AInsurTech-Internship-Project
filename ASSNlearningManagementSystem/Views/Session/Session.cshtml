@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
 @section Styles {
     <style>
         .status-green {
@@ -69,6 +71,12 @@
                 background: none;
                 border: none;
             }
+
+        th.sorting:after,
+        th.sorting_asc:after,
+        th.sorting_desc:after {
+            content: none !important;
+        }
     </style>
 }
 
@@ -83,10 +91,13 @@
         </div>
     }
 
-    <div class="empmaster_card">
-        <div class="emp_add_heading">
+    <div class="container_emp">
+        <div class="emp_head">
             <h3>@(Model.NewSession != null && Model.NewSession.SessionID > 0 ? "Edit Session" : "Create New Session")</h3>
         </div>
+    </div>
+
+    <div class="empmaster_card">
         @if (!ViewData.ModelState.IsValid)
         {
             <div class="alert alert-danger">
@@ -196,86 +207,87 @@
 
     <br />
 
-    <div class="empmaster_card syllabus-spacing">
-        <div class="emp_add_heading">
+    <div class="container_emp">
+        <div class="emp_head">
             <h3>Upcoming & Past Sessions</h3>
         </div>
+    </div>
 
-        <table class="emp_table">
-            <thead>
-                <tr>
-                    <th>Trainer</th>
-                    <th>Topic</th>
-                    <th>Course</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Students</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var session in Model.SessionsList)
-                {
+    <div class="empmaster_card syllabus-spacing">
+        <div class="table-responsive">
+            <table class="emp_table table" id="sessionTable">
+                <thead>
                     <tr>
-                        <td>@session.TrainerName</td>
-                        <td>@session.TopicName</td>
-                        <td>@session.CourseName</td>
-                        <td>@session.SessionDate.ToString("yyyy-MM-dd")</td>
-                        <td>@session.StartTime.ToString(@"hh\:mm") - @session.EndTime.ToString(@"hh\:mm")</td>
-                        <td>
-                            @if (session.Status == "Scheduled")
-                            {
-                                <span class="status-yellow">Scheduled</span>
-                            }
-                            else if (session.Status == "Ongoing")
-                            {
-                                <span class="status-green">Ongoing</span>
-                            }
-                            else if (session.Status == "Completed")
-                            {
-                                <span class="status-red">Completed</span>
-                            }
-                        </td>
-                        <td>@session.EnrolledLearnerCount</td>
-                        <td>
-                            <div class="action-icons">
+                        <th>Trainer</th>
+                        <th>Topic</th>
+                        <th>Course</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Students</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var session in Model.SessionsList)
+                    {
+                        <tr>
+                            <td>@session.TrainerName</td>
+                            <td>@session.TopicName</td>
+                            <td>@session.CourseName</td>
+                            <td>@session.SessionDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @(session.StartTime.ToString(@"hh\:mm")) - @(session.EndTime.ToString(@"hh\:mm"))
+                            </td>
+                            <td>
                                 @if (session.Status == "Scheduled")
                                 {
-                                    <a href="@Url.Action("Session", "Session", new { id = session.SessionID })" title="Edit">
-                                        <i class="fa-solid fa-pen-to-square" style="cursor:pointer; color:#18AE90;"></i>
-                                    </a>
-                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <button type="submit" onclick="return confirm('Are you sure?');">
-                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
-                                        </button>
-                                    }
+                                    <span class="status-yellow">Scheduled</span>
+                                }
+                                else if (session.Status == "Ongoing")
+                                {
+                                    <span class="status-green">Ongoing</span>
                                 }
                                 else if (session.Status == "Completed")
                                 {
-                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <button type="submit" onclick="return confirm('Are you sure?');">
-                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
-                                        </button>
-                                    }
+                                    <span class="status-red">Completed</span>
                                 }
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                            </td>
+                            <td>@session.EnrolledLearnerCount</td>
+                            <td>
+                                <div class="action-icons">
+                                    @if (session.Status == "Scheduled" || session.Status == "Completed")
+                                    {
+                                        <a href="@Url.Action("Session", "Session", new { id = session.SessionID })" title="Edit">
+                                            <i class="fa-solid fa-pen-to-square" style="cursor:pointer; color:#18AE90;"></i>
+                                        </a>
+                                        @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" onclick="return confirm('Are you sure?');">
+                                                <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
+                                            </button>
+                                        }
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </main>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script>
         $(function () {
+            $('#sessionTable').DataTable({
+                responsive: true
+            });
+
             $('#CourseID').change(function () {
                 var courseId = $(this).val();
                 $('#SyllabusID').empty().append('<option>Select Syllabus</option>');
