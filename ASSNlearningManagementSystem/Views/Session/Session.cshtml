@@ -52,6 +52,23 @@
         .danger-highlight {
             background-color: #E74C3C !important;
         }
+
+        .action-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .action-icons a,
+            .action-icons button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                margin: 0;
+                background: none;
+                border: none;
+            }
     </style>
 }
 
@@ -91,7 +108,6 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.NewSession.SessionID)
 
-            <!-- Row 1: Trainer | Course -->
             <div class="form_row">
                 <div class="form_group">
                     <label>Trainer</label>
@@ -113,7 +129,6 @@
                 </div>
             </div>
 
-            <!-- Row 2: Syllabus | Topic -->
             <div class="form_row">
                 <div class="form_group">
                     <label>Syllabus</label>
@@ -135,7 +150,6 @@
                 </div>
             </div>
 
-            <!-- Row 3: Session Date | Student Count -->
             <div class="form_row">
                 <div class="form_group">
                     <label>Session Date</label>
@@ -154,7 +168,6 @@
                 </div>
             </div>
 
-            <!-- Row 4: Start Time | End Time -->
             <div class="form_row">
                 <div class="form_group">
                     <label>Start Time</label>
@@ -226,29 +239,31 @@
                         </td>
                         <td>@session.EnrolledLearnerCount</td>
                         <td>
-                            @if (session.Status == "Scheduled")
-                            {
-                                <a href="@Url.Action("Session", "Session", new { id = session.SessionID })" title="Edit">
-                                    <i class="fa-solid fa-pen-to-square" style="cursor:pointer; margin-right:10px; color:#18AE90;"></i>
-                                </a>
-                                @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                            <div class="action-icons">
+                                @if (session.Status == "Scheduled")
                                 {
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" onclick="return confirm('Are you sure?');" style="background:none; border:none;">
-                                        <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
-                                    </button>
+                                    <a href="@Url.Action("Session", "Session", new { id = session.SessionID })" title="Edit">
+                                        <i class="fa-solid fa-pen-to-square" style="cursor:pointer; color:#18AE90;"></i>
+                                    </a>
+                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" onclick="return confirm('Are you sure?');">
+                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
+                                        </button>
+                                    }
                                 }
-                            }
-                            else if (session.Status == "Completed")
-                            {
-                                @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                else if (session.Status == "Completed")
                                 {
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" onclick="return confirm('Are you sure?');" style="background:none; border:none;">
-                                        <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
-                                    </button>
+                                    @using (Html.BeginForm("Delete", "Session", new { id = session.SessionID }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" onclick="return confirm('Are you sure?');">
+                                            <i class="fa-solid fa-trash" style="cursor:pointer; color:#CD2F74;"></i>
+                                        </button>
+                                    }
                                 }
-                            }
+                            </div>
                         </td>
                     </tr>
                 }

@@ -368,5 +368,42 @@ namespace ASSNlearningManagementSystem.Repository
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
+        // ✅ NEW METHODS REQUIRED BY THE CONTROLLER
+        public string GetCourseNameById(int id)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var cmd = new MySqlCommand("SELECT CourseName FROM course WHERE CourseID = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            return cmd.ExecuteScalar()?.ToString() ?? "";
+        }
+
+        public string GetSyllabusNameById(int id)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var cmd = new MySqlCommand("SELECT Syllabus_name FROM syllabus WHERE SyllabusID = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            return cmd.ExecuteScalar()?.ToString() ?? "";
+        }
+
+        public string GetTopicNameById(int id)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var cmd = new MySqlCommand("SELECT TopicName FROM topic WHERE TopicID = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            return cmd.ExecuteScalar()?.ToString() ?? "";
+        }
+
+        public string GetTrainerNameById(int id)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            connection.Open();
+            var cmd = new MySqlCommand("SELECT first_name FROM user WHERE user_id = @id", connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            return cmd.ExecuteScalar()?.ToString() ?? "";
+        }
     }
 }

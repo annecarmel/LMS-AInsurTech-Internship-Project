@@ -53,40 +53,37 @@ namespace ASSNlearningManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SaveSession(SessionViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                // ✅ LOGGING VALIDATION ERRORS — DEBUGGING AID
-                foreach (var key in ModelState.Keys)
-                {
-                    var errors = ModelState[key].Errors;
-                    foreach (var error in errors)
-                    {
-                        Console.WriteLine($"Validation failed for '{key}': {error.ErrorMessage}");
-                    }
-                }
+            // Load dropdowns
+            ViewBag.Trainers = new SelectList(_sessionRepo.GetTrainers(), "Key", "Value");
+            ViewBag.Courses = new SelectList(_sessionRepo.GetCourses(), "Key", "Value");
+            ViewBag.Syllabuses = new SelectList(_sessionRepo.GetSyllabuses(), "Key", "Value");
+            ViewBag.Topics = new SelectList(_sessionRepo.GetTopics(), "Key", "Value");
 
-                ViewBag.Trainers = new SelectList(_sessionRepo.GetTrainers(), "Key", "Value");
-                ViewBag.Courses = new SelectList(_sessionRepo.GetCourses(), "Key", "Value");
-                ViewBag.Syllabuses = new SelectList(_sessionRepo.GetSyllabuses(), "Key", "Value");
-                ViewBag.Topics = new SelectList(_sessionRepo.GetTopics(), "Key", "Value");
+            // Populate calculated fields
+            model.NewSession.CourseName = _sessionRepo.GetCourseNameById(model.NewSession.CourseID);
+            model.NewSession.SyllabusName = _sessionRepo.GetSyllabusNameById(model.NewSession.SyllabusID);
+            model.NewSession.TopicName = _sessionRepo.GetTopicNameById(model.NewSession.TopicID);
+            model.NewSession.TrainerName = _sessionRepo.GetTrainerNameById(model.NewSession.TrainerID);
+            model.NewSession.Status = CalculateStatus(model.NewSession.SessionDate, model.NewSession.StartTime, model.NewSession.EndTime);
 
-                model.SessionsList = _sessionRepo.GetAllSessions() ?? new List<Session>();
-                return View("Session", model);
-            }
-
+            // Set audit fields
             if (model.NewSession.SessionID == 0)
             {
-                model.NewSession.CreatedBy = 1; // TODO: replace with actual user ID
+                model.NewSession.CreatedBy = 1; // TODO: Replace with logged-in user
                 model.NewSession.CreatedOn = DateTime.Now;
             }
-            else
-            {
-                model.NewSession.UpdatedBy = 1; // TODO: replace with actual user ID
-                model.NewSession.UpdatedOn = DateTime.Now;
-            }
+            model.NewSession.UpdatedBy = 1;
+            model.NewSession.UpdatedOn = DateTime.Now;
 
-            // ✅ Automatically calculate status based on session time
-            model.NewSession.Status = CalculateStatus(model.NewSession.SessionDate, model.NewSession.StartTime, model.NewSession.EndTime);
+            // ✅ Clear stale validation before re-validating after assignments
+            ModelState.Clear();
+            TryValidateModel(model.NewSession);
+
+            if (!ModelState.IsValid)
+            {
+                model.SessionsList = _sessionRepo.GetAllSessions();
+                return View("Session", model);
+            }
 
             _sessionRepo.SaveSession(model.NewSession);
 
@@ -96,6 +93,8 @@ namespace ASSNlearningManagementSystem.Controllers
 
             return RedirectToAction("Session");
         }
+
+
 
         // POST: /Session/Delete/{id}
         [HttpPost]
