@@ -1,0 +1,38 @@
+﻿@model ASSNlearningManagementSystem.Models.EvaluateExamViewModel
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Evaluate Exam";
+}
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Evaluate Exam: @Model.ExamTitle</h3>
+        <p>Learner: @Model.LearnerName</p>
+    </div>
+    <form asp-action="Evaluate" method="post">
+        <input type="hidden" asp-for="SubmissionID" />
+        <input type="hidden" asp-for="PassingMarks" />
+        <table class="emp_table table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Marks Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Answers[i].QuestionText</td>
+                        <td>@Model.Answers[i].AnswerText</td>
+                        <td>
+                            <input type="hidden" name="Answers[@i].AnswerID" value="@Model.Answers[i].AnswerID" />
+                            <input type="number" name="Answers[@i].MarksAwarded" value="@Model.Answers[i].MarksAwarded" min="0" class="form-control" required />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="custom-button">Submit Evaluation</button>
+    </form>
+</div>

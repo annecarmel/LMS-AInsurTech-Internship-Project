@@ -1,0 +1,37 @@
+﻿@model List<ASSNlearningManagementSystem.Models.PendingEvaluationViewModel>
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Pending Evaluations";
+}
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Pending Evaluations</h3>
+    </div>
+    <div class="empmaster_card">
+        <div class="table-responsive">
+            <table class="emp_table table">
+                <thead>
+                    <tr>
+                        <th>Submission ID</th>
+                        <th>Exam Title</th>
+                        <th>Learner Name</th>
+                        <th>Submission Date</th>
+                        <th>Evaluate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.SubmissionID</td>
+                            <td>@item.ExamTitle</td>
+                            <td>@item.LearnerName</td>
+                            <td>@item.SubmissionDate.ToString("yyyy-MM-dd")</td>
+                            <td><a href="@Url.Action("Evaluate", "Exam", new { submissionId = item.SubmissionID })" class="custom-button">Evaluate</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

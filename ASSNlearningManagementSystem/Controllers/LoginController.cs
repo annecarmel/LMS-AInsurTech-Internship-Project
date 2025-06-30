@@ -6,16 +6,14 @@ namespace ASSNlearningManagementSystem.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly string connectionString = "server=localhost;user=root;password=root;database=lmsdb";
+        private readonly string connectionString = "server=localhost;user=root;password=Nishad@sql12345;database=lmsdb";
 
-        // GET: /Account/Login
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /Account/Login
         [HttpPost]
         public IActionResult Login(User user)
         {
@@ -25,17 +23,20 @@ namespace ASSNlearningManagementSystem.Controllers
                 {
                     con.Open();
 
-                    string query = "SELECT role_id FROM user WHERE username = @username AND password = @password";
+                    string query = "SELECT role_id, user_id FROM user WHERE username = @username AND password = @password";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@username", user.Username);
                         cmd.Parameters.AddWithValue("@password", user.Password);
 
-                        object result = cmd.ExecuteScalar();
+                        using var reader = cmd.ExecuteReader();
 
-                        if (result != null)
+                        if (reader.Read())
                         {
-                            int roleId = Convert.ToInt32(result);
+                            int roleId = Convert.ToInt32(reader["role_id"]);
+                            int userId = Convert.ToInt32(reader["user_id"]);
+
+                            HttpContext.Session.SetInt32("UserId", userId);
 
                             switch (roleId)
                             {
@@ -62,15 +63,8 @@ namespace ASSNlearningManagementSystem.Controllers
             return View();
         }
 
-        // Optional default welcome page
-        public IActionResult Welcome()
-        {
-            return View();
-        }
 
-        public IActionResult Index()
-        {
-            return RedirectToAction("Login");
-        }
+        public IActionResult Welcome() => View();
+        public IActionResult Index() => RedirectToAction("Login");
     }
 }

@@ -1,5 +1,187 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ASSNlearningManagementSystem.Models.ExamCreationViewModel
 @{
+    Layout = "_TrainerLayout"; // Replace with your layout name
+    ViewData["Title"] = "Create Exam";
+}
+
+<main>
+    <div class="container">
+        <div class="page-contents">
+            <div class="container_emp">
+                <div class="emp_head">
+                    <h3>Create Exam</h3>
+                </div>
+            </div>
+
+            <form asp-action="Create" method="post">
+                <div class="empmaster_card">
+
+                    <div class="form_row">
+                        <div class="form_group">
+                            <label>Course</label>
+                            <select name="Exam.TopicId" required>
+                                <option value="">Select Course</option>
+                                @foreach (var c in ViewBag.Courses)
+                                {
+                                    <option value="@c.CourseId">@c.CourseName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form_group">
+                            <label>Topic</label>
+                            <select name="Exam.TopicId" required>
+                                <option value="">Select Topic</option>
+                                @foreach (var t in ViewBag.Topics)
+                                {
+                                    <option value="@t.TopicID">@t.TopicName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form_row">
+                        <div class="form_group">
+                            <label>Exam Title</label>
+                            <input type="text" name="Exam.ExamTitle" placeholder="Enter Exam Title" required />
+                        </div>
+                        <div class="form_group">
+                            <label>Exam Date</label>
+                            <input type="date" name="Exam.ExamDate" required />
+                        </div>
+                    </div>
+
+                    <div class="form_row">
+                        <div class="form_group">
+                            <label>Duration (minutes)</label>
+                            <input type="number" name="Exam.Duration" required />
+                        </div>
+                        <div class="form_group">
+                            <label>Max Marks</label>
+                            <input type="number" name="Exam.MaxMarks" required />
+                        </div>
+                        <div class="form_group">
+                            <label>Passing Marks</label>
+                            <input type="number" name="Exam.PassingMarks" required />
+                        </div>
+                    </div>
+
+                    <div class="form_row">
+                        <div class="form_group">
+                            <label>Evaluator</label>
+                            <select name="Exam.EvaluatorId" required>
+                                <option value="">Select Evaluator</option>
+                                @foreach (var u in ViewBag.Users)
+                                {
+                                    <option value="@u.UserId">@u.FullName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form_group">
+                            <label>Instructor</label>
+                            <select name="Exam.InstructorId" required>
+                                <option value="">Select Instructor</option>
+                                @foreach (var u in ViewBag.Users)
+                                {
+                                    <option value="@u.UserId">@u.FullName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="emp_head">
+                        <h3>Questions</h3>
+                        <button type="button" id="add-question" class="custom-button">Add Question</button>
+                    </div>
+
+                    <div id="questions-container"></div>
+
+                    <div class="form_row">
+                        <button type="submit" class="custom-button">Save Exam</button>
+                        <button type="reset">Cancel</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let questionIndex = 0;
+
+            $("#add-question").click(function () {
+                let html = `
+                <div class="question-card" style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                    <div class="form_row">
+                        <div class="form_group">
+                            <label>Question Text</label>
+                            <input type="text" name="Questions[${questionIndex}].QuestionText" required />
+                        </div>
+                        <div class="form_group">
+                            <label>Question Type</label>
+                            <select name="Questions[${questionIndex}].QuestionType" class="question-type" data-index="${questionIndex}" required>
+                                <option value="">Select Type</option>
+                                <option value="MCQ">MCQ</option>
+                                <option value="ShortAnswer">Short Answer</option>
+                            </select>
+                        </div>
+                        <div class="form_group">
+                            <label>Marks</label>
+                            <input type="number" name="Questions[${questionIndex}].Marks" required />
+                        </div>
+                    </div>
+
+                    <div class="options-container" id="options-${questionIndex}"></div>
+
+                    <button type="button" class="remove-question custom-button" style="background:red;">Remove Question</button>
+                </div>`;
+                $("#questions-container").append(html);
+                questionIndex++;
+            });
+
+            $(document).on('click', '.remove-question', function () {
+                $(this).closest('.question-card').remove();
+            });
+
+            $(document).on('change', '.question-type', function () {
+                let index = $(this).data('index');
+                let type = $(this).val();
+                if (type === "MCQ") {
+                    let optHtml = `
+                    <div>
+                        <button type="button" class="add-option custom-button" data-index="${index}">Add Option</button>
+                        <div id="option-list-${index}"></div>
+                    </div>`;
+                    $(`#options-${index}`).html(optHtml);
+                } else {
+                    $(`#options-${index}`).empty();
+                }
+            });
+
+            $(document).on('click', '.add-option', function () {
+                let qIndex = $(this).data('index');
+                let oIndex = $(`#option-list-${qIndex} .option-item`).length;
+                let html = `
+                <div class="option-item">
+                    <input type="text" name="Questions[${qIndex}].Options[${oIndex}].OptionText" placeholder="Option Text" required />
+                    <label>
+                        <input type="checkbox" name="Questions[${qIndex}].Options[${oIndex}].IsCorrect" value="true" /> Is Correct
+                    </label>
+                    <button type="button" class="remove-option" style="background:red;">Remove Option</button>
+                </div>`;
+                $(`#option-list-${qIndex}`).append(html);
+            });
+
+            $(document).on('click', '.remove-option', function () {
+                $(this).closest('.option-item').remove();
+            });
+        });
+    </script>
 }

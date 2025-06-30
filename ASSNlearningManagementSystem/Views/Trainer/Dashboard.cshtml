@@ -1,5 +1,230 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    Layout = "_TrainerLayout";
+    ViewData["Title"] = "Dashboard";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <title>DashBoard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="dashboard-contents">
+                <div class="hero_section">
+                    <div class="number_card">
+                        <div class="card1">
+                            <div class="card1_left">
+                                <img src="~/img/Policies.png" />
+                            </div>
+                            <div class="card1_right">
+                                <h6> Number of Learners</h6>
+                                <h1>@Model.TotalLearners</h1>
+                            </div>
+                        </div>
+
+                        <div class="card2">
+                            <div class="card2_left">
+                                <img src="~/img/Claims.png" />
+                            </div>
+                            <div class="card2_right">
+                                <h6>Assigned Courses</h6>
+                                <h1>@Model.AssignedCourses</h1>
+                            </div>
+                        </div>
+
+                        <div class="card3">
+                            <div class="card3_left">
+                                <img src="~/img/Settlement.png" />
+                            </div>
+                            <div class="card3_right">
+                                <h6>Number of Courses</h6>
+                                <h1>@Model.TotalCourses</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="policy_card">
+                    <div class="motor_card_box">
+                        <div class="details">
+                            <div class="details-header">
+                                <h6>Session Count by Topic</h6>
+                            </div>
+                            <canvas id="barChart" style="max-width: 600px; max-height: 400px;"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="motor_card_box">
+                        <div class="details">
+                            <div class="details-header">
+                                <h6>Evaluation Status Distribution</h6>
+                            </div>
+                            <canvas id="pieChart" style="max-width: 600px; max-height: 400px;"></canvas>
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="table_card">
+                        <!-- First Motor Card Box -->
+                        <div class="motor_card_box">
+                            <div class="details">
+                                <div class="details-header">
+                                    <h6>Session Schedule</h6>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table" id="table1">
+                                        <thead>
+                                            <tr>
+                                                <th>Edit</th>
+                                                <th>Session ID</th>
+                                                <th>Topic</th>
+                                                <th>Date</th>
+                                                <th>Learner</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var s in Model.Sessions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <a href="#" class="edit-icon">
+                                                            <img src="~/img/edit Icon.png" width="15px" height="15px" />
+                                                        </a>
+                                                    </td>
+                                                    <td>@s.SessionId</td>
+                                                    <td>@s.Topic</td>
+                                                    <td>@s.Date.ToString("yyyy-MM-dd")</td> 
+                                                    <td>@s.LearnerName</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Second Motor Card Box -->
+                        <div class="motor_card_box">
+                            <div class="details">
+                                <div class="details-header">
+                                    <h6>Evaluation</h6>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table" id="table2">
+                                        <thead>
+                                            <tr>
+                                                <th>Edit</th>
+                                                <th>Exam ID</th>
+                                                <th>Exam Name</th>
+                                                <th>Learner</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach (var e in Model.Evaluations)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <a href="#" class="edit-icon">
+                                                        <img src="~/img/edit Icon.png" width="15px" height="15px" />
+                                                    </a>
+                                                </td>
+                                                <td>@e.ExamId</td>
+                                                <td>@e.ExamName</td>
+                                                <td>@e.LearnerName</td>
+                                                <td>@e.Status</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- End of table_card -->
+                </div> <!-- End of policy_card -->
+            </div> <!-- End of dashboard-contents -->
+        </div> <!-- End of container -->
+    </main>
+
+    <div id="edit-modal" class="modal">
+        <h2>Edit Policy Details</h2>
+        <form>
+            <label>Quotation:</label>
+            <input type="text" id="quotation" name="quotation" />
+
+            <label>Policy Issue:</label>
+            <input type="date" id="policyIssue" name="policyIssue" />
+
+            <label>Policy End:</label>
+            <input type="date" id="policyEnd" name="policyEnd" />
+
+            <label>Status:</label>
+            <input type="text" id="status" name="status" />
+
+            <button type="submit" class="submit-button">Submit</button>
+            <button type="button" id="cancel-button">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        // Bar Chart - Session Count per Course
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        const barLabels = @Html.Raw(Json.Serialize(Model.BarChartData.Keys));
+        const barData = @Html.Raw(Json.Serialize(Model.BarChartData.Values));
+
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: barLabels,
+                datasets: [{
+                    label: 'Number of Sessions per Course',
+                    data: barData,
+                    backgroundColor: 'rgba(46, 204, 113, 0.6)',
+                    borderColor: 'rgba(39, 174, 96, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Pie Chart - Exam Submissions per Course
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const pieLabels = @Html.Raw(Json.Serialize(Model.PieChartData.Keys));
+        const pieData = @Html.Raw(Json.Serialize(Model.PieChartData.Values));
+
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: pieLabels,
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: [
+                        'rgba(46, 204, 113, 0.7)',
+                        'rgba(231, 76, 60, 0.7)',
+                        'rgba(52, 152, 219, 0.7)',
+                        'rgba(155, 89, 182, 0.7)',
+                        'rgba(241, 196, 15, 0.7)',
+                        'rgba(230, 126, 34, 0.7)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+
+</body>
+</html>
