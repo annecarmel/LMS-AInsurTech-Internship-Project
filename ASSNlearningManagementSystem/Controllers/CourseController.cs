@@ -1,6 +1,7 @@
 ﻿using ASSNlearningManagementSystem.DataAccess;
 using ASSNlearningManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http; // ✅ Needed for session
 using System;
 
 namespace ASSNlearningManagementSystem.Controllers
@@ -31,12 +32,17 @@ namespace ASSNlearningManagementSystem.Controllers
         [HttpPost]
         public IActionResult Save(Course course)
         {
+            // ✅ Get logged-in user ID from session
+            var userId = HttpContext.Session.GetInt32("UserId")?.ToString();
+
             bool success;
 
             if (course.CourseID == 0)
             {
                 // Add
                 course.CreatedOn = DateTime.Now;
+                course.CreatedBy = userId; // ✅ use actual user ID
+
                 success = _courseRepo.AddCourse(course);
                 TempData["Success"] = success ? "✅ Course saved successfully." : "❌ Failed to save course.";
             }
@@ -44,6 +50,8 @@ namespace ASSNlearningManagementSystem.Controllers
             {
                 // Update
                 course.UpdatedOn = DateTime.Now;
+                course.UpdatedBy = userId; // ✅ use actual user ID
+
                 success = _courseRepo.UpdateCourse(course);
                 TempData["Success"] = success ? "✅ Course updated successfully." : "❌ Failed to update course.";
             }

@@ -37,20 +37,25 @@ namespace ASSNlearningManagementSystem.Controllers
                 {
                     if (employee.user_id > 0)
                     {
-                        // Update case
+                        // ✅ UPDATE
                         employee.updated_on = DateTime.Now;
+                        employee.updated_by = HttpContext.Session.GetInt32("UserId");
+
                         _employeeRepository.UpdateEmployee(employee);
                         TempData["SuccessMessage"] = "User updated successfully!";
                     }
                     else
                     {
-                        // Create case
+                        // ✅ CREATE
                         employee.username = $"{employee.first_name}.{employee.last_name}".ToLower();
                         employee.password = GenerateRandomPassword();
                         employee.full_name = $"{employee.first_name} {employee.last_name}";
                         employee.created_on = DateTime.Now;
                         employee.updated_on = DateTime.Now;
-                        employee.is_active = true;
+                        employee.is_active = false;
+
+                        employee.created_by = HttpContext.Session.GetInt32("UserId");
+                        employee.updated_by = HttpContext.Session.GetInt32("UserId");
 
                         _employeeRepository.AddEmployee(employee);
                         TempData["SuccessMessage"] = "User saved successfully!";
@@ -113,6 +118,5 @@ namespace ASSNlearningManagementSystem.Controllers
 
             return RedirectToAction("Employee");
         }
-
     }
 }

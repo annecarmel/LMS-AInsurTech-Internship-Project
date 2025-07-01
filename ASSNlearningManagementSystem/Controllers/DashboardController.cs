@@ -44,7 +44,16 @@ namespace ASSNlearningManagementSystem.Controllers
             ViewBag.PopularityDataJson = JsonConvert.SerializeObject(popularityData, camelCaseSettings);
 
             // === Tables ===
-            ViewBag.UpcomingExams = _repo.GetUpcomingExams();
+
+            // ✅ Show only "Scheduled" exams (i.e., upcoming)
+            var allExams = _repo.GetUpcomingExams();
+            var scheduledExams = allExams
+                .Where(e => e.Status != null && e.Status.Trim().ToLower() == "scheduled")
+                .OrderBy(e => e.Date) // Optional: show nearest upcoming first
+                .ToList();
+
+            ViewBag.UpcomingExams = scheduledExams;
+
             ViewBag.SessionOverview = _repo.GetSessionOverview();
 
             return View("Dashboard");

@@ -35,7 +35,7 @@ namespace ASSNlearningManagementSystem.Models
 
         public int role_id { get; set; }
 
-        // ✨ NEW FIELDS FOR AUTO-GENERATION
+        // ✅ Auto-generated fields
         public string? username { get; set; } = "";
 
         public string? password { get; set; } = "";
@@ -47,6 +47,11 @@ namespace ASSNlearningManagementSystem.Models
         public DateTime updated_on { get; set; }
 
         public bool is_active { get; set; }
+
+        // ✅ NEW: created_by & updated_by for auditing
+        public int? created_by { get; set; }
+
+        public int? updated_by { get; set; }
 
         // For displaying user list
         public List<EmployeeViewModel> EmployeeList { get; set; } = new List<EmployeeViewModel>();

@@ -202,9 +202,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                     try
                     {
                         string courseQuery = @"
-                            INSERT INTO course (CourseName, Description, created_on, created_by)
-                            VALUES (@name, @desc, @createdOn, @createdBy);
-                            SELECT LAST_INSERT_ID();";
+                    INSERT INTO course (CourseName, Description, created_on, created_by)
+                    VALUES (@name, @desc, @createdOn, @createdBy);
+                    SELECT LAST_INSERT_ID();";
 
                         int newCourseId;
                         using (var cmd = new MySqlCommand(courseQuery, conn, transaction))
@@ -212,7 +212,7 @@ namespace ASSNlearningManagementSystem.DataAccess
                             cmd.Parameters.AddWithValue("@name", course.CourseName);
                             cmd.Parameters.AddWithValue("@desc", course.Description);
                             cmd.Parameters.AddWithValue("@createdOn", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@createdBy", course.CreatedBy ?? "1");
+                            cmd.Parameters.AddWithValue("@createdBy", course.CreatedBy); // ✅ use passed value
 
                             newCourseId = Convert.ToInt32(cmd.ExecuteScalar());
                         }
@@ -222,9 +222,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                             foreach (var syllabus in course.Syllabuses)
                             {
                                 string syllabusQuery = @"
-                                    INSERT INTO syllabus (Syllabus_name, CourseID, created_on, created_by, updated_on, updated_by)
-                                    VALUES (@title, @courseId, @createdOn, @createdBy, @updatedOn, @updatedBy);
-                                    SELECT LAST_INSERT_ID();";
+                            INSERT INTO syllabus (Syllabus_name, CourseID, created_on, created_by, updated_on, updated_by)
+                            VALUES (@title, @courseId, @createdOn, @createdBy, @updatedOn, @updatedBy);
+                            SELECT LAST_INSERT_ID();";
 
                                 int newSyllabusId;
                                 using (var syllabusCmd = new MySqlCommand(syllabusQuery, conn, transaction))
@@ -232,9 +232,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                                     syllabusCmd.Parameters.AddWithValue("@title", syllabus.Title);
                                     syllabusCmd.Parameters.AddWithValue("@courseId", newCourseId);
                                     syllabusCmd.Parameters.AddWithValue("@createdOn", DateTime.Now);
-                                    syllabusCmd.Parameters.AddWithValue("@createdBy", course.CreatedBy ?? "1");
+                                    syllabusCmd.Parameters.AddWithValue("@createdBy", course.CreatedBy); // ✅ use passed value
                                     syllabusCmd.Parameters.AddWithValue("@updatedOn", DateTime.Now);
-                                    syllabusCmd.Parameters.AddWithValue("@updatedBy", course.CreatedBy ?? "1");
+                                    syllabusCmd.Parameters.AddWithValue("@updatedBy", course.CreatedBy); // ✅ use passed value
 
                                     newSyllabusId = Convert.ToInt32(syllabusCmd.ExecuteScalar());
                                 }
@@ -244,8 +244,8 @@ namespace ASSNlearningManagementSystem.DataAccess
                                     foreach (var topic in syllabus.Topics)
                                     {
                                         string topicQuery = @"
-                                            INSERT INTO topic (TopicName, Duration, Description, SyllabusID, created_on, created_by, updated_on, updated_by)
-                                            VALUES (@title, @duration, @desc, @syllabusId, @createdOn, @createdBy, @updatedOn, @updatedBy);";
+                                    INSERT INTO topic (TopicName, Duration, Description, SyllabusID, created_on, created_by, updated_on, updated_by)
+                                    VALUES (@title, @duration, @desc, @syllabusId, @createdOn, @createdBy, @updatedOn, @updatedBy);";
 
                                         using (var topicCmd = new MySqlCommand(topicQuery, conn, transaction))
                                         {
@@ -254,9 +254,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                                             topicCmd.Parameters.AddWithValue("@desc", topic.Description ?? "");
                                             topicCmd.Parameters.AddWithValue("@syllabusId", newSyllabusId);
                                             topicCmd.Parameters.AddWithValue("@createdOn", DateTime.Now);
-                                            topicCmd.Parameters.AddWithValue("@createdBy", course.CreatedBy ?? "1");
+                                            topicCmd.Parameters.AddWithValue("@createdBy", course.CreatedBy); // ✅ use passed value
                                             topicCmd.Parameters.AddWithValue("@updatedOn", DateTime.Now);
-                                            topicCmd.Parameters.AddWithValue("@updatedBy", course.CreatedBy ?? "1");
+                                            topicCmd.Parameters.AddWithValue("@updatedBy", course.CreatedBy); // ✅ use passed value
 
                                             topicCmd.ExecuteNonQuery();
                                         }
@@ -288,16 +288,16 @@ namespace ASSNlearningManagementSystem.DataAccess
                     try
                     {
                         string courseQuery = @"
-                            UPDATE course
-                            SET CourseName = @name, Description = @desc, updated_on = @updatedOn, updated_by = @updatedBy
-                            WHERE CourseID = @id";
+                    UPDATE course
+                    SET CourseName = @name, Description = @desc, updated_on = @updatedOn, updated_by = @updatedBy
+                    WHERE CourseID = @id";
 
                         using (var cmd = new MySqlCommand(courseQuery, conn, transaction))
                         {
                             cmd.Parameters.AddWithValue("@name", course.CourseName);
                             cmd.Parameters.AddWithValue("@desc", course.Description);
                             cmd.Parameters.AddWithValue("@updatedOn", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy ?? "1");
+                            cmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy); // ✅ use passed value
                             cmd.Parameters.AddWithValue("@id", course.CourseID);
                             cmd.ExecuteNonQuery();
                         }
@@ -321,9 +321,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                             foreach (var syllabus in course.Syllabuses)
                             {
                                 string syllabusQuery = @"
-                                    INSERT INTO syllabus (Syllabus_name, CourseID, created_on, created_by, updated_on, updated_by)
-                                    VALUES (@title, @courseId, @createdOn, @createdBy, @updatedOn, @updatedBy);
-                                    SELECT LAST_INSERT_ID();";
+                            INSERT INTO syllabus (Syllabus_name, CourseID, created_on, created_by, updated_on, updated_by)
+                            VALUES (@title, @courseId, @createdOn, @createdBy, @updatedOn, @updatedBy);
+                            SELECT LAST_INSERT_ID();";
 
                                 int newSyllabusId;
                                 using (var syllabusCmd = new MySqlCommand(syllabusQuery, conn, transaction))
@@ -331,9 +331,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                                     syllabusCmd.Parameters.AddWithValue("@title", syllabus.Title);
                                     syllabusCmd.Parameters.AddWithValue("@courseId", course.CourseID);
                                     syllabusCmd.Parameters.AddWithValue("@createdOn", DateTime.Now);
-                                    syllabusCmd.Parameters.AddWithValue("@createdBy", course.UpdatedBy ?? "1");
+                                    syllabusCmd.Parameters.AddWithValue("@createdBy", course.UpdatedBy); // ✅ use passed value
                                     syllabusCmd.Parameters.AddWithValue("@updatedOn", DateTime.Now);
-                                    syllabusCmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy ?? "1");
+                                    syllabusCmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy); // ✅ use passed value
 
                                     newSyllabusId = Convert.ToInt32(syllabusCmd.ExecuteScalar());
                                 }
@@ -343,8 +343,8 @@ namespace ASSNlearningManagementSystem.DataAccess
                                     foreach (var topic in syllabus.Topics)
                                     {
                                         string topicQuery = @"
-                                            INSERT INTO topic (TopicName, Duration, Description, SyllabusID, created_on, created_by, updated_on, updated_by)
-                                            VALUES (@title, @duration, @desc, @syllabusId, @createdOn, @createdBy, @updatedOn, @updatedBy);";
+                                    INSERT INTO topic (TopicName, Duration, Description, SyllabusID, created_on, created_by, updated_on, updated_by)
+                                    VALUES (@title, @duration, @desc, @syllabusId, @createdOn, @createdBy, @updatedOn, @updatedBy);";
 
                                         using (var topicCmd = new MySqlCommand(topicQuery, conn, transaction))
                                         {
@@ -353,9 +353,9 @@ namespace ASSNlearningManagementSystem.DataAccess
                                             topicCmd.Parameters.AddWithValue("@desc", topic.Description ?? "");
                                             topicCmd.Parameters.AddWithValue("@syllabusId", newSyllabusId);
                                             topicCmd.Parameters.AddWithValue("@createdOn", DateTime.Now);
-                                            topicCmd.Parameters.AddWithValue("@createdBy", course.UpdatedBy ?? "1");
+                                            topicCmd.Parameters.AddWithValue("@createdBy", course.UpdatedBy); // ✅ use passed value
                                             topicCmd.Parameters.AddWithValue("@updatedOn", DateTime.Now);
-                                            topicCmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy ?? "1");
+                                            topicCmd.Parameters.AddWithValue("@updatedBy", course.UpdatedBy); // ✅ use passed value
 
                                             topicCmd.ExecuteNonQuery();
                                         }
@@ -375,6 +375,7 @@ namespace ASSNlearningManagementSystem.DataAccess
                 }
             }
         }
+
 
         // ✅ Delete course with cascade
         public bool DeleteCourse(int courseId)

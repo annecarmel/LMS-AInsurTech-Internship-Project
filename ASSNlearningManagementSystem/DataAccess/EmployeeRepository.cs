@@ -21,10 +21,10 @@ namespace ASSNlearningManagementSystem.DataAccess
             {
                 string query = @"INSERT INTO user 
                         (first_name, last_name, email, phone_number, date_of_birth, gender, city, state, country, department, role_id,
-                         username, password, full_name, created_on, updated_on, is_active)
+                         username, password, full_name, created_on, updated_on, is_active, created_by, updated_by)
                         VALUES 
                         (@FirstName, @LastName, @Email, @PhoneNumber, @DateOfBirth, @Gender, @City, @State, @Country, @Department, @RoleId,
-                         @Username, @Password, @FullName, @CreatedOn, @UpdatedOn, @IsActive)";
+                         @Username, @Password, @FullName, @CreatedOn, @UpdatedOn, @IsActive, @CreatedBy, @UpdatedBy)";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@FirstName", employee.first_name);
@@ -39,13 +39,16 @@ namespace ASSNlearningManagementSystem.DataAccess
                 cmd.Parameters.AddWithValue("@Department", employee.department);
                 cmd.Parameters.AddWithValue("@RoleId", employee.role_id);
 
-                // Auto-generated fields
                 cmd.Parameters.AddWithValue("@Username", employee.username);
                 cmd.Parameters.AddWithValue("@Password", employee.password);
                 cmd.Parameters.AddWithValue("@FullName", employee.full_name);
                 cmd.Parameters.AddWithValue("@CreatedOn", employee.created_on);
                 cmd.Parameters.AddWithValue("@UpdatedOn", employee.updated_on);
                 cmd.Parameters.AddWithValue("@IsActive", employee.is_active);
+
+                // ✅ New fields
+                cmd.Parameters.AddWithValue("@CreatedBy", employee.created_by);
+                cmd.Parameters.AddWithValue("@UpdatedBy", employee.updated_by);
 
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -148,7 +151,8 @@ namespace ASSNlearningManagementSystem.DataAccess
                             country = @Country,
                             department = @Department,
                             role_id = @RoleId,
-                            updated_on = @UpdatedOn
+                            updated_on = @UpdatedOn,
+                            updated_by = @UpdatedBy
                          WHERE user_id = @UserId";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -164,6 +168,7 @@ namespace ASSNlearningManagementSystem.DataAccess
                 cmd.Parameters.AddWithValue("@Department", employee.department);
                 cmd.Parameters.AddWithValue("@RoleId", employee.role_id);
                 cmd.Parameters.AddWithValue("@UpdatedOn", employee.updated_on);
+                cmd.Parameters.AddWithValue("@UpdatedBy", employee.updated_by);
                 cmd.Parameters.AddWithValue("@UserId", employee.user_id);
 
                 conn.Open();
@@ -184,6 +189,5 @@ namespace ASSNlearningManagementSystem.DataAccess
                 cmd.ExecuteNonQuery();
             }
         }
-
     }
 }

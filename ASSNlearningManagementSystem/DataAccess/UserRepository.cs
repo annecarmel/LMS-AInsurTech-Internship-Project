@@ -32,14 +32,14 @@ namespace ASSNlearningManagementSystem.DataAccess
             }
         }
 
-        public (string Username, string Role)? GetUserByUsernameAndPassword(string username, string password)
+        public (int UserId, string Username, string Department, string Role)? GetUserByUsernameAndPassword(string username, string password)
         {
             using (var conn = new MySqlConnection(_connectionString))
             {
                 conn.Open();
 
                 string query = @"
-                    SELECT u.username, ur.role_name
+                    SELECT u.user_id, u.full_name AS username, u.department, ur.role_name
                     FROM user u
                     INNER JOIN userrole ur ON u.role_id = ur.role_id
                     WHERE u.username = @username AND u.password = @password";
@@ -53,9 +53,13 @@ namespace ASSNlearningManagementSystem.DataAccess
                     {
                         if (reader.Read())
                         {
+                            int userId = reader.GetInt32("user_id");
                             string foundUsername = reader.GetString("username");
+                            string department = reader.IsDBNull(reader.GetOrdinal("department"))
+                                ? "" : reader.GetString("department");
                             string role = reader.GetString("role_name");
-                            return (foundUsername, role);
+
+                            return (userId, foundUsername, department, role);
                         }
                     }
                 }
@@ -63,5 +67,36 @@ namespace ASSNlearningManagementSystem.DataAccess
 
             return null; // User not found
         }
+
+        public void UpdateLastLoginAndIsActive(int userId, bool isActive)
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE user SET last_login = NOW(), is_active = @isActive WHERE user_id = @userId";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@isActive", isActive ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateIsActive(int userId, bool isActive)
+        {
+            using (var conn = new MySqlConnection(_connectionString))
+            {
+                conn.Open();
+                string query = "UPDATE user SET is_active = @isActive WHERE user_id = @userId";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@isActive", isActive ? 1 : 0);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

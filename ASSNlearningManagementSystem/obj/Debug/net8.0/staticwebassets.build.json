@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "R9Fy2QOMKaRbh/4wBo8uWclMwFZwz1k7i6YMTe9D5bM=",
+  "Hash": "4ok1WhNf8zttRtkYZnyer/ji7KJ4OJT90JoMTsMBfco=",
   "Source": "ASSNlearningManagementSystem",
   "BasePath": "_content/ASSNlearningManagementSystem",
   "Mode": "Default",
@@ -115,8 +115,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "h33bge9nl1",
-      "Integrity": "bTzvDw7m04ZPVzX+NX35oNl4dsEyxPX9Vfb++wSOMlc=",
+      "Fingerprint": "4fjpkoxggk",
+      "Integrity": "kDJXLU0LGbFLchUS8uASwJ69xA7GsLMts1nkLifM7jU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\style.css"
@@ -1985,6 +1985,51 @@
       ]
     },
     {
+      "Route": "css/style.4fjpkoxggk.css",
+      "AssetFile": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16583"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kDJXLU0LGbFLchUS8uASwJ69xA7GsLMts1nkLifM7jU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 30 Jun 2025 06:43:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4fjpkoxggk"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kDJXLU0LGbFLchUS8uASwJ69xA7GsLMts1nkLifM7jU="
+        }
+      ]
+    },
+    {
       "Route": "css/style.css",
       "AssetFile": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
       "Selectors": [],
@@ -1995,7 +2040,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16581"
+          "Value": "16583"
         },
         {
           "Name": "Content-Type",
@@ -2003,11 +2048,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bTzvDw7m04ZPVzX+NX35oNl4dsEyxPX9Vfb++wSOMlc=\""
+          "Value": "\"kDJXLU0LGbFLchUS8uASwJ69xA7GsLMts1nkLifM7jU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 26 Jun 2025 07:25:00 GMT"
+          "Value": "Mon, 30 Jun 2025 06:43:01 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2017,52 +2062,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bTzvDw7m04ZPVzX+NX35oNl4dsEyxPX9Vfb++wSOMlc="
-        }
-      ]
-    },
-    {
-      "Route": "css/style.h33bge9nl1.css",
-      "AssetFile": "C:\\Users\\Lemra\\Desktop\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem\\wwwroot\\css\\style.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "16581"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"bTzvDw7m04ZPVzX+NX35oNl4dsEyxPX9Vfb++wSOMlc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 26 Jun 2025 07:25:00 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "h33bge9nl1"
-        },
-        {
-          "Name": "label",
-          "Value": "css/style.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-bTzvDw7m04ZPVzX+NX35oNl4dsEyxPX9Vfb++wSOMlc="
+          "Value": "sha256-kDJXLU0LGbFLchUS8uASwJ69xA7GsLMts1nkLifM7jU="
         }
       ]
     },

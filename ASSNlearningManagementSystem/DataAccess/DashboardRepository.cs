@@ -107,10 +107,11 @@ namespace ASSNlearningManagementSystem.DataAccess
         {
             var list = new List<UpcomingExam>();
             string query = @"
-                SELECT exam_title, exam_date, duration, status
-                FROM exam
-                WHERE status IN ('Pending', 'Upcoming')
-                ORDER BY exam_date ASC";
+        SELECT exam_title, exam_date, duration, status
+        FROM exam
+        WHERE LOWER(TRIM(status)) = 'scheduled'
+        AND exam_date >= CURDATE()
+        ORDER BY exam_date ASC";
 
             using (var conn = new MySqlConnection(_connectionString))
             using (var cmd = new MySqlCommand(query, conn))

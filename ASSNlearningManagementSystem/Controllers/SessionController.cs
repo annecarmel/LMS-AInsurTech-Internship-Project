@@ -3,6 +3,7 @@ using ASSNlearningManagementSystem.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http; // ✅ For Session
 using System;
 using System.Collections.Generic;
 
@@ -66,13 +67,16 @@ namespace ASSNlearningManagementSystem.Controllers
             model.NewSession.TrainerName = _sessionRepo.GetTrainerNameById(model.NewSession.TrainerID);
             model.NewSession.Status = CalculateStatus(model.NewSession.SessionDate, model.NewSession.StartTime, model.NewSession.EndTime);
 
+            // ✅ Get real user ID from session
+            var userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+
             // Set audit fields
             if (model.NewSession.SessionID == 0)
             {
-                model.NewSession.CreatedBy = 1; // TODO: Replace with logged-in user
+                model.NewSession.CreatedBy = userId; // ✅ Real user
                 model.NewSession.CreatedOn = DateTime.Now;
             }
-            model.NewSession.UpdatedBy = 1;
+            model.NewSession.UpdatedBy = userId; // ✅ Real user
             model.NewSession.UpdatedOn = DateTime.Now;
 
             // ✅ Clear stale validation before re-validating after assignments
@@ -87,14 +91,12 @@ namespace ASSNlearningManagementSystem.Controllers
 
             _sessionRepo.SaveSession(model.NewSession);
 
-            TempData["SuccessMessage"] = model.NewSession.SessionID == 0
+            TempData["SessionSuccess"] = model.NewSession.SessionID == 0
                 ? "Session created successfully!"
                 : "Session updated successfully!";
 
             return RedirectToAction("Session");
         }
-
-
 
         // POST: /Session/Delete/{id}
         [HttpPost]
@@ -107,7 +109,7 @@ namespace ASSNlearningManagementSystem.Controllers
             }
 
             _sessionRepo.DeleteSession(id);
-            TempData["SuccessMessage"] = "Session deleted successfully!";
+            TempData["SessionSuccess"] = "Session deleted successfully!";
             return RedirectToAction("Session");
         }
 

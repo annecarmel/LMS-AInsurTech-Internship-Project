@@ -68,108 +68,109 @@
 }
 
 <main class="container">
-
-    <!-- Title: Create New Course -->
-    <div class="container_emp">
-        <div class="emp_head">
-            <h3>@(Model.NewCourse.CourseID == 0 ? "Create New Course" : "Edit Course")</h3>
-        </div>
-    </div>
-
     <div class="empmaster_card">
-        @if (TempData["Success"] != null)
-        {
-            <div id="flash-message" class="alert alert-success">@TempData["Success"]</div>
-        }
-        @if (TempData["Error"] != null)
-        {
-            <div id="flash-message" class="alert alert-danger">@TempData["Error"]</div>
-        }
-
-        <form asp-action="Save" asp-controller="Course" method="post" class="emp_form">
-            <input type="hidden" name="CourseID" value="@Model.NewCourse.CourseID" />
-
-            <div class="form_row">
-                <div class="form_group">
-                    <label for="courseName">Course Name</label>
-                    <input type="text" id="courseName" name="CourseName" value="@Model.NewCourse.CourseName" placeholder="Enter Course Name" required />
-                </div>
-                <div class="form_group">
-                    <label for="courseDesc">Course Description</label>
-                    <input type="text" id="courseDesc" name="Description" value="@Model.NewCourse.Description" placeholder="Enter Description" required />
+        <div class="emp_add_heading">
+            <div class="container_emp">
+                <div class="emp_head">
+                    <h3>@(Model.NewCourse.CourseID == 0 ? "Create New Course" : "Edit Course")</h3>
                 </div>
             </div>
 
-            <div id="syllabusContainer">
-                @if (Model.NewCourse.Syllabuses != null)
-                {
-                    int sIndex = 0;
-                    foreach (var syllabus in Model.NewCourse.Syllabuses)
+            @if (TempData["Success"] != null)
+            {
+                <div id="flash-message" class="alert alert-success">@TempData["Success"]</div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div id="flash-message" class="alert alert-danger">@TempData["Error"]</div>
+            }
+
+            <form asp-action="Save" asp-controller="Course" method="post" class="emp_form">
+                <input type="hidden" name="CourseID" value="@Model.NewCourse.CourseID" />
+
+                <div class="form_row">
+                    <div class="form_group">
+                        <label for="courseName">Course Name</label>
+                        <input type="text" id="courseName" name="CourseName" value="@Model.NewCourse.CourseName" placeholder="Enter Course Name" required />
+                    </div>
+                    <div class="form_group">
+                        <label for="courseDesc">Course Description</label>
+                        <input type="text" id="courseDesc" name="Description" value="@Model.NewCourse.Description" placeholder="Enter Description" required />
+                    </div>
+                </div>
+
+                <div id="syllabusContainer">
+                    @if (Model.NewCourse.Syllabuses != null)
                     {
-                        <div class="empmaster_card syllabus-spacing">
-                            <div class="emp_add_heading" style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <h3>Syllabus @(++sIndex)</h3>
-                                <button type="button" onclick="this.closest('.empmaster_card').remove()" class="cancel-button-spacing" style="background:#E74C3C; color:white; border:none; padding:4px 10px; border-radius:6px;">Cancel</button>
-                            </div>
-                            <div class="form_row">
-                                <div class="form_group">
-                                    <label>Syllabus Title</label>
-                                    <input type="text" name="Syllabuses[@(sIndex - 1)].Title" value="@syllabus.Title" placeholder="Enter Syllabus Title" required />
+                        int sIndex = 0;
+                        foreach (var syllabus in Model.NewCourse.Syllabuses)
+                        {
+                            <div class="empmaster_card syllabus-spacing">
+                                <div class="emp_add_heading" style="display:flex; justify-content:space-between; align-items:flex-start;">
+                                    <h3>Syllabus @(++sIndex)</h3>
+                                    <button type="button" onclick="this.closest('.empmaster_card').remove()" class="cancel-button-spacing" style="background:#E74C3C; color:white; border:none; padding:4px 10px; border-radius:6px;">Cancel</button>
+                                </div>
+                                <div class="form_row">
+                                    <div class="form_group">
+                                        <label>Syllabus Title</label>
+                                        <input type="text" name="Syllabuses[@(sIndex - 1)].Title" value="@syllabus.Title" placeholder="Enter Syllabus Title" required />
+                                    </div>
+                                </div>
+                                <div class="topics first-topic-spacing">
+                                    @if (syllabus.Topics != null)
+                                    {
+                                        int tIndex = 0;
+                                        foreach (var topic in syllabus.Topics)
+                                        {
+                                            <div class="topic-spacing">
+                                                <div class="form_row topic-align">
+                                                    <div class="form_group">
+                                                        <label>Topic Title</label>
+                                                        <input type="text" name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].Title" value="@topic.Title" required />
+                                                    </div>
+                                                    <div class="form_group">
+                                                        <label>Duration (hours)</label>
+                                                        <input type="number" name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].DurationHours" value="@topic.DurationHours" required />
+                                                    </div>
+                                                    <button type="button" onclick="this.closest('.topic-spacing').remove()" class="topic-cancel-button">Cancel</button>
+                                                </div>
+                                                <div class="form_row">
+                                                    <div class="form_group" style="width:100%;">
+                                                        <label>Topic Description</label>
+                                                        <textarea name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].Description" rows="3" style="width:100%;" required>@topic.Description</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            tIndex++;
+                                        }
+                                    }
+                                </div>
+                                <div class="form_row">
+                                    <button type="button" class="custom-button" onclick="addTopic(this)">+ Add Topic</button>
                                 </div>
                             </div>
-                            <div class="topics first-topic-spacing">
-                                @if (syllabus.Topics != null)
-                                {
-                                    int tIndex = 0;
-                                    foreach (var topic in syllabus.Topics)
-                                    {
-                                        <div class="topic-spacing">
-                                            <div class="form_row topic-align">
-                                                <div class="form_group">
-                                                    <label>Topic Title</label>
-                                                    <input type="text" name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].Title" value="@topic.Title" required />
-                                                </div>
-                                                <div class="form_group">
-                                                    <label>Duration (hours)</label>
-                                                    <input type="number" name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].DurationHours" value="@topic.DurationHours" required />
-                                                </div>
-                                                <button type="button" onclick="this.closest('.topic-spacing').remove()" class="topic-cancel-button">Cancel</button>
-                                            </div>
-                                            <div class="form_row">
-                                                <div class="form_group" style="width:100%;">
-                                                    <label>Topic Description</label>
-                                                    <textarea name="Syllabuses[@(sIndex - 1)].Topics[@tIndex].Description" rows="3" style="width:100%;" required>@topic.Description</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        tIndex++;
-                                    }
-                                }
-                            </div>
-                            <div class="form_row">
-                                <button type="button" class="custom-button" onclick="addTopic(this)">+ Add Topic</button>
-                            </div>
-                        </div>
+                        }
                     }
-                }
-            </div>
+                </div>
 
-            <div class="form_row">
-                <button type="button" class="custom-button" onclick="addSyllabus()">+ Add Syllabus</button>
-                <button type="submit" class="custom-button">Save Course</button>
-                <a href="@Url.Action("Course", "Course")" class="custom-button" style="background-color:#E6A325; color:#fff; text-decoration:none; display:inline-block; text-align:center;">Cancel</a>
-            </div>
-        </form>
-    </div>
-
-    <!-- Title: Existing Courses -->
-    <div class="container_emp syllabus-spacing">
-        <div class="emp_head">
-            <h3>Existing Courses</h3>
+                <div class="form_row">
+                    <button type="button" class="custom-button" onclick="addSyllabus()">+ Add Syllabus</button>
+                    <button type="submit" class="custom-button">Save Course</button>
+                    <a href="@Url.Action("Course", "Course")" class="custom-button" style="background-color:#E6A325; color:#fff; text-decoration:none; display:inline-block; text-align:center;">Cancel</a>
+                </div>
+            </form>
         </div>
     </div>
 
+    <!-- Existing Courses Table -->
     <div class="empmaster_card syllabus-spacing">
+        <div class="emp_add_heading">
+            <div class="container_emp syllabus-spacing">
+                <div class="emp_head">
+                    <h3>Existing Courses</h3>
+                </div>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="emp_table" id="courseTable">
                 <thead>
@@ -206,7 +207,6 @@
             </table>
         </div>
     </div>
-
 </main>
 
 @section Scripts {
