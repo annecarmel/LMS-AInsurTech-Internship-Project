@@ -1,0 +1,52 @@
+﻿@model ASSNlearningManagementSystem.Models.ViewLearnerModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "All Courses";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+</head>
+
+<div class="container my-4">
+    <h2 class="mb-4">All Courses</h2>
+
+    @if (Model.CourseDetails != null && Model.CourseDetails.Any())
+    {
+        <div class="table-responsive">
+            <table class="emp_table">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.CourseDetails)
+                    {
+                        <tr>
+                            <td>@course.CourseId</td>
+                            <td>@course.CourseName</td>
+                            <td>
+                                <a asp-action="CourseDetails"
+                                   asp-controller="Learner"
+                                   asp-route-courseId="@course.CourseId">
+                                           <button class="custom-btn custom-btn-primary">View Details</button>
+                                           </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            No courses found.
+        </div>
+    }
+</div>

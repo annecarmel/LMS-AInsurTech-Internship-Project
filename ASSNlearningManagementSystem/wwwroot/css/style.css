@@ -1,4 +1,4 @@
-ï»¿* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -47,7 +47,7 @@ body {
     box-shadow: 4px 4px 16px 0px rgba(4, 7, 177, 0.12);
 }
 
-.mobile-menu{
+.mobile-menu {
     display: none;
 }
 
@@ -61,60 +61,59 @@ body {
     padding: 20px;
 }
 
-.login_form form {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    text-align: left;
-}
+    .login_form form {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        text-align: left;
+    }
 
-.login_form label {
-    display: block;
-    font-size: 9px;
-    font-weight: 500;
-    color: #000000;
-    margin-top: 2px;
-    width: 200px;
-    /* consistent width */
-}
+    .login_form label {
+        display: block;
+        font-size: 9px;
+        font-weight: 500;
+        color: #000000;
+        margin-top: 2px;
+        width: 200px;
+        /* consistent width */
+    }
 
-.login_form input[type="text"],
-.login_form input[type="password"] {
-    background-color: #f2f2f2;
-    border: 1px solid #E2E2E2;
-    border-radius: 16px;
-    height: 24px;
-    padding: 0 10px;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
+    .login_form input[type="text"],
+    .login_form input[type="password"] {
+        background-color: #f2f2f2;
+        border: 1px solid #E2E2E2;
+        border-radius: 16px;
+        height: 24px;
+        padding: 0 10px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
 
 .remember {
     display: flex;
     align-items: center;
     justify-content: start;
     gap: 5px;
-
 }
 
-.remember input[type="checkbox"] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #033FA3;
-    margin-right: 2px;
-    position: relative;
-}
+    .remember input[type="checkbox"] {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #033FA3;
+        margin-right: 2px;
+        position: relative;
+    }
 
-.remember input[type="checkbox"]:checked {
-    background-color: #033FA3;
-}
+        .remember input[type="checkbox"]:checked {
+            background-color: #033FA3;
+        }
 
-.remember label {
-    color: #7c7c7c;
-    font-size: 9px;
-    text-align: left;
-}
+    .remember label {
+        color: #7c7c7c;
+        font-size: 9px;
+        text-align: left;
+    }
 
 .login-btn,
 .forgot-btn {
@@ -126,14 +125,12 @@ body {
     margin: 0 !important;
     font-weight: 300 !important;
     padding: 0 20px !important;
-
 }
 
 .login-btn {
     background-color: #cd2f74 !important;
     color: #ffffff !important;
     border: none !important;
-
 }
 
 .forgot-btn {
@@ -151,9 +148,9 @@ body {
     margin-top: 10px;
 }
 
-.button_group button:first-child {
-    margin-bottom: 10px;
-}
+    .button_group button:first-child {
+        margin-bottom: 10px;
+    }
 
 .footer {
     position: fixed;
@@ -187,10 +184,12 @@ footer p {
     justify-content: space-between;
     align-items: center;
 }
+
 .logo a {
     display: block;
     height: 40px;
 }
+
 .logo img {
     display: block;
     width: 100%;
@@ -211,6 +210,7 @@ footer p {
     align-items: center;
     gap: 10px;
 }
+
 .profile-image {
     display: block;
     width: 40px;
@@ -218,12 +218,14 @@ footer p {
     overflow: hidden;
     border-radius: 50%;
 }
-.profile-image img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
+
+    .profile-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
 .user_info {
     padding: 0px;
     padding-right: 0px;
@@ -231,15 +233,15 @@ footer p {
     margin-right: 40px;
 }
 
-.user_info h6 {
-    font-size: 11px;
-    font-weight: 12px;
-    padding-left: 0px;
-}
+    .user_info h6 {
+        font-size: 11px;
+        font-weight: 12px;
+        padding-left: 0px;
+    }
 
-.user_info p {
-    font-size: 9px;
-}
+    .user_info p {
+        font-size: 9px;
+    }
 
 .menubar_background {
     background-color: #cd2f74;
@@ -251,14 +253,13 @@ footer p {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
 }
 
-.menubar_emp a img {
-    width: 13px;
-    height: 13px;
-    margin-top: 3px;
-}
+    .menubar_emp a img {
+        width: 13px;
+        height: 13px;
+        margin-top: 3px;
+    }
 
 .menu_item {
     display: flex;
@@ -267,30 +268,34 @@ footer p {
     list-style: none;
     position: relative;
 }
-.menu_item:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-.menu_item a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    position: relative;
-    display: block;
-    padding: 7px 20px;
-    font-size: 14px;
-}
 
-.menu_item span {
-    color: rgb(255, 255, 255);
-    font-size: 12px;
-}
+    .menu_item:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
 
-.menu_item img {
-    width: 10px;
-    height: 10px;
-}
-.menu_item:hover .submenu {
-    display: block;
-}
+    .menu_item a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        position: relative;
+        display: block;
+        padding: 7px 20px;
+        font-size: 14px;
+    }
+
+    .menu_item span {
+        color: rgb(255, 255, 255);
+        font-size: 12px;
+    }
+
+    .menu_item img {
+        width: 10px;
+        height: 10px;
+    }
+
+    .menu_item:hover .submenu {
+        display: block;
+    }
+
 .submenu {
     display: none;
     position: absolute;
@@ -302,18 +307,21 @@ footer p {
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15);
     z-index: 1;
 }
-.submenu li {
-    list-style: none;
-}
-.submenu a {
-    color: #000;
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-.submenu a:hover {
-    background: #a1024c17;
-}
+
+    .submenu li {
+        list-style: none;
+    }
+
+    .submenu a {
+        color: #000;
+        display: block;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+        .submenu a:hover {
+            background: #a1024c17;
+        }
 
 
 .emp_head h3 {
@@ -329,7 +337,6 @@ footer p {
     box-shadow: 1px 1px 16px 0px rgba(0, 0, 0, 0.16);
     padding: 30px 30px;
     width: 100%;
-
     margin-left: 0;
 }
 
@@ -354,38 +361,38 @@ footer p {
     flex-direction: center;
 }
 
-.form_group label {
-    margin-bottom: 5px;
-    width: 120px;
-    text-align: left;
-    margin-right: 50px;
-    font-weight: bold;
-    font-size: 12px;
-    color: #727272;
-    font-weight: 400;
-    white-space: nowrap;
-    margin-right: 5px;
-}
+    .form_group label {
+        margin-bottom: 5px;
+        width: 120px;
+        text-align: left;
+        margin-right: 50px;
+        font-weight: bold;
+        font-size: 12px;
+        color: #727272;
+        font-weight: 400;
+        white-space: nowrap;
+        margin-right: 5px;
+    }
 
-.form_group input,
-.form_group select {
-    flex: 1;
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    font-size: 11px;
-    border: 1px solid #cbcbcb;
-    width: 60%;
-    height: 30px;
-    box-sizing: border-box;
-    margin-left: 0;
-    color: #a8a8a8;
-}
+    .form_group input,
+    .form_group select {
+        flex: 1;
+        padding: 8px;
+        border-radius: 4px;
+        border: none;
+        font-size: 11px;
+        border: 1px solid #cbcbcb;
+        width: 60%;
+        height: 30px;
+        box-sizing: border-box;
+        margin-left: 0;
+        color: #a8a8a8;
+    }
 
-.form_group input::placeholder {
-    color: #a8a8a8;
-    font-size: 12px;
-}
+        .form_group input::placeholder {
+            color: #a8a8a8;
+            font-size: 12px;
+        }
 
 .dob-input {
     padding: 8px;
@@ -455,14 +462,14 @@ button[type="reset"] {
     gap: 0;
 }
 
-.entries-select label {
-    margin: 0;
-    padding-right: 2px;
-    font-size: 10px;
-    color: #727272;
-    white-space: nowrap;
-    margin-right: -93px;
-}
+    .entries-select label {
+        margin: 0;
+        padding-right: 2px;
+        font-size: 10px;
+        color: #727272;
+        white-space: nowrap;
+        margin-right: -93px;
+    }
 
 .entries-dropdown {
     padding: 5px;
@@ -516,24 +523,24 @@ button[type="reset"] {
     border: 1px solid #ccc;
 }
 
-.emp_table th,
-.emp_table td {
-    padding: 10px 15px;
-    text-align: left;
-}
+    .emp_table th,
+    .emp_table td {
+        padding: 10px 15px;
+        text-align: left;
+    }
 
-.emp_table th {
-    background-color: #cd2f74;
-    color: #ffffff;
-}
+    .emp_table th {
+        background-color: #cd2f74;
+        color: #ffffff;
+    }
 
-.emp_table tbody tr:nth-child(odd) {
-    background-color: #f6f6f6 !important;
-}
+    .emp_table tbody tr:nth-child(odd) {
+        background-color: #f6f6f6 !important;
+    }
 
-.emp_table tbody tr:nth-child(even) {
-    background-color: #ffffff !important;
-}
+    .emp_table tbody tr:nth-child(even) {
+        background-color: #ffffff !important;
+    }
 
 .pagination {
     display: flex;
@@ -555,19 +562,19 @@ button[type="reset"] {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.page-btn.large {
-    width: 60px;
-}
+    .page-btn.large {
+        width: 60px;
+    }
 
-.page-btn.active {
-    background-color: #CD2F74;
-    color: white;
-}
+    .page-btn.active {
+        background-color: #CD2F74;
+        color: white;
+    }
 
-.page-btn:hover {
-    background-color: #CD2F74;
-    color: white;
-}
+    .page-btn:hover {
+        background-color: #CD2F74;
+        color: white;
+    }
 
 
 
@@ -590,12 +597,10 @@ main {
 
 .card2 {
     background: linear-gradient(135deg, #1bc9f2, #29aecd);
-
 }
 
 .card3 {
     background: linear-gradient(135deg, #f22772, #df0052);
-
 }
 
 .card1,
@@ -610,11 +615,11 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.card1 img,
-.card2 img,
-.card3 img {
-    width: 50px;
-}
+    .card1 img,
+    .card2 img,
+    .card3 img {
+        width: 50px;
+    }
 
 .card1_right,
 .card2_right,
@@ -625,21 +630,21 @@ main {
     justify-content: center;
 }
 
-.card1_right h6,
-.card2_right h6,
-.card3_right h6 {
-    font-weight: normal;
-    margin: 5px 0;
-    font-size: 10px;
-    padding-left: 20px;
-}
+    .card1_right h6,
+    .card2_right h6,
+    .card3_right h6 {
+        font-weight: normal;
+        margin: 5px 0;
+        font-size: 10px;
+        padding-left: 20px;
+    }
 
-.card1_right h1,
-.card2_right h1,
-.card3_right h1 {
-    margin: 0;
-    font-size: 24px;
-}
+    .card1_right h1,
+    .card2_right h1,
+    .card3_right h1 {
+        margin: 0;
+        font-size: 24px;
+    }
 
 .motor_bar {
     display: flex;
@@ -769,34 +774,34 @@ table {
     width: 100%;
 }
 
-table tr {
-    border-bottom: 1px solid #ececec;
-}
+    table tr {
+        border-bottom: 1px solid #ececec;
+    }
 
-table th {
-    background-color: #f22772;
-    color: #ffffff;
-    padding: 8px 30px;
-    text-align: left;
-    border: none;
-    font-size: 10px;
-    font-weight: 500;
-}
+    table th {
+        background-color: #f22772;
+        color: #ffffff;
+        padding: 8px 30px;
+        text-align: left;
+        border: none;
+        font-size: 10px;
+        font-weight: 500;
+    }
 
-/* Table cell styling */
-table td {
-    padding: 6px 10px;
-    /* Reduced padding */
-    background-color: #ffffff;
-    border: none;
-    font-size: 10px;
-    color: #353536
-}
+    /* Table cell styling */
+    table td {
+        padding: 6px 10px;
+        /* Reduced padding */
+        background-color: #ffffff;
+        border: none;
+        font-size: 10px;
+        color: #353536
+    }
 
-/* Table row hover effect */
-table tr:hover td {
-    background-color: #ffffff;
-}
+    /* Table row hover effect */
+    table tr:hover td {
+        background-color: #ffffff;
+    }
 
 /* Card header styling */
 .details h3 {
@@ -830,16 +835,16 @@ table .edit-icon img {
 }
 
 
-.modal form {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 8px;
-}
+    .modal form {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 8px;
+    }
 
-.modal h2 {
-    text-align: center;
-}
+    .modal h2 {
+        text-align: center;
+    }
 
 
 #edit-modal {
@@ -857,61 +862,104 @@ table .edit-icon img {
     display: none;
 }
 
-#edit-modal form {
-    display: flex;
-    flex-direction: column;
-}
+    #edit-modal form {
+        display: flex;
+        flex-direction: column;
+    }
 
-#edit-modal form label {
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #333;
-}
+        #edit-modal form label {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
 
-#edit-modal form input {
-    margin-bottom: 15px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-}
+        #edit-modal form input {
+            margin-bottom: 15px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
 
-#edit-modal form .button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
+        #edit-modal form .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
 
-/* Style for Save and Cancel buttons */
-#edit-modal form button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 500;
-}
+        /* Style for Save and Cancel buttons */
+        #edit-modal form button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+        }
 
-/* Save button */
-#edit-modal form button[type="submit"] {
-    background-color: #f22772;
-    color: white;
-}
+            /* Save button */
+            #edit-modal form button[type="submit"] {
+                background-color: #f22772;
+                color: white;
+            }
 
-/* Cancel button */
-#edit-modal form button#cancel-button {
-    background-color: white;
-    color: #f22772;
-    border: 1px solid #f22772;
-    ;
+            /* Cancel button */
+            #edit-modal form button#cancel-button {
+                background-color: white;
+                color: #f22772;
+                border: 1px solid #f22772;
+                ;
+            }
 
-}
-
-#edit-modal form button:hover {
-    opacity: 0.9;
-}
+            #edit-modal form button:hover {
+                opacity: 0.9;
+            }
 
 .full-width-container {
     width: 100%;
     padding: 0 20px;
     margin: 0 auto;
+}
+
+.custom-btn {
+    display: inline-block;
+    padding: 6px 20px;
+    font-size: 12px;
+    border-radius: 16px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s, opacity 0.3s;
+    min-height: 24px; /* to match login button height */
+}
+
+/* Primary (pink) button — Enroll, Save, Submit */
+.custom-btn-primary {
+    background-color: #cd2f74;
+    color: #ffffff;
+}
+
+/* Success (green) button — Join session, Confirm */
+.custom-btn-success {
+    background-color: #18AE90;
+    color: #ffffff;
+}
+
+/* Danger (red) button — Unenroll, Delete */
+.custom-btn-danger {
+    background-color: #E53935;
+    color: #ffffff;
+}
+
+/* Outline (white with border) — optional for Cancel/secondary actions */
+.custom-btn-outline {
+    background-color: #ffffff;
+    color: #cd2f74;
+    border: 1px solid #cd2f74;
+}
+
+/* Hover effect */
+.custom-btn:hover {
+    opacity: 0.9;
 }

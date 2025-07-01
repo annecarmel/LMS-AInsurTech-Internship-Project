@@ -10,10 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/responsive.css" />
+
+    <!-- ✅ Corrected CSS paths -->
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 </head>
+
 <body>
     <!-- ✅ Header Starts -->
     <header>
@@ -21,7 +25,7 @@
             <div class="container">
                 <div class="nav_emp">
                     <div class="logo">
-                        <a href="#"><img src="~/img/ai  2 .png" alt="Logo" /></a>
+                        <a href="#"><img src="~/img/ai2.png" alt="Logo" /></a>
                     </div>
                     <div class="nav_right">
                         <div class="profile">
@@ -32,7 +36,7 @@
                             </div>
                         </div>
                         <div class="logout-icon">
-                            <a href="/Account/Logout"><img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" /></a>
+                            <a href="/Login/Login"><img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" /></a>
                         </div>
                     </div>
                 </div>
@@ -42,9 +46,15 @@
         <div class="menubar_background">
             <div class="container">
                 <ul class="menubar_emp">
-                    <li class="menu_item"><a href="/Dashboard/Dashboard">Dashboard</a></li>
-                    <li class="menu_item">
-                        <a href="#">Masters</a>
+
+                    <!-- Dashboard stays the same -->
+                    
+                    <!-- New Courses menu item, leads directly to courselearner page -->
+                    <li class="menu_item"><a href="/Learner/MyEnrollments">Enrolled</a></li>
+
+                    <!-- Renamed Courses -> Exam with existing submenu -->
+                    <li class="menu_item"><a href="/Learner/ExamListing">Exams</a></li>
+                        
                         <ul class="submenu">
                             <li><a href="#">Submenu item 1</a></li>
                             <li><a href="#">Submenu item 2</a></li>
@@ -52,11 +62,20 @@
                             <li><a href="#">Submenu item 4</a></li>
                         </ul>
                     </li>
-                    <li class="menu_item"><a href="/Employee/Employee">Employee Master</a></li>
+
+                    <!-- New Courses menu item, leads directly to courselearner page -->
+                    <li class="menu_item"><a href="/Learner/CourseList">Courses</a></li>
+
+                    <li class="menu_item"><a  href="/Learner/TimeTable">Time Table</a> </li>
+
+
+                    <!-- Login stays the same -->
                     <li class="menu_item"><a href="/Login/Login">Login</a></li>
+
                 </ul>
             </div>
         </div>
+
     </header>
     <!-- ✅ Header Ends -->
     <!-- Main Content -->

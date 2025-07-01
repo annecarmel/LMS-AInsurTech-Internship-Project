@@ -1,9 +1,6 @@
-wwwroot\css\AdminSidebar.css
-wwwroot\css\LearnerSidebar.css
 wwwroot\css\responsive.css
 wwwroot\css\site.css
 wwwroot\css\style.css
-wwwroot\css\TrainerSidebar.css
 wwwroot\favicon.ico
 wwwroot\img\ai2.png
 wwwroot\img\arrow.png

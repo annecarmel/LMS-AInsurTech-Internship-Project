@@ -1,0 +1,74 @@
+﻿@model List<ASSNlearningManagementSystem.Models.CourseEnrollment>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "My Enrollments";
+}
+<head>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+</head>
+
+<div class="container my-4">
+    <h2 class="mb-4">My Enrolled Courses</h2>
+
+    @if (TempData["EnrollmentSuccess"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["EnrollmentSuccess"]
+        </div>
+    }
+
+    @if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="emp_table">
+                <thead>
+                    <tr>
+                        <th>Enrollment ID</th>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Status</th>
+                        <th>Enrolled On</th>
+                        <th>Feedback</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enrollment in Model)
+                    {
+                        <tr>
+                            <td>@enrollment.EnrollmentId</td>
+                            <td>@enrollment.CourseId</td>
+                            <td>@enrollment.CourseName</td>
+                            <td>@enrollment.CompletionStatus</td>
+                            <td>@enrollment.EnrolledOn.ToString("yyyy-MM-dd")</td>
+                            <td>@(string.IsNullOrEmpty(enrollment.Feedback) ? "No feedback yet" : enrollment.Feedback)</td>
+                            <td>
+                                <div class="d-flex flex-nowrap align-items-stretch gap-2 w-100">
+                                    <!-- Unenroll button -->
+                                    <form asp-action="Unenroll" asp-controller="Learner" method="post" class="m-0">
+                                        <input type="hidden" name="enrollmentId" value="@enrollment.EnrollmentId" />
+                                        <button class="custom-btn custom-btn-danger">Unenroll</button>
+
+                                    </form>
+
+                                    <!-- Feedback form -->
+                                    <form asp-action="SubmitFeedback" asp-controller="Learner" method="post" class="d-flex flex-nowrap align-items-stretch m-0 gap-2">
+                                        <input type="hidden" name="enrollmentId" value="@enrollment.EnrollmentId" />
+                                        <textarea name="feedback" class="form-control form-control-sm" placeholder="Enter feedback..." rows="1" style="width: 180px;">@enrollment.Feedback</textarea>
+                                        <button class="custom-btn custom-btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">You have not enrolled in any courses yet.</div>
+    }
+</div>
