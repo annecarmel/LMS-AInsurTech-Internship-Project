@@ -83,9 +83,7 @@
                                 <div class="table-responsive">
                                     <table class="table" id="table1">
                                         <thead>
-                                            <tr>
-                                                <th>Edit</th>
-                                                <th>Session ID</th>
+                                            <tr>                                              
                                                 <th>Topic</th>
                                                 <th>Date</th>
                                                 <th>Learner</th>
@@ -95,12 +93,7 @@
                                             @foreach (var s in Model.Sessions)
                                             {
                                                 <tr>
-                                                    <td>
-                                                        <a href="#" class="edit-icon">
-                                                            <img src="~/img/edit Icon.png" width="15px" height="15px" />
-                                                        </a>
-                                                    </td>
-                                                    <td>@s.SessionId</td>
+                                                    
                                                     <td>@s.Topic</td>
                                                     <td>@s.Date.ToString("yyyy-MM-dd")</td> 
                                                     <td>@s.LearnerName</td>
@@ -123,35 +116,34 @@
                                     <table class="table" id="table2">
                                         <thead>
                                             <tr>
-                                                <th>Edit</th>
-                                                <th>Exam ID</th>
                                                 <th>Exam Name</th>
                                                 <th>Learner</th>
+                                                <th>Total Marks</th>
+                                                <th>Marks Obtained</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        @foreach (var e in Model.Evaluations)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <a href="#" class="edit-icon">
-                                                        <img src="~/img/edit Icon.png" width="15px" height="15px" />
-                                                    </a>
-                                                </td>
-                                                <td>@e.ExamId</td>
-                                                <td>@e.ExamName</td>
-                                                <td>@e.LearnerName</td>
-                                                <td>@e.Status</td>
-                                            </tr>
-                                        }
+                                        <tbody>
+                                            @foreach (var e in Model.Evaluations)
+                                            {
+                                                <tr>
+                                                    <td>@e.ExamName</td>
+                                                    <td>@e.LearnerName</td>
+                                                    <td>@(e.TotalMarks != null ? e.TotalMarks.ToString() : "N/A")</td>
+                                                    <td>@(e.MarksObtained != null ? e.MarksObtained.ToString() : "Pending")</td>
+                                                    <td>@e.Status</td>
+                                                </tr>
+                                            }
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End of table_card -->
-                </div> <!-- End of policy_card -->
-            </div> <!-- End of dashboard-contents -->
-        </div> <!-- End of container -->
+
+                    </div> 
+                </div>
+            </div>
+        </div>
     </main>
 
     <div id="edit-modal" class="modal">

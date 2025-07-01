@@ -27,7 +27,10 @@
         public string ExamName { get; set; }
         public string LearnerName { get; set; }
         public string Status { get; set; }
+        public int? TotalMarks { get; set; }
+        public int? MarksObtained { get; set; }
     }
+
     public class BarChartData
     {
         public string CourseName { get; set; }
