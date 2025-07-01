@@ -4,6 +4,7 @@
     Layout = "_Layout";
     ViewData["Title"] = "Dashboard";
 }
+
 <head>
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/responsive.css" />
@@ -13,57 +14,67 @@
     <div class="container">
         <div class="dashboard-contents">
 
-            <!-- smmall Cards -->
+            <!-- Small Cards Section -->
             <div class="hero_section">
                 <div class="number_card">
                     <div class="card1">
-                        <div class="card1_left"><img src="~/img/Policies.png"></div>
+                        <div class="card1_left">
+                            <img src="~/img/Policies.png" alt="Policies Icon" />
+                        </div>
                         <div class="card1_right">
                             <h6>Courses Enrolled</h6>
-                            <h1>@Model.Enrollments?.Count()  </h1>
+                            <h1>@Model.Enrollments?.Count()</h1>
                         </div>
                     </div>
                     <div class="card2">
-                        <div class="card2_left"><img src="~/img/Claims.png"></div>
+                        <div class="card2_left">
+                            <img src="~/img/Claims.png" alt="Claims Icon" />
+                        </div>
                         <div class="card2_right">
                             <h6>Total Courses</h6>
-                            <h1>@Model.Courses?.Count()  </h1>
+                            <h1>@Model.Courses?.Count()</h1>
                         </div>
                     </div>
                     <div class="card3">
-                        <div class="card3_left"><img src="~/img/Settlement.png"></div>
+                        <div class="card3_left">
+                            <img src="~/img/Settlement.png" alt="Rating Icon" />
+                        </div>
                         <div class="card3_right">
                             <h6>Rate your Learning</h6>
-                            <h1>   </h1>
+                            <h1></h1> <!-- Placeholder -->
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Charts -->
+            <!-- Charts Section -->
             <div class="table_card" style="display: flex; flex-wrap: wrap; gap: 20px;">
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
-                        <div class="details-header"><h3>Your Course Progress</h3></div>
-                        <div class="chart-container" style="width:100%;height:400px;">
+                        <div class="details-header">
+                            <h3>Your Course Progress</h3>
+                        </div>
+                        <div class="chart-container" style="width:100%; height:400px;">
                             <canvas id="barChart"></canvas>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
-                        <div class="details-header"><h3>Courses </h3></div>
-                        <div class="chart-container" style="width:100%;height:400px;">
+                        <div class="details-header">
+                            <h3>Courses</h3>
+                        </div>
+                        <div class="chart-container" style="width:100%; height:400px;">
                             <canvas id="pieChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <!-- Tables Section -->
             <div class="table_card" style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px;">
+
                 <!-- Enrollment Table -->
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
@@ -74,9 +85,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <!-- <th>Enrollment ID</th> -->
                                         <th>Course ID</th>
-                                        <!-- <th>User ID</th> -->
                                         <th>Completion Status</th>
                                         <th>Enrolled On</th>
                                         <th>Completed On</th>
@@ -86,10 +95,8 @@
                                     @foreach (var e in Model.Enrollments)
                                     {
                                         <tr>
-                                            <!-- <td>@e.EnrollmentId</td>-->
                                             <td>@e.CourseId</td>
-                                            <!-- <td>@e.UserId</td> -->
-                                            <td>@e.CompletionStatus</td>
+                                            <td>In Progress</td> <!-- Replace with actual status when available -->
                                             <td>@e.EnrolledOn.ToString("yyyy-MM-dd")</td>
                                             <td>@(e.CompletedOn?.ToString("yyyy-MM-dd") ?? "N/A")</td>
                                         </tr>
@@ -129,74 +136,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
 
         </div>
     </div>
 </main>
-
-<!-- Chart JS Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const barCtx = document.getElementById('barChart').getContext('2d');
-    const barChart = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Completed', 'In Progress', 'Not Started'],
-            datasets: [{
-                label: 'Enrollments',
-                data: [
-                    @Model.Enrollments.Count(e => e.CompletionStatus == "Completed"),
-                    @Model.Enrollments.Count(e => e.CompletionStatus == "In Progress"),
-                    @Model.Enrollments.Count(e => e.CompletionStatus == "Not Started")
-                ],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                // backgroundColor: ['#4caf50', '#ffc107', '#f44336']
-            }]
-        },
-        options: { responsive: true }
-    });
-
-    const pieCtx = document.getElementById('pieChart').getContext('2d');
-    const pieChart = new Chart(pieCtx, {
-        type: 'pie',
-        data: {
-            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Courses.Select(c => c.CourseName))),
-            datasets: [{
-                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                                                                                                                                                Model.Courses.Select(c => Model.Enrollments.Count(e => e.CourseId == c.CourseId))
-                                                                                                                                )),
-                                                                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-               // backgroundColor: ['#2196f3', '#9c27b0', '#ff9800', '#4caf50', '#e91e63', '#00bcd4']
-
-            }]
-        },
-        options: { responsive: true }
-    });
-</script> 

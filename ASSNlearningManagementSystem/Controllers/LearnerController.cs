@@ -6,12 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml;
+using static ASSNlearningManagementSystem.Models.ViewLearnerModel;
 
 namespace ASSNlearningManagementSystem.Controllers
 {
     public class LearnerController : Controller
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
 
         public LearnerController(IConfiguration configuration)
         {
@@ -65,7 +66,7 @@ namespace ASSNlearningManagementSystem.Controllers
                     EnrollmentId = Convert.ToInt32(reader["enrollment_id"]),
                     CourseId = Convert.ToInt32(reader["course_id"]),
                     UserId = Convert.ToInt32(reader["user_id"]),
-                    CompletionStatus = reader["completion_status"].ToString(),
+                    // CompletionStatus = reader["completion_status"].ToString(),
                     EnrolledOn = Convert.ToDateTime(reader["enrolled_on"]),
                     CompletedOn = reader.IsDBNull(reader.GetOrdinal("completed_on"))
                         ? (DateTime?)null
@@ -148,7 +149,8 @@ namespace ASSNlearningManagementSystem.Controllers
                 while (reader.Read())
                 {
                     int syllabusId = Convert.ToInt32(reader["SyllabusID"]);
-                    string syllabusName = reader["Syllabus_name"].ToString();
+                    string syllabusName = reader["Syllabus_name"]?.ToString() ?? "N/A";
+
 
                     if (!syllabusDict.ContainsKey(syllabusId))
                     {
@@ -233,7 +235,7 @@ namespace ASSNlearningManagementSystem.Controllers
             {
                 courses.Add((
                     Convert.ToInt32(courseReader["CourseID"]),
-                    courseReader["CourseName"].ToString()
+                    courseReader["CourseName"].ToString() ?? "N/A"
                 ));
             }
             courseReader.Close();
@@ -264,7 +266,8 @@ namespace ASSNlearningManagementSystem.Controllers
                 while (syllabusReader.Read())
                 {
                     int syllabusId = Convert.ToInt32(syllabusReader["SyllabusID"]);
-                    string syllabusName = syllabusReader["Syllabus_name"].ToString();
+                    string syllabusName = syllabusReader["Syllabus_name"]?.ToString() ?? "N/A";
+
 
                     if (!syllabusDict.ContainsKey(syllabusId))
                     {
@@ -386,7 +389,13 @@ namespace ASSNlearningManagementSystem.Controllers
                 using var con = new MySqlConnection(_connectionString);
                 con.Open();
 
-                int learnerId = (int)HttpContext.Session.GetInt32("UserId"); // use your session key
+                int? learnerIdNullable = HttpContext.Session.GetInt32("UserId");
+                if (!learnerIdNullable.HasValue)
+                {
+                    throw new UnauthorizedAccessException("User not logged in or session expired.");
+                }
+                int learnerId = learnerIdNullable.Value;
+                // use your session key
 
                 var cmd = new MySqlCommand(@"
     SELECT c.CourseName, s.Syllabus_name, t.TopicName,
@@ -437,7 +446,13 @@ namespace ASSNlearningManagementSystem.Controllers
         {
             List<ExamViewModel> exams = new List<ExamViewModel>();
 
-            int learnerId = (int)HttpContext.Session.GetInt32("UserId");
+            int? learnerIdNullable = HttpContext.Session.GetInt32("UserId");
+            if (!learnerIdNullable.HasValue)
+            {
+                throw new UnauthorizedAccessException("User not logged in or session expired.");
+            }
+            int learnerId = learnerIdNullable.Value;
+
 
             using (var con = new MySqlConnection(_connectionString))
             {
@@ -471,33 +486,39 @@ namespace ASSNlearningManagementSystem.Controllers
 
             return View(exams);
         }
-
-
+        [HttpGet]
         public IActionResult AttendExam(int examId)
         {
-            List<ExamQuestionViewModel> questions = new();
-
             using var con = new MySqlConnection(_connectionString);
             con.Open();
 
+            List<ExamQuestionViewModel> questions = LoadExamQuestions(examId, con);
+
+            ViewBag.ExamID = examId;
+            ViewBag.UserID = GetCurrentUserId();
+
+            return View(questions);
+        }
+        private List<ExamQuestionViewModel> LoadExamQuestions(int examId, MySqlConnection con)
+        {
+            var questions = new List<ExamQuestionViewModel>();
             var cmd = new MySqlCommand(@"
-        SELECT q.QuestionID, q.QuestionText, q.Marks, o.OptionID, o.OptionText
-        FROM question q
-        LEFT JOIN optiontable o ON q.QuestionID = o.QuestionID
-        WHERE q.ExamID = @examId
-        ORDER BY q.QuestionID, o.OptionID", con);
+SELECT q.QuestionID, q.QuestionText, q.Marks, q.QuestionType, 
+       o.OptionID, o.OptionText
+FROM question q
+LEFT JOIN optiontable o ON q.QuestionID = o.QuestionID
+WHERE q.ExamID = @examId
+ORDER BY q.QuestionID, o.OptionID", con);
 
             cmd.Parameters.AddWithValue("@examId", examId);
 
             using var reader = cmd.ExecuteReader();
-
-            Dictionary<int, ExamQuestionViewModel> questionDict = new();
+            var questionDict = new Dictionary<int, ExamQuestionViewModel>();
 
             while (reader.Read())
             {
                 int questionId = reader.GetInt32("QuestionID");
 
-                // If first time seeing this question, create and add it
                 if (!questionDict.ContainsKey(questionId))
                 {
                     questionDict[questionId] = new ExamQuestionViewModel
@@ -505,11 +526,11 @@ namespace ASSNlearningManagementSystem.Controllers
                         QuestionId = questionId,
                         QuestionText = reader["QuestionText"].ToString(),
                         Marks = reader.GetInt32("Marks"),
+                        QuestionType = reader["QuestionType"].ToString(),
                         Options = new List<OptionViewModel>()
                     };
                 }
 
-                // Add option if exists (LEFT JOIN may give NULL option)
                 if (!reader.IsDBNull(reader.GetOrdinal("OptionID")))
                 {
                     questionDict[questionId].Options.Add(new OptionViewModel
@@ -520,15 +541,51 @@ namespace ASSNlearningManagementSystem.Controllers
                 }
             }
 
-            questions = questionDict.Values.ToList();
+            return questionDict.Values.ToList();
+        }
+
+
+        [HttpPost]
+        public IActionResult AttendExam(int examId, List<AnswerSubmissionModel> answers)
+        {
+            int userId = GetCurrentUserId();
+            using var con = new MySqlConnection(_connectionString);
+            con.Open();
+
+            var submissionCmd = new MySqlCommand(@"
+INSERT INTO examsubmission (ExamID, user_id, SubmissionDate, created_by, created_on)
+VALUES (@ExamID, @UserID, NOW(), @UserID, NOW());
+SELECT LAST_INSERT_ID();", con);
+            submissionCmd.Parameters.AddWithValue("@ExamID", examId);
+            submissionCmd.Parameters.AddWithValue("@UserID", userId);
+
+            int submissionId = Convert.ToInt32(submissionCmd.ExecuteScalar());
+
+            foreach (var answer in answers)
+            {
+                var cmd = new MySqlCommand(@"
+INSERT INTO answer (SubmissionID, QuestionID, OptionID, AnswerText, created_by, created_on)
+VALUES (@SubmissionID, @QuestionID, @OptionID, @AnswerText, @UserID, NOW())", con);
+
+                cmd.Parameters.AddWithValue("@SubmissionID", submissionId);
+                cmd.Parameters.AddWithValue("@QuestionID", answer.QuestionId);
+                cmd.Parameters.AddWithValue("@OptionID", (object?)answer.SelectedOptionId ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@AnswerText", (object?)answer.AnswerText ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            List<ExamQuestionViewModel> questions = LoadExamQuestions(examId, con);
+
+            ViewBag.ExamID = examId;
+            ViewBag.UserID = userId;
+            ViewBag.SuccessMessage = "Exam submitted successfully!";
+
             return View(questions);
         }
 
 
+
     }
-
-
-
-
-
 }
