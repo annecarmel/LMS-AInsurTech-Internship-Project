@@ -1,5 +1,6 @@
 ﻿using ASSNlearningManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
@@ -29,19 +30,24 @@ namespace ASSNlearningManagementSystem.Controllers
             return userId.Value;
         }
 
-        public IActionResult Dashboard()
-        {
-            var enrollments = GetCourseEnrollments();
-            var courses = GetCourses();
+public IActionResult Dashboard()
+{
+    var enrollments = GetCourseEnrollments();
+    var courses = GetCourses();
+    int userId = GetCurrentUserId(); 
+    var results = GetResultsForCurrentUser(userId);
+            double? averageRating = GetAverageRatingForUser(userId);
 
             var viewModel = new ViewLearnerModel
-            {
-                Enrollments = enrollments,
-                Courses = courses
+    {
+        Enrollments = enrollments,
+        Courses = courses,
+        Results = results,
+        AverageRating = averageRating
             };
 
-            return View(viewModel);
-        }
+    return View(viewModel);
+}
 
         private List<CourseEnrollment> GetCourseEnrollments()
         {
@@ -50,7 +56,7 @@ namespace ASSNlearningManagementSystem.Controllers
             using var con = new MySqlConnection(_connectionString);
             string query = @"
         SELECT e.enrollment_id, e.course_id, e.user_id, e.completion_status, 
-               e.enrolled_on, e.completed_on, c.CourseName, r.feedback
+               e.enrolled_on, e.completed_on, c.CourseName, r.feedback, r.Rating_Value
         FROM courseenrollments e
         JOIN Course c ON e.course_id = c.CourseID
         LEFT JOIN rating r ON e.course_id = r.CourseID AND e.user_id = r.user_id";
@@ -66,21 +72,22 @@ namespace ASSNlearningManagementSystem.Controllers
                     EnrollmentId = Convert.ToInt32(reader["enrollment_id"]),
                     CourseId = Convert.ToInt32(reader["course_id"]),
                     UserId = Convert.ToInt32(reader["user_id"]),
-                    // CompletionStatus = reader["completion_status"].ToString(),
                     EnrolledOn = Convert.ToDateTime(reader["enrolled_on"]),
                     CompletedOn = reader.IsDBNull(reader.GetOrdinal("completed_on"))
                         ? (DateTime?)null
                         : Convert.ToDateTime(reader["completed_on"]),
-                    CourseName = reader["CourseName"].ToString(), // ✅ ensure CourseName is populated
+                    CourseName = reader["CourseName"].ToString(),
                     Feedback = reader.IsDBNull(reader.GetOrdinal("feedback"))
                         ? string.Empty
-                        : reader["feedback"].ToString()
+                        : reader["feedback"].ToString(),
+                    Rating = reader.IsDBNull(reader.GetOrdinal("Rating_Value"))
+                        ? (int?)null
+                        : Convert.ToInt32(reader["Rating_Value"])
                 });
             }
 
             return list;
         }
-
 
 
         private List<Course> GetCourses()
@@ -99,7 +106,7 @@ namespace ASSNlearningManagementSystem.Controllers
                     CourseId = Convert.ToInt32(reader["CourseID"]),
                     CourseName = reader["CourseName"].ToString(),
                     Description = reader["Description"].ToString(),
-                    Duration = "N/A" // Placeholder, since duration is not in your DB
+                    Duration = "N/A" 
                 });
             }
             return list;
@@ -108,6 +115,13 @@ namespace ASSNlearningManagementSystem.Controllers
         public IActionResult CourseDetails(int courseId)
         {
             var courseDetails = GetCourseDetails(courseId);
+
+            int userId = GetCurrentUserId();
+            var enrollments = GetCourseEnrollments().FindAll(e => e.UserId == userId);
+
+            
+            courseDetails.UserEnrollments = enrollments;
+
             return View("CourseDetailsLearner", courseDetails);
         }
 
@@ -122,7 +136,7 @@ namespace ASSNlearningManagementSystem.Controllers
             using var con = new MySqlConnection(_connectionString);
             con.Open();
 
-            // Get course name
+         
             using (var cmd = new MySqlCommand("SELECT CourseName FROM Course WHERE CourseID = @CourseID", con))
             {
                 cmd.Parameters.AddWithValue("@CourseID", courseId);
@@ -131,7 +145,7 @@ namespace ASSNlearningManagementSystem.Controllers
                     course.CourseName = reader["CourseName"].ToString();
             }
 
-            // Get syllabuses, topics, trainers, session dates
+           
             using (var cmd = new MySqlCommand(@"
                 SELECT s.SyllabusID, s.Syllabus_name, t.TopicID, t.TopicName, u.username AS TrainerName, sess.session_date
                 FROM syllabus s
@@ -214,12 +228,16 @@ namespace ASSNlearningManagementSystem.Controllers
 
         public IActionResult CourseList()
         {
+            int userId = GetCurrentUserId(); 
             var viewModel = new ViewLearnerModel
             {
-                CourseDetails = GetAllCourseDetails()
+                CourseDetails = GetAllCourseDetails(),
+                Enrollments = GetCourseEnrollments().FindAll(e => e.UserId == userId) 
             };
+
             return View("courselearner", viewModel);
         }
+
 
         private List<CourseLearnerViewModel> GetAllCourseDetails()
         {
@@ -322,11 +340,12 @@ namespace ASSNlearningManagementSystem.Controllers
             return RedirectToAction("MyEnrollments");
         }
         [HttpPost]
-        public IActionResult SubmitFeedback(int enrollmentId, string feedback)
+        [HttpPost]
+        public IActionResult SubmitFeedback(int enrollmentId, string feedback, int rating)
         {
             int userId = GetCurrentUserId();
 
-            // Get course_id from enrollment
+           
             int courseId;
             using (var con = new MySqlConnection(_connectionString))
             {
@@ -342,7 +361,7 @@ namespace ASSNlearningManagementSystem.Controllers
                 courseId = Convert.ToInt32(result);
             }
 
-            // Insert or update feedback in rating table
+        
             using (var con = new MySqlConnection(_connectionString))
             {
                 con.Open();
@@ -357,26 +376,29 @@ namespace ASSNlearningManagementSystem.Controllers
                 if (count == 0)
                 {
                     var insertCmd = new MySqlCommand(@"
-                INSERT INTO rating (CourseID, user_id, feedback) 
-                VALUES (@CourseID, @UserID, @Feedback)", con);
+                INSERT INTO rating (CourseID, user_id, feedback, Rating_Value, created_by, created_on) 
+                VALUES (@CourseID, @UserID, @Feedback, @Rating, @UserID, NOW())", con);
                     insertCmd.Parameters.AddWithValue("@CourseID", courseId);
                     insertCmd.Parameters.AddWithValue("@UserID", userId);
                     insertCmd.Parameters.AddWithValue("@Feedback", feedback);
+                    insertCmd.Parameters.AddWithValue("@Rating", rating);
                     insertCmd.ExecuteNonQuery();
                 }
                 else
                 {
                     var updateCmd = new MySqlCommand(@"
-                UPDATE rating SET feedback = @Feedback 
+                UPDATE rating 
+                SET feedback = @Feedback, Rating_Value = @Rating, updated_by = @UserID, updated_on = NOW() 
                 WHERE CourseID = @CourseID AND user_id = @UserID", con);
                     updateCmd.Parameters.AddWithValue("@Feedback", feedback);
+                    updateCmd.Parameters.AddWithValue("@Rating", rating);
                     updateCmd.Parameters.AddWithValue("@CourseID", courseId);
                     updateCmd.Parameters.AddWithValue("@UserID", userId);
                     updateCmd.ExecuteNonQuery();
                 }
             }
 
-            TempData["Message"] = "Feedback submitted successfully.";
+            TempData["Message"] = "Feedback & rating submitted successfully.";
             return RedirectToAction("MyEnrollments");
         }
 
@@ -395,8 +417,7 @@ namespace ASSNlearningManagementSystem.Controllers
                     throw new UnauthorizedAccessException("User not logged in or session expired.");
                 }
                 int learnerId = learnerIdNullable.Value;
-                // use your session key
-
+             
                 var cmd = new MySqlCommand(@"
     SELECT c.CourseName, s.Syllabus_name, t.TopicName,
            sess.session_date, sess.start_time, sess.end_time,
@@ -584,7 +605,86 @@ VALUES (@SubmissionID, @QuestionID, @OptionID, @AnswerText, @UserID, NOW())", co
 
             return View(questions);
         }
+        private List<ResultViewModel> GetResultsForCurrentUser(int userId)
+        {
+            var results = new List<ResultViewModel>();
 
+            using var con = new MySqlConnection(_connectionString);
+            con.Open();
+
+            var cmd = new MySqlCommand(@"
+        SELECT 
+            e.exam_id, 
+            e.exam_title, 
+            e.max_marks, 
+            er.marks_obtained
+        FROM examresult er
+        JOIN exam e ON er.exam_id = e.exam_id
+        WHERE er.user_id = @userId", con);
+
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                results.Add(new ResultViewModel
+                {
+                    ExamId = reader.GetInt32("exam_id"),
+                    ExamTitle = reader.GetString("exam_title"),
+                    MaxMarks = reader.GetInt32("max_marks"),
+                    MarksObtained = reader.GetInt32("marks_obtained")
+                });
+            }
+
+            return results;
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            base.OnActionExecuting(context);
+
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId != null)
+            {
+                using var con = new MySqlConnection(_connectionString);
+                con.Open();
+
+                var cmd = new MySqlCommand(@"
+            SELECT u.username, r.role_name
+            FROM user u
+            JOIN userrole r ON u.role_id = r.role_id
+            WHERE u.user_id = @UserId", con);
+
+                cmd.Parameters.AddWithValue("@UserId", userId);
+
+                using var reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    ViewBag.UserName = reader["username"]?.ToString() ?? "Unknown User";
+                    ViewBag.UserRole = reader["role_name"]?.ToString() ?? "Unknown Role";
+                }
+            }
+        }
+
+        private double? GetAverageRatingForUser(int userId)
+        {
+            using var con = new MySqlConnection(_connectionString);
+            con.Open();
+
+            var cmd = new MySqlCommand(@"
+        SELECT AVG(Rating_Value) 
+        FROM rating 
+        WHERE user_id = @UserId", con);
+            cmd.Parameters.AddWithValue("@UserId", userId);
+
+            object result = cmd.ExecuteScalar();
+            if (result != DBNull.Value && result != null)
+            {
+                return Convert.ToDouble(result);
+            }
+
+            return null; 
+        }
 
 
     }

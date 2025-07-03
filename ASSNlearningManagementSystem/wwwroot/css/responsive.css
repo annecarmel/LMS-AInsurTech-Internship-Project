@@ -1,7 +1,4 @@
 
-/* Login Start Here */
-/* ---------------- */
-
 
 @media (max-width: 768px) {
     /* nav logo */
@@ -31,7 +28,7 @@
 
     /* login card (keeps row layout) */
     .login_card {
-        flex-direction: row; /* keep side-by-side layout */
+        flex-direction: row; 
         flex-wrap: wrap;
         margin: 20px auto;
         padding: 15px;
@@ -231,9 +228,6 @@
 
 
 /* Login End Here */
-/* ---------------- */
-
-
 
 
 

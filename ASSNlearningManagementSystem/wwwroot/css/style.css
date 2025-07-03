@@ -15,7 +15,7 @@ body {
     margin: 0 auto;
 }
 
-/* login */
+
 .login_header {
     background-color: rgb(255, 255, 255);
     padding: 10px 0px;
@@ -53,7 +53,7 @@ body {
 
 .login_image img {
     height: 400px;
-    ;
+    
     width: 350px;
 }
 
@@ -75,7 +75,7 @@ body {
         color: #000000;
         margin-top: 2px;
         width: 200px;
-        /* consistent width */
+    
     }
 
     .login_form input[type="text"],
@@ -698,11 +698,8 @@ main {
 svg {
     width: 100%;
     height: 100%;
-    /* border-left: 2px solid rgb(185, 185, 185);
-    border-bottom: 2px solid rgb(185, 185, 185); */
+    
 }
-
-/* Main container styles */
 
 .dashboard-contents {
     display: flex;
@@ -719,8 +716,6 @@ svg {
     gap: 2%;
     width: 100%;
 }
-
-/* Card styling - maintains your exact dimensions */
 .motor_card_box {
     width: 49%;
     background: #fff;
@@ -907,7 +902,7 @@ table .edit-icon img {
                 background-color: white;
                 color: #f22772;
                 border: 1px solid #f22772;
-                ;
+                
             }
 
             #edit-modal form button:hover {
@@ -931,35 +926,55 @@ table .edit-icon img {
     cursor: pointer;
     border: none;
     transition: background-color 0.3s, opacity 0.3s;
-    min-height: 24px; /* to match login button height */
+    min-height: 24px; 
 }
-
-/* Primary (pink) button — Enroll, Save, Submit */
 .custom-btn-primary {
     background-color: #cd2f74;
     color: #ffffff;
 }
-
-/* Success (green) button — Join session, Confirm */
 .custom-btn-success {
     background-color: #18AE90;
     color: #ffffff;
 }
 
-/* Danger (red) button — Unenroll, Delete */
 .custom-btn-danger {
     background-color: #E53935;
     color: #ffffff;
 }
 
-/* Outline (white with border) — optional for Cancel/secondary actions */
 .custom-btn-outline {
     background-color: #ffffff;
     color: #cd2f74;
     border: 1px solid #cd2f74;
 }
 
-/* Hover effect */
 .custom-btn:hover {
     opacity: 0.9;
 }
+textarea.form-control-sm,
+select.form-select-sm {
+    min-width: 120px;
+}
+.enrollment-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+    .enrollment-actions form {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+
+    .enrollment-actions textarea {
+        flex: 1 1 auto;
+        min-width: 150px;
+    }
+
+    .enrollment-actions select,
+    .enrollment-actions button {
+        flex-shrink: 0; 
+    }
+

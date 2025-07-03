@@ -5,6 +5,10 @@
         public List<CourseEnrollment> Enrollments { get; set; } = new();
         public List<Course> Courses { get; set; } = new();
         public List<CourseLearnerViewModel> CourseDetails { get; set; } = new();
+        public List<ResultViewModel>? Results { get; set; }
+        public double? AverageRating { get; set; }
+
+
     }
 
     public class CourseEnrollment
@@ -17,6 +21,9 @@
         public DateTime EnrolledOn { get; set; }
         public DateTime? CompletedOn { get; set; }
         public string Feedback { get; set; } = string.Empty;
+        public int? Rating { get; set; }
+
+
     }
 
     public class Course
@@ -32,6 +39,8 @@
         public int CourseId { get; set; }
         public string CourseName { get; set; } = string.Empty;
         public List<SyllabusViewModel> Syllabuses { get; set; } = new();
+        public List<CourseEnrollment> UserEnrollments { get; set; }
+
     }
 
     public class SyllabusViewModel
@@ -75,7 +84,7 @@
         public int QuestionId { get; set; }
         public string QuestionText { get; set; } = string.Empty;
         public int Marks { get; set; }
-        public string QuestionType { get; set; } = "MCQ"; // Add this
+        public string QuestionType { get; set; } = "MCQ"; 
         public List<OptionViewModel> Options { get; set; } = new();
     }
 
@@ -89,8 +98,8 @@
     public class AnswerSubmissionModel
     {
         public int QuestionId { get; set; }
-        public int? SelectedOptionId { get; set; }  // Nullable for text answers
-        public string? AnswerText { get; set; }     // For text-based questions
+        public int? SelectedOptionId { get; set; }
+        public string? AnswerText { get; set; }
     }
 
 }
