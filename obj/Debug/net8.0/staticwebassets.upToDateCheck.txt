@@ -1,15 +1,16 @@
 wwwroot\css\AdminSidebar.css
-wwwroot\css\LearnerSidebar.css
 wwwroot\css\responsive.css
 wwwroot\css\site.css
 wwwroot\css\style.css
-wwwroot\css\TrainerSidebar.css
 wwwroot\favicon.ico
 wwwroot\img\ai2.png
 wwwroot\img\arrow.png
 wwwroot\img\calendar.png
 wwwroot\img\Claims.png
 wwwroot\img\edit Icon.png
+wwwroot\img\icons8-course-64.png
+wwwroot\img\icons8-exam-100.png
+wwwroot\img\icons8-users-80.png
 wwwroot\img\list_12713145.png
 wwwroot\img\login illustration.png
 wwwroot\img\LoginBG.png

@@ -1,18 +1,54 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ALMS</title>
 
-    <!-- Google Fonts & CSS Links -->
+    <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+    <!-- ✅ Inline CSS for half-in/half-out status dot -->
+    <style>
+        
+        .status-wrapper {
+            position: relative;
+            display: inline-block;
+            overflow: visible;
+        }
+
+        .status-wrapper img {
+            display: block;
+            border-radius: 50%;
+        }
+
+        .status-dot {
+            position: absolute;
+            bottom: -5px; /* Half-outside, adjust as needed */
+            right: -5px;
+            width: 14px;
+            height: 14px;
+            background-color: #28a745; /* green for active */
+            border: 2px solid #fff;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+            .status-dot.inactive {
+                background-color: red;
+            }
+    </style>
+
+   
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <!-- ✅ Header Starts -->
@@ -21,18 +57,23 @@
             <div class="container">
                 <div class="nav_emp">
                     <div class="logo">
-                        <a href="#"><img src="~/img/ai  2 .png" alt="Logo" /></a>
+                        <a href="#"><img src="~/img/ai2.png" alt="Logo" /></a>
                     </div>
                     <div class="nav_right">
                         <div class="profile">
-                            <a href="#" class="profile-image"><img src="~/img/Profile Avatar.png" alt="Profile Image" /></a>
+                            <div class="status-wrapper">
+                                <img src="~/img/Profile Avatar.png" alt="Profile Image" />
+                                <span class="status-dot @(Context.Session.GetInt32("IsActive") == 1 ? "" : "inactive")"></span>
+                            </div>
                             <div class="user_info">
-                                <h6>@User.Identity.Name</h6>
-                                <p>Asst.insurance officer</p>
+                                <h6>@Context.Session.GetString("Username")</h6>
+                                <p>@Context.Session.GetString("Department")</p>
                             </div>
                         </div>
                         <div class="logout-icon">
-                            <a href="/Account/Logout"><img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" /></a>
+                            <a href="/Login/Logout">
+                                <img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" />
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -43,28 +84,25 @@
             <div class="container">
                 <ul class="menubar_emp">
                     <li class="menu_item"><a href="/Dashboard/Dashboard">Dashboard</a></li>
-                    <li class="menu_item">
-                        <a href="#">Masters</a>
-                        <ul class="submenu">
-                            <li><a href="#">Submenu item 1</a></li>
-                            <li><a href="#">Submenu item 2</a></li>
-                            <li><a href="#">Submenu item 3</a></li>
-                            <li><a href="#">Submenu item 4</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu_item"><a href="/User/User">User Master</a></li>
-                    <li class="menu_item"><a href="/Login/Login">Login</a></li>
+                    <li class="menu_item"><a href="/Employee/Employee">User Master</a></li>
+                    <li class="menu_item"><a href="/Course/Course">Courses</a></li>
+                    <li class="menu_item"><a href="/Session/Session">Scheduler</a></li>
+                    <li class="menu_item"><a href="/Exam/Exam">Exams</a></li>
+                    <li class="menu_item"><a href="/Exam/Results">Reports</a></li>
+                    <li class="menu_item"><a href="/Rating/Rating">Ratings</a></li>
                 </ul>
             </div>
         </div>
     </header>
     <!-- ✅ Header Ends -->
-    <!-- Main Content -->
+    <!-- ✅ Main Content Area -->
     <main role="main" class="container">
         @RenderBody()
     </main>
 
-    <!-- Optional: Scripts -->
+    <!-- ✅ Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

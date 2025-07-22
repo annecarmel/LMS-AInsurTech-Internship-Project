@@ -1,0 +1,136 @@
+﻿@model List<ASSNlearningManagementSystem.Models.AssignedExamViewModel>
+
+@{
+    Layout = "_TrainerLayout";
+    ViewData["Title"] = "Assigned Exams";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <title>Assigned Exams</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        div.dataTables_wrapper .dataTables_filter {
+            margin-bottom: 15px;
+        }
+
+        div.dataTables_wrapper .dataTables_paginate {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        div.dataTables_wrapper .dataTables_info {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+       
+        .action-button {
+            display: inline-block;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .assign-btn {
+            background-color: #18AE90;
+            color: white;
+        }
+
+            .assign-btn:hover {
+                background-color: #149e83;
+            }
+
+        .view-btn {
+            background-color: #E6A325; 
+            color: white;
+        }
+
+            .view-btn:hover {
+                background-color: #d5961e;
+            }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="page-contents">
+                <div class="container_emp mb-20">
+                    <div class="emp_head">
+                        <h3>My Assigned Exams</h3>
+                    </div>
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table">
+                                <thead>
+                                    <tr>
+                                        <th>Exam Title</th>
+                                        <th>Course Name</th>
+                                        <th>Topic Name</th>
+                                        <th>Trainer Name</th>
+                                        <th>Evaluator Name</th>
+                                        <th>Exam Date</th>
+                                        <th>Duration (min)</th>
+                                        <th>Max Marks</th>
+                                        <th>Passing Marks</th>
+                                        <th>Status</th>
+                                        <th>Assign Questions</th>
+                                        <th>View Questions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var exam in Model)
+                                    {
+                                        <tr>
+                                            <td>@exam.ExamTitle</td>
+                                            <td>@exam.CourseName</td>
+                                            <td>@exam.TopicName</td>
+                                            <td>@exam.InstructorName</td>
+                                            <td>@exam.EvaluatorName</td>
+                                            <td>@exam.ExamDate.ToString("dd-MM-yyyy")</td>
+                                            <td>@exam.Duration</td>
+                                            <td>@exam.MaxMarks</td>
+                                            <td>@exam.PassingMarks</td>
+                                            <td>@exam.Status</td>
+                                            <td>
+                                                <a href="@Url.Action("AssignQuestions", "ExamQuestion", new { examId = exam.ExamId })" class="action-button assign-btn">Assign Questions</a>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("ViewQuestions", "ExamQuestion", new { examId = exam.ExamId })" class="action-button view-btn">View Questions</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.emp_table').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+</body>
+</html>

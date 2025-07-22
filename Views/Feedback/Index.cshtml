@@ -1,0 +1,115 @@
+﻿@model ASSNlearningManagementSystem.Models.TrainerFeedbackPageViewModel
+
+@{
+    Layout = "_TrainerLayout";
+    ViewData["Title"] = "Feedback";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <title>User Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        div.dataTables_wrapper .dataTables_filter {
+            margin-bottom: 15px; /* Adjust as needed */
+        }
+
+        div.dataTables_wrapper .dataTables_paginate {
+            margin-top: 15px; /* space above pagination controls */
+        }
+
+        div.dataTables_wrapper .dataTables_info {
+            margin-top: 15px; /* space above info text */
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+
+        <div class="container">
+            <div class="page-contents">
+                <!-- Assigned Topics Table -->
+                <div class="container_emp mb-20">
+                    <div class="emp_head">
+                        <h3>My Assigned Topics</h3>
+                    </div>
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table">
+                                <thead>
+                                    <tr>
+                                        <th>Course Name</th>
+                                        <th>Topic Name</th>
+                                        <th>Topic Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var topic in Model.AssignedTopics)
+                                    {
+                                        <tr>
+                                            <td>@topic.CourseName</td>
+                                            <td>@topic.TopicName</td>
+                                            <td>@topic.TopicDescription</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container_emp mb-20">
+                    <div class="emp_head">
+                        <h3>User Feedback</h3>
+                    </div>
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table">
+                                <thead>
+                                    <tr>
+                                        <th>Rating ID</th>
+                                        <th>User Name</th>
+                                        <th>Course Name</th>
+                                        <th>Feedback Text</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var feedback in Model.Feedbacks)
+                                    {
+                                        <tr>
+                                            <td>@feedback.RatingId</td>
+                                            <td>@feedback.UserName</td>
+                                            <td>@feedback.CourseName</td>
+                                            <td>@feedback.FeedbackText</td>
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.emp_table').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+</body>
+</html>

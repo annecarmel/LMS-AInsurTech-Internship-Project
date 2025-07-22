@@ -1,0 +1,107 @@
+﻿@model ASSNlearningManagementSystem.Models.SessionViewModel
+
+@{
+    ViewData["Title"] = "My Sessions";
+    Layout = "~/Views/Shared/_TrainerLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+<main class="container">
+    <div class="container_emp">
+        <div class="emp_head">
+            <h3>My Sessions</h3>
+        </div>
+    </div>
+
+    <div class="empmaster_card syllabus-spacing">
+        <div class="table-responsive">
+            <table class="emp_table table" id="sessionTable">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Course</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Students</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var session in Model.SessionsList)
+                    {
+                        <tr>
+                            <td>@session.TopicName</td>
+                            <td>@session.CourseName</td>
+                            <td>@session.SessionDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                @(session.StartTime.ToString(@"hh\:mm")) - @(session.EndTime.ToString(@"hh\:mm"))
+                            </td>
+                            <td>
+                                <span class="status-label @session.Status.ToLower()">@session.Status</span>
+                            </td>
+                            <td>@session.EnrolledLearnerCount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(function () {
+            $('#sessionTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+}
+
+<style>
+    .status-label {
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: bold;
+        display: inline-block;
+        text-transform: capitalize;
+    }
+
+        .status-label.scheduled {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-label.ongoing {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-label.completed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    div.dataTables_wrapper .dataTables_filter {
+        margin-bottom: 15px;
+    }
+
+    div.dataTables_wrapper .dataTables_paginate {
+        margin-top: 15px; /* space above pagination controls */
+    }
+
+    div.dataTables_wrapper .dataTables_info {
+        margin-top: 15px; /* space above info text */
+    }
+
+    
+
+
+
+
+
+</style>

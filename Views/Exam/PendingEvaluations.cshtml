@@ -1,0 +1,150 @@
+﻿@model ASSNlearningManagementSystem.Models.EvaluationPageViewModel
+
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Pending Evaluations";
+}
+@if (TempData["Error"] != null)
+{
+    <script>
+        alert('@TempData["Error"]');
+    </script>
+}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+<style>
+    div.dataTables_wrapper .dataTables_filter {
+        margin-bottom: 15px;
+    }
+
+    div.dataTables_wrapper .dataTables_paginate {
+        margin-top: 15px;
+    }
+
+    div.dataTables_wrapper .dataTables_info {
+        margin-top: 15px;
+    }
+
+    /* Evaluate & Revaluate button styles */
+    .action-button {
+        display: inline-block;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .evaluate-btn {
+        background-color: #18AE90; /* Green */
+        color: white;
+    }
+
+        .evaluate-btn:hover {
+            background-color: #149e83;
+        }
+
+    .revaluate-btn {
+        background-color: #E6A325; /* Orange */
+        color: white;
+    }
+
+        .revaluate-btn:hover {
+            background-color: #d5961e;
+        }
+</style>
+
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Pending Evaluations</h3>
+    </div>
+    <div class="empmaster_card">
+        <div class="table-responsive">
+            <table class="emp_table table" id="pendingTable">
+                <thead>
+                    <tr>
+                        <th>Submission ID</th>
+                        <th>Exam Title</th>
+                        <th>Learner Name</th>
+                        <th>Submission Date</th>
+                        <th>Evaluate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Pending)
+                    {
+                        <tr>
+                            <td>@item.SubmissionID</td>
+                            <td>@item.ExamTitle</td>
+                            <td>@item.LearnerName</td>
+                            <td>@item.SubmissionDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <a href="@Url.Action("Evaluate", "Exam", new { submissionId = item.SubmissionID })" class="action-button evaluate-btn">Evaluate</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Completed Evaluations</h3>
+    </div>
+    <div class="empmaster_card">
+        <div class="table-responsive">
+            <table class="emp_table table" id="completedTable">
+                <thead>
+                    <tr>
+                        <th>Submission ID</th>
+                        <th>Exam Title</th>
+                        <th>Learner Name</th>
+                        <th>Max Marks</th>
+                        <th>Obtained Marks</th>
+                        <th>Exam Date</th>
+                        <th>Revaluation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eval in Model.Completed)
+                    {
+                        <tr>
+                            <td>@eval.SubmissionID</td>
+                            <td>@eval.ExamTitle</td>
+                            <td>@eval.LearnerName</td>
+                            <td>@eval.MaxMarks</td>
+                            <td>@eval.ObtainedMarks</td>
+                            <td>@eval.ExamDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <a href="@Url.Action("Revaluation", "Exam", new { submissionId = eval.SubmissionID })" class="action-button revaluate-btn">Revaluate</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#pendingTable').DataTable({
+                responsive: true
+            });
+
+            $('#completedTable').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+}

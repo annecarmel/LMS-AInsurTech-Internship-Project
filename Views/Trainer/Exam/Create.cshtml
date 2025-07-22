@@ -1,0 +1,244 @@
+﻿@model List<ASSNlearningManagementSystem.Models.Exam>
+@{
+    ViewData["Title"] = "Exam Master";
+    Layout = "~/Views/Shared/_TrainerLayout.cshtml";
+    var examToEdit = ViewBag.ExamToEdit as ASSNlearningManagementSystem.Models.Exam;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Master</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+    <style>
+        .action-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+            .action-icons i.fa-pen-to-square {
+                color: #18AE90;
+                cursor: pointer;
+            }
+
+            .action-icons i.fa-trash {
+                color: #CD2F74;
+                cursor: pointer;
+            }
+
+        .alert-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-weight: bold;
+            border-left: 5px solid;
+        }
+
+        .alert-success {
+            background-color: #e7f9f0;
+            color: #177d52;
+            border-color: #18ae90;
+        }
+
+        .alert-danger {
+            background-color: #fdeaea;
+            color: #c02d4a;
+            border-color: #cd2f74;
+        }
+
+        .status-scheduled {
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-ongoing {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .status-completed {
+            color: red;
+            font-weight: bold;
+        }
+
+        a.custom-button.cancel {
+            background-color: #E6A325;
+            color: white;
+            padding: 5px 35px;
+            border: none;
+            border-radius: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .status-label {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            display: inline-block;
+            text-transform: capitalize;
+        }
+
+            /* Status colors */
+            .status-label.scheduled {
+                background-color: #d4edda; /* Light green */
+                color: #155724;
+            }
+
+            .status-label.ongoing {
+                background-color: #fff3cd; /* Light yellow */
+                color: #856404;
+            }
+
+            .status-label.completed {
+                background-color: #f8d7da; /* Light red */
+                color: #721c24;
+            }
+
+        div.dataTables_wrapper .dataTables_filter {
+            margin-bottom: 15px; /* Adjust as needed */
+        }
+
+        div.dataTables_wrapper .dataTables_paginate {
+            margin-top: 15px; /* space above pagination controls */
+        }
+
+        div.dataTables_wrapper .dataTables_info {
+            margin-top: 15px; /* space above info text */
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="page-contents">
+
+                @if (TempData["ExamMessage"] != null)
+                {
+                    var colorClass = TempData["ExamMessage"].ToString() == "deleted" ? "alert-danger" : "alert-success";
+                    var msg = TempData["ExamMessage"].ToString() == "saved" ? "Exam saved successfully"
+                    : TempData["ExamMessage"].ToString() == "updated" ? "Exam updated successfully"
+                    : "Exam deleted successfully";
+
+                    <div class="alert-message @colorClass" id="alertBox">@msg</div>
+                }
+
+                <div class="container_emp">
+                    
+                </div>
+
+                
+
+                <div class="container_emp mb-20">
+                    <div class="emp_head">
+                        <h3>Exam List</h3>
+                    </div>
+                    <div class="empmaster_card">
+                        <div class="table-responsive">
+                            <table class="emp_table table" id="examTable">
+                                <thead>
+                                    <tr>
+                                        <th>Exam ID</th>
+                                        <th>Exam Title</th>
+                                        <th>Topic</th>
+                                        <th>Exam Date</th>
+                                        <th>Start Time</th>
+                                        <th>Duration</th>
+                                        <th>Max Marks</th>
+                                        <th>Passing Marks</th>
+                                        <th>Instructor</th>
+                                        <th>Evaluator</th>
+                                        <th>Status</th>
+                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.ExamId</td>
+                                            <td>@item.ExamTitle</td>
+                                            <td>@item.TopicName</td>
+                                            <td>@item.ExamDate.ToString("yyyy-MM-dd")</td>
+                                            <td>@(item.StartTime != null ? DateTime.Today.Add(item.StartTime.Value).ToString("hh\\:mm tt") : "-")</td>
+
+                                            <td>@item.Duration</td>
+                                            <td>@item.MaxMarks</td>
+                                            <td>@item.PassingMarks</td>
+                                            <td>@item.InstructorName</td>
+                                            <td>@item.EvaluatorName</td>
+                                            <td>
+                                                <span class="status-label @item.Status.ToLower()">@item.Status</span>
+                                            </td>
+
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#examTable').DataTable({ responsive: true });
+
+            setTimeout(() => {
+                $('#alertBox').fadeOut('slow');
+            }, 3000);
+
+            var selectedSyllabusId = '@examToEdit?.SyllabusId';
+            var selectedTopicId = '@examToEdit?.TopicId';
+
+            $('#CourseId').change(function () {
+                var courseId = $(this).val();
+                $('#SyllabusId').empty().append('<option value="">Loading...</option>');
+                $.get('/Exam/GetSyllabuses', { courseId: courseId }, function (data) {
+                    $('#SyllabusId').empty().append('<option value="">Select Syllabus</option>');
+                    $.each(data, function (i, syllabus) {
+                        var selected = syllabus.syllabusID == selectedSyllabusId ? 'selected' : '';
+                        $('#SyllabusId').append('<option value="' + syllabus.syllabusID + '" ' + selected + '>' + syllabus.title + '</option>');
+                    });
+                    if (selectedSyllabusId) {
+                        $('#SyllabusId').trigger('change');
+                    }
+                });
+            });
+
+            $('#SyllabusId').change(function () {
+                var syllabusId = $(this).val();
+                $('#TopicId').empty().append('<option value="">Loading...</option>');
+                $.get('/Exam/GetTopics', { syllabusId: syllabusId }, function (data) {
+                    $('#TopicId').empty().append('<option value="">Select Topic</option>');
+                    $.each(data, function (i, topic) {
+                        var selected = topic.topicID == selectedTopicId ? 'selected' : '';
+                        $('#TopicId').append('<option value="' + topic.topicID + '" ' + selected + '>' + topic.title + '</option>');
+                    });
+                });
+            });
+
+            if ('@examToEdit' !== '') {
+                $('#CourseId').trigger('change');
+            }
+        });
+    </script>
+</body>
+</html>

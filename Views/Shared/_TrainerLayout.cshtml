@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ALMS</title>
 
-    <!-- Google Fonts & CSS Links -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
 </head>
 <body>
-    <!-- ✅ Header Starts -->
+    <!-- Header Starts -->
     <header>
         <div class="nav_background">
             <div class="container">
@@ -27,12 +26,12 @@
                         <div class="profile">
                             <a href="#" class="profile-image"><img src="~/img/Profile Avatar.png" alt="Profile Image" /></a>
                             <div class="user_info">
-                                <h6>@User.Identity.Name</h6>
-                                <p>Asst.insurance officer</p>
+                                <h6>@Context.Session.GetString("Username")</h6>
+                                <p>@Context.Session.GetString("Department")</p>
                             </div>
                         </div>
                         <div class="logout-icon">
-                            <a href="/Account/Logout"><img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" /></a>
+                            <a asp-controller="Login" asp-action="Login"><img class="logout" src="~/img/Logout Icon.png" height="25px" alt="Logout" /></a>
                         </div>
                     </div>
                 </div>
@@ -42,24 +41,27 @@
         <div class="menubar_background">
             <div class="container">
                 <ul class="menubar_emp">
-                    <li class="menu_item"><a href="dashboard.html">Dashboard</a></li>
+                    <li class="menu_item"><a asp-controller="Trainer" asp-action="Dashboard">Dashboard</a></li>
                     <li class="menu_item">
                         <a href="#">Exams</a>
                         <ul class="submenu">
-                            <li><a href="#">Create Exam</a></li>
-                            <li><a href="#">Evaluate Exams</a></li>
+                            <li><a asp-controller="Exam" asp-action="Create">Exam List</a></li>
+                            <li><a asp-controller="Exam" asp-action="PendingEvaluations">Evaluate Exams</a></li>
+                            <li><a asp-controller="TrainerExam" asp-action="AssignedExams">Assigned Exams</a></li>
+                            
+                           
                             <!--<li><a href="#">Submenu item 3</a></li>
                             <li><a href="#">Submenu item 4</a></li>-->
                         </ul>
                     </li>
-                    <li class="menu_item"><a href="employee_master.html">Session Schedule</a></li>
-                    <li class="menu_item"><a href="employee_master.html">Assigned Topics</a></li>
-                    <li class="menu_item"><a href="login.html">Login</a></li>
+                    <li class="menu_item"><a asp-controller="Session" asp-action="TrainerSessions">Session Schedule</a></li>
+                    <li class="menu_item"><a asp-controller="Feedback" asp-action="Index">Assigned Topics</a></li>
+                    <li class="menu_item"><a asp-controller="Login" asp-action="Login">Logout</a></li>
                 </ul>
             </div>
         </div>
     </header>
-    <!-- ✅ Header Ends -->
+    <!-- Header Ends -->
     <!-- Main Content -->
     <main role="main" class="container">
         @RenderBody()

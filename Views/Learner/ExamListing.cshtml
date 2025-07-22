@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ASSNlearningManagementSystem.Models.LearnerExamViewModel>
+@{
+    Layout = "_LeanersLayout";
+    ViewData["Title"] = "Exam List";
+}
+
+<h2 class="mb-4">My Exams</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="emp_table">
+    <thead>
+        <tr>
+            <th>Exam ID</th>
+            <th>Exam Title</th>
+            <th>Topic</th>
+            <th>Duration (mins)</th>
+            <th>Max Marks</th>
+            <th>Passing Marks</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exam in Model)
+        {
+            <tr>
+                <td>@exam.ExamId</td>
+                <td>@exam.ExamTitle</td>
+                <td>@exam.TopicName</td>
+                <td>@exam.Duration</td>
+                <td>@exam.MaxMarks</td>
+                <td>@exam.PassingMarks</td>
+                <td>
+                    <a asp-action="AttendExam" asp-controller="Learner" asp-route-examId="@exam.ExamId"
+                       style="background-color: #18AE90; color: #fff; border: none; border-radius: 16px; padding: 5px 20px; font-size: 12px; cursor: pointer; text-decoration: none; display: inline-block;">
+                        Attend Exam
+                    </a>
+
+
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>

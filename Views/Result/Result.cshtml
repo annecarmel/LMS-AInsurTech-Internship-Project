@@ -1,0 +1,51 @@
+﻿@model List<ASSNlearningManagementSystem.Models.ResultViewModel>
+
+@{
+    ViewData["Title"] = "My Exam Results";
+    Layout = "_LeanersLayout";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/responsive.css" />
+</head>
+
+<div class="container my-4">
+    <h2 class="mb-4">My Exam Results</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">No exam results found.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="emp_table">
+                <thead>
+                    <tr>
+                        <th>Exam ID</th>
+                        <th>Exam Title</th>
+                        <th>Passing Marks</th>
+                        <th>Marks Obtained</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.ExamId</td>
+                            <td>@result.ExamTitle</td>
+                            <td>@result.PassingMarks</td>
+                            <td>@result.MarksObtained / @result.MaxMarks</td>
+                            <td style="color:@(result.Status == "Pass" ? "green" : "red")">
+                                @result.Status
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+

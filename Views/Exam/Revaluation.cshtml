@@ -1,0 +1,76 @@
+﻿@model ASSNlearningManagementSystem.Models.RevaluationViewModel
+
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Revaluation";
+}
+
+<style>
+    /* ✅ Common LMS button styles */
+    .action-button {
+        display: inline-block;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+
+    .submit-btn {
+        background-color: #18AE90; /* Green */
+        color: white;
+    }
+
+        .submit-btn:hover {
+            background-color: #149e83;
+        }
+
+    .cancel-btn {
+        background-color: #E6A325; /* Orange */
+        color: white;
+    }
+
+        .cancel-btn:hover {
+            background-color: #d5961e;
+        }
+</style>
+
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Revaluation for @Model.ExamTitle</h3>
+    </div>
+    <div class="empmaster_card">
+        <form asp-action="Revaluation" method="post">
+            <input type="hidden" name="SubmissionID" value="@Model.SubmissionID" />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Obtained Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Questions.Count; i++)
+                    {
+                        <tr>
+                            <td>@Model.Questions[i].QuestionText</td>
+                            <td>
+                                <input type="hidden" name="Questions[@i].QuestionID" value="@Model.Questions[i].QuestionID" />
+                                <input type="number" name="Questions[@i].ObtainedMarks" class="form-control" placeholder="Enter marks" required />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="submit" class="action-button submit-btn">Submit Revaluation</button>
+            <button type="button" class="action-button cancel-btn" onclick="location.href='@Url.Action("PendingEvaluations")'">Cancel</button>
+        </form>
+    </div>
+</div>

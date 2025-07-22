@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "y5YLax27afI=",
+  "dgSpecHash": "5y9sSxV/oc4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\nisha\\OneDrive\\Desktop\\LMS-AInsurTech-Internship-Project\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
+  "projectFilePath": "C:\\Users\\nisha\\OneDrive\\Pictures\\LMS-AInsurTech-Internship-Project\\LMS-AInsurTech-Internship-Project\\ASSNlearningManagementSystem\\ASSNlearningManagementSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nisha\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\google.protobuf\\3.30.0\\google.protobuf.3.30.0.nupkg.sha512",
@@ -12,6 +12,7 @@
     "C:\\Users\\nisha\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\mysql.data\\9.3.0\\mysql.data.9.3.0.nupkg.sha512",
+    "C:\\Users\\nisha\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\system.configuration.configurationmanager\\8.0.0\\system.configuration.configurationmanager.8.0.0.nupkg.sha512",
     "C:\\Users\\nisha\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.1\\system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",

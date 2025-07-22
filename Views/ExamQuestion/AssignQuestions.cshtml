@@ -1,0 +1,134 @@
+﻿@model List<Question>
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Assign Questions";
+}
+
+<style>
+    /* ✅ Common LMS button styles */
+    .action-button {
+        display: inline-block;
+        padding: 6px 16px;
+        border: none;
+        border-radius: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        margin: 5px 5px 5px 0;
+    }
+
+    .add-btn {
+        background-color: #18AE90; /* Green */
+        color: white;
+    }
+
+        .add-btn:hover {
+            background-color: #149e83;
+        }
+
+    .submit-btn {
+        background-color: #18AE90; /* Green */
+        color: white;
+    }
+
+        .submit-btn:hover {
+            background-color: #149e83;
+        }
+
+    .remove-btn {
+        background-color: #E6A325; /* Red */
+        color: white;
+    }
+
+        .remove-btn:hover {
+            background-color: #d5961e;
+        }
+</style>
+
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h2>Assign Questions to Exam</h2>
+    </div>
+
+    <form asp-action="AssignQuestions" asp-route-examId="@ViewBag.ExamId" method="post">
+        <div id="questions-container">
+            <!-- Dynamic questions will be inserted here -->
+        </div>
+
+        <button type="button" onclick="addQuestion()" class="action-button add-btn">Add Question</button>
+        <button type="submit" class="action-button submit-btn">Submit</button>
+    </form>
+</div>
+
+<script>
+    function addQuestion() {
+        const container = document.getElementById('questions-container');
+        const index = container.children.length;
+
+        const html = `
+            <div id="question-${index}" style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+                <label>Question Text</label>
+                <input name="questions[${index}].QuestionText" required />
+
+                <label>Type</label>
+                <select name="questions[${index}].QuestionType" onchange="toggleOptions(${index}, this.value)">
+                    <option value="MCQ">MCQ</option>
+                    <option value="Short Answer">Short Answer</option>
+                </select>
+
+                <label>Marks</label>
+                <input name="questions[${index}].Marks" type="number" required />
+
+                <div id="options-container-${index}" style="margin-top:10px;">
+                    <!-- Options will be added here if MCQ -->
+                    <button type="button" onclick="addOption(${index})" class="action-button add-btn">Add Option</button>
+                </div>
+
+                <button type="button" onclick="removeQuestion(${index})" class="action-button remove-btn">Remove Question</button>
+            </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', html);
+    }
+
+    function removeQuestion(qIndex) {
+        const qDiv = document.getElementById(`question-${qIndex}`);
+        qDiv.remove();
+    }
+
+    function toggleOptions(qIndex, qType) {
+        const optContainer = document.getElementById(`options-container-${qIndex}`);
+        if (qType === "MCQ") {
+            optContainer.style.display = "block";
+        } else {
+            optContainer.style.display = "none";
+            optContainer.innerHTML = `<button type="button" onclick="addOption(${qIndex})" class="action-button add-btn">Add Option</button>`;
+        }
+    }
+
+    function addOption(qIndex) {
+        const container = document.getElementById(`options-container-${qIndex}`);
+        const optionCount = container.querySelectorAll('.option-item').length;
+
+        const html = `
+            <div class="option-item" style="margin-left:20px; border-left: 2px solid #ccc; padding-left:10px; margin-top:10px;">
+                <label>Option Text</label>
+                <input name="questions[${qIndex}].Options[${optionCount}].OptionText" required />
+
+                <label>Is Correct</label>
+                <input name="questions[${qIndex}].Options[${optionCount}].IsCorrect" type="checkbox" />
+
+                <button type="button" onclick="removeOption(this)" class="action-button remove-btn">Remove Option</button>
+            </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', html);
+    }
+
+    function removeOption(btn) {
+        btn.parentElement.remove();
+    }
+</script>

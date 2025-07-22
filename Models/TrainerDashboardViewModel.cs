@@ -9,8 +9,8 @@
 
         public List<SessionSchedule> Sessions { get; set; }
         public List<EvaluationInfo> Evaluations { get; set; }
-        public Dictionary<string, int> BarChartData { get; set; }    // e.g. course name => session count
-        public Dictionary<string, int> PieChartData { get; set; }    // e.g. course name => exam submissions
+        public Dictionary<string, int> BarChartData { get; set; }
+        public Dictionary<string, int> PieChartData { get; set; }
     }
 
     public class SessionSchedule
@@ -27,7 +27,10 @@
         public string ExamName { get; set; }
         public string LearnerName { get; set; }
         public string Status { get; set; }
+        public int? TotalMarks { get; set; }
+        public int? MarksObtained { get; set; }
     }
+
     public class BarChartData
     {
         public string CourseName { get; set; }

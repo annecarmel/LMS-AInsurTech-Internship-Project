@@ -1,0 +1,111 @@
+﻿@model List<ASSNlearningManagementSystem.Models.QuestionViewModel>
+
+@{
+    Layout = "_TrainerLayout";
+    ViewData["Title"] = "Manage Questions";
+}
+
+<div class="container">
+    <div class="page-contents">
+        <div class="container_emp mb-20">
+            <div class="emp_head">
+                <h3>Manage Questions</h3>
+            </div>
+
+            <!-- Existing Questions Table -->
+            <div class="empmaster_card">
+                <div class="table-responsive">
+                    <table class="emp_table table">
+                        <thead>
+                            <tr>
+                                <th>Question ID</th>
+                                <th>Question Text</th>
+                                <th>Type</th>
+                                <th>Marks</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var q in Model)
+                            {
+                                <tr>
+                                    <td>@q.QuestionId</td>
+                                    <td>@q.QuestionText</td>
+                                    <td>@q.QuestionType</td>
+                                    <td>@q.Marks</td>
+                                    <td>
+                                        <a asp-action="EditQuestion" asp-route-id="@q.QuestionId" class="btn btn-sm btn-primary">Edit</a>
+                                        <a asp-action="DeleteQuestion" asp-route-id="@q.QuestionId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this question?');">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add New Question Form -->
+            <div class="container_emp mb-20 mt-4">
+                <div class="emp_head">
+                    <h4>Add New Question</h4>
+                </div>
+                <div class="empmaster_card">
+                    <form asp-action="AddQuestion" method="post">
+                        <div class="form-group">
+                            <label>Question Text</label>
+                            <input type="text" name="QuestionText" class="form-control" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Marks</label>
+                            <input type="number" name="Marks" class="form-control" required min="1" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Question Type</label>
+                            <select name="QuestionType" class="form-control" id="questionTypeSelect" required>
+                                <option value="">Select Type</option>
+                                <option value="MCQ">MCQ</option>
+                                <option value="ShortAnswer">Short Answer</option>
+                            </select>
+                        </div>
+
+                        <div id="mcqOptionsSection" style="display:none;">
+                            <label>Options</label>
+                            <div id="mcqOptionsContainer"></div>
+                            <button type="button" class="btn btn-secondary mt-2" onclick="addMCQOption()">Add Option</button>
+                        </div>
+
+                        <button type="submit" class="btn btn-success mt-3">Add Question</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function addMCQOption() {
+            var index = $('#mcqOptionsContainer .option-input').length;
+            var html = `<div class="option-input mt-2">
+                            <input type="text" name="Options[${index}].OptionText" class="form-control" placeholder="Option Text" required />
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeOption(this)">Remove</button>
+                        </div>`;
+            $('#mcqOptionsContainer').append(html);
+        }
+
+        function removeOption(btn) {
+            $(btn).parent().remove();
+        }
+
+        $('#questionTypeSelect').change(function () {
+            if ($(this).val() == "MCQ") {
+                $('#mcqOptionsSection').show();
+            } else {
+                $('#mcqOptionsSection').hide();
+                $('#mcqOptionsContainer').empty();
+            }
+        });
+    </script>
+}

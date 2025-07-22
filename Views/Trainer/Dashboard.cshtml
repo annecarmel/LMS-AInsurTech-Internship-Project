@@ -57,7 +57,7 @@
                     <div class="motor_card_box">
                         <div class="details">
                             <div class="details-header">
-                                <h6>Session Count by Topic (Bar Chart)</h6>
+                                <h6>Session Count by Course</h6>
                             </div>
                             <canvas id="barChart" style="max-width: 600px; max-height: 400px;"></canvas>
                         </div>
@@ -66,7 +66,7 @@
                     <div class="motor_card_box">
                         <div class="details">
                             <div class="details-header">
-                                <h6>Evaluation Status Distribution (Pie Chart)</h6>
+                                <h6>Evaluation Status Distribution</h6>
                             </div>
                             <canvas id="pieChart" style="max-width: 600px; max-height: 400px;"></canvas>
                         </div>
@@ -84,8 +84,6 @@
                                     <table class="table" id="table1">
                                         <thead>
                                             <tr>
-                                                <th>Edit</th>
-                                                <th>Session ID</th>
                                                 <th>Topic</th>
                                                 <th>Date</th>
                                                 <th>Learner</th>
@@ -95,14 +93,9 @@
                                             @foreach (var s in Model.Sessions)
                                             {
                                                 <tr>
-                                                    <td>
-                                                        <a href="#" class="edit-icon">
-                                                            <img src="~/img/edit Icon.png" width="15px" height="15px" />
-                                                        </a>
-                                                    </td>
-                                                    <td>@s.SessionId</td>
+
                                                     <td>@s.Topic</td>
-                                                    <td>@s.Date.ToString("yyyy-MM-dd")</td> <!-- optional: format date -->
+                                                    <td>@s.Date.ToString("yyyy-MM-dd")</td>
                                                     <td>@s.LearnerName</td>
                                                 </tr>
                                             }
@@ -123,35 +116,34 @@
                                     <table class="table" id="table2">
                                         <thead>
                                             <tr>
-                                                <th>Edit</th>
-                                                <th>Exam ID</th>
                                                 <th>Exam Name</th>
                                                 <th>Learner</th>
+                                                <th>Total Marks</th>
+                                                <th>Marks Obtained</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
-                                        @foreach (var e in Model.Evaluations)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <a href="#" class="edit-icon">
-                                                        <img src="~/img/edit Icon.png" width="15px" height="15px" />
-                                                    </a>
-                                                </td>
-                                                <td>@e.ExamId</td>
-                                                <td>@e.ExamName</td>
-                                                <td>@e.LearnerName</td>
-                                                <td>@e.Status</td>
-                                            </tr>
-                                        }
+                                        <tbody>
+                                            @foreach (var e in Model.Evaluations)
+                                            {
+                                                <tr>
+                                                    <td>@e.ExamName</td>
+                                                    <td>@e.LearnerName</td>
+                                                    <td>@(e.TotalMarks != null ? e.TotalMarks.ToString() : "N/A")</td>
+                                                    <td>@(e.MarksObtained != null ? e.MarksObtained.ToString() : "Pending")</td>
+                                                    <td>@e.Status</td>
+                                                </tr>
+                                            }
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End of table_card -->
-                </div> <!-- End of policy_card -->
-            </div> <!-- End of dashboard-contents -->
-        </div> <!-- End of container -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <div id="edit-modal" class="modal">

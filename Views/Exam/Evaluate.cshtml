@@ -1,0 +1,93 @@
+﻿@model ASSNlearningManagementSystem.Models.EvaluateExamViewModel
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Evaluate Exam";
+}
+@if (TempData["Error"] != null)
+{
+    <script>
+        alert('@TempData["Error"]');
+    </script>
+}
+
+
+<style>
+    .action-button {
+        display: inline-block;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-evaluate-btn {
+        background-color: #18AE90; 
+        color: white;
+    }
+
+        .submit-evaluate-btn:hover {
+            background-color: #149e83;
+        }
+</style>
+
+<div class="container_emp mb-20">
+    <div class="emp_head">
+        <h3>Evaluate Exam: @Model.ExamTitle</h3>
+        <p>Learner: @Model.LearnerName</p>
+    </div>
+    <form asp-action="Evaluate" method="post">
+        <input type="hidden" asp-for="SubmissionID" />
+        <input type="hidden" asp-for="PassingMarks" />
+        <table class="emp_table table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Options</th>
+                    <th>Marks Awarded</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Answers[i].QuestionText</td>
+                        <td>@Model.Answers[i].AnswerText</td>
+                        <td>
+                            @if (Model.Answers[i].QuestionType == "MCQ")
+                            {
+                                <ul>
+                                    @foreach (var opt in Model.Answers[i].Options)
+                                    {
+                                        <li>
+                                            @opt.OptionText
+                                            @if (Model.Answers[i].SelectedOptionID == opt.OptionID)
+                                            {
+                                                <strong> (Selected)</strong>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+
+                            else
+                            {
+                                <em>Not applicable</em>
+                            }
+                        </td>
+                        <td>
+                            <input type="hidden" name="Answers[@i].AnswerID" value="@Model.Answers[i].AnswerID" />
+                            <input type="number" name="Answers[@i].MarksAwarded" value="@Model.Answers[i].MarksAwarded" min="0" class="form-control" required />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button type="submit" class="action-button submit-evaluate-btn">Submit Evaluation</button>
+    </form>
+</div>

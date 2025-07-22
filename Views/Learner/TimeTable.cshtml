@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ASSNlearningManagementSystem.Models.TimeTableRow>
+
+@{
+    Layout = "_LeanersLayout";
+    ViewData["Title"] = "Time Table";
+}
+
+<div class="container my-4">
+    <h2 class="mb-4">My Timetable</h2>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    else if (!Model.Any())
+    {
+        <div class="alert alert-info">No sessions found for your enrolled courses.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="emp_table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Syllabus</th>
+                        <th>Topic</th>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Trainer</th>
+                        <th>    </th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CourseName</td>
+                            <td>@item.SyllabusName</td>
+                            <td>@item.TopicName</td>
+                            <td>@(item.SessionDate?.ToString("yyyy-MM-dd") ?? "N/A")</td>
+                            <td>@(item.StartTime?.ToString(@"hh\:mm") ?? "N/A")</td>
+                            <td>@(item.EndTime?.ToString(@"hh\:mm") ?? "N/A")</td>
+                            <td>@item.TrainerName</td>
+                            <td>
+                                <button style="background-color: #18AE90; color: #fff; border: none; border-radius: 24px; padding: 0 20px; height: 24px; font-size: 13px; cursor: pointer; font-weight: 300;">
+                                    Join Now
+                                </button>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,76 @@
+﻿@model ASSNlearningManagementSystem.Models.QuestionViewModel
+
+@{
+    Layout = "_TrainerLayout";
+    ViewData["Title"] = "Edit Question";
+}
+
+<div class="container">
+    <div class="page-contents">
+        <div class="container_emp mb-20">
+            <div class="emp_head">
+                <h3>Edit Question</h3>
+            </div>
+
+            <div class="empmaster_card">
+                <form asp-action="EditQuestion" method="post">
+                    <input type="hidden" name="QuestionId" value="@Model.QuestionId" />
+
+                    <div class="form-group">
+                        <label>Question Text</label>
+                        <input type="text" name="QuestionText" class="form-control" value="@Model.QuestionText" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Marks</label>
+                        <input type="number" name="Marks" class="form-control" value="@Model.Marks" required min="1" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Question Type</label>
+                        <input type="text" class="form-control" value="@Model.QuestionType" readonly />
+                    </div>
+
+                    @if (Model.QuestionType == "MCQ")
+                    {
+                        <div class="form-group">
+                            <label>Options</label>
+                            <div id="mcqOptionsContainer">
+                                @for (int i = 0; i < Model.Options.Count; i++)
+                                {
+                                    <div class="option-input mt-2">
+                                        <input type="hidden" name="Options[@i].OptionID" value="@Model.Options[i].OptionID" />
+                                        <input type="text" name="Options[@i].OptionText" class="form-control" value="@Model.Options[i].OptionText" required />
+                                        <button type="button" class="btn btn-danger btn-sm" onclick="removeOption(this)">Remove</button>
+                                    </div>
+                                }
+                            </div>
+                            <button type="button" class="btn btn-secondary mt-2" onclick="addMCQOption()">Add Option</button>
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+                    <a asp-action="ManageQuestions" class="btn btn-secondary mt-3">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function addMCQOption() {
+            var index = $('#mcqOptionsContainer .option-input').length;
+            var html = `<div class="option-input mt-2">
+                            <input type="hidden" name="Options[${index}].OptionID" value="0" />
+                            <input type="text" name="Options[${index}].OptionText" class="form-control" placeholder="Option Text" required />
+                            <button type="button" class="btn btn-danger btn-sm" onclick="removeOption(this)">Remove</button>
+                        </div>`;
+            $('#mcqOptionsContainer').append(html);
+        }
+
+        function removeOption(btn) {
+            $(btn).parent().remove();
+        }
+    </script>
+}

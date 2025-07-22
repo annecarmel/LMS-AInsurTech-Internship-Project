@@ -1,0 +1,87 @@
+﻿@model List<Question>
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "View Questions";
+}
+<style>
+    .action-button {
+        display: inline-block;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 10px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .assign-btn {
+        background-color: #18AE90;
+        color: white;
+    }
+
+        .assign-btn:hover {
+            background-color: #149e83;
+        }
+
+    .view-btn {
+        background-color: #E6A325;
+        color: white;
+    }
+
+        .view-btn:hover {
+            background-color: #d5961e;
+        }
+</style>
+
+<h2>Questions for Exam</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Question Text</th>
+            <th>Type</th>
+            <th>Marks</th>
+            <th>Options (for MCQ)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@q.QuestionText</td>
+                <td>@q.QuestionType</td>
+                <td>@q.Marks</td>
+                <td>
+                    @if (q.QuestionType == "MCQ" && q.Options != null && q.Options.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var opt in q.Options)
+                            {
+                                <li>
+                                    @opt.OptionText
+                                    @if (opt.IsCorrect)
+                                    {
+                                        <strong>(Correct)</strong>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>N/A</span>
+                    }
+                </td>
+                <td>
+                    <button type="button" class="action-button assign-btn" onclick="location.href='@Url.Action("EditQuestion", "ExamQuestion", new { questionId = q.QuestionID })'">Edit</button>
+
+                    <button type="button" class="action-button view-btn" onclick="location.href='@Url.Action("DeleteQuestion", "ExamQuestion", new { questionId = q.QuestionID, examId = ViewBag.ExamId })'">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

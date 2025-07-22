@@ -1,0 +1,137 @@
+﻿@model Question
+@{
+    Layout = "_TrainerLayout";
+    ViewBag.Title = "Edit Question";
+}
+
+<style>
+    
+    .action-button {
+        display: inline-block;
+        padding: 6px 16px;
+        border: none;
+        border-radius: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        transition: background-color 0.3s ease;
+        margin: 5px 5px 5px 0;
+    }
+
+    .add-btn {
+        background-color: #18AE90;
+        color: white;
+    }
+
+        .add-btn:hover {
+            background-color: #149e83;
+        }
+
+    .submit-btn-1 {
+        background-color: #18AE90; 
+        color: white;
+    }
+
+        .submit-btn-1:hover {
+            background-color: #149e83;
+        }
+
+    .remove-btn {
+        background-color: #E6A325; 
+        color: white;
+    }
+
+        .remove-btn:hover {
+            background-color: #d5961e;
+        }
+
+    .cancel-btn {
+        background-color: #E6A325; 
+        color: white;
+    }
+
+        .cancel-btn:hover {
+            background-color: #d5961e;
+        }
+</style>
+
+<h2>Edit Question</h2>
+
+<form asp-action="EditQuestion" method="post">
+    <input type="hidden" name="QuestionID" value="@Model.QuestionID" />
+    <input type="hidden" name="ExamID" value="@Model.ExamID" />
+
+    <div>
+        <label>Question Text</label>
+        <input name="QuestionText" value="@Model.QuestionText" required />
+    </div>
+
+    <div>
+        <label>Question Type</label>
+        <input name="QuestionType" value="@Model.QuestionType" readonly />
+    </div>
+
+    <div>
+        <label>Marks</label>
+        <input name="Marks" type="number" value="@Model.Marks" required />
+    </div>
+
+    @if (Model.QuestionType == "MCQ")
+    {
+        <h4>Options</h4>
+        <div id="options-container">
+            @for (int i = 0; i < Model.Options.Count; i++)
+            {
+                <div id="option-@i">
+                    <input type="hidden" name="Options[@i].OptionID" value="@Model.Options[i].OptionID" />
+                    <input type="hidden" name="Options[@i].IsDeleted" value="false" />
+
+                    <label>Option Text</label>
+                    <input name="Options[@i].OptionText" value="@Model.Options[i].OptionText" required />
+
+                    <label>Is Correct</label>
+                    <input name="Options[@i].IsCorrect" type="checkbox" @(Model.Options[i].IsCorrect ? "checked" : "") />
+
+                    <button type="button" class="action-button remove-btn" onclick="deleteOption(@i)">Delete Option</button>
+                </div>
+            }
+        </div>
+
+        <button type="button" class="action-button add-btn" onclick="addOption()">Add Option</button>
+    }
+
+    <button type="submit" class="action-button submit-btn-1">Save</button>
+    <button type="button" class="action-button cancel-btn" onclick="location.href='@Url.Action("ViewQuestions", "ExamQuestion", new { examId = Model.ExamID })'">Cancel</button>
+</form>
+
+<script>
+    function addOption() {
+        const container = document.getElementById('options-container');
+        const index = container.children.length;
+
+        container.innerHTML += `
+            <div id="option-${index}">
+                <input type="hidden" name="Options[${index}].OptionID" value="0" />
+                <input type="hidden" name="Options[${index}].IsDeleted" value="false" />
+
+                <label>Option Text</label>
+                <input name="Options[${index}].OptionText" required />
+
+                <label>Is Correct</label>
+                <input name="Options[${index}].IsCorrect" type="checkbox" />
+
+                <button type="button" class="action-button remove-btn" onclick="deleteOption(${index})">Delete Option</button>
+            </div>
+        `;
+    }
+
+    function deleteOption(index) {
+        const optionDiv = document.getElementById(`option-${index}`);
+        
+        optionDiv.querySelector(`input[name="Options[${index}].IsDeleted"]`).value = "true";
+        
+        optionDiv.style.display = "none";
+    }
+</script>
