@@ -191,7 +191,7 @@
                                         <input type="time" name="StartTime" value="@(examToEdit?.StartTime.HasValue == true ? examToEdit.StartTime.Value.ToString(@"hh\:mm") : "")" required />
                                     </div>
                                     <div class="form_group">
-                                        <label>Duration (in minutes)</label>
+                                        <label>Duration (in mins)</label>
                                         <input type="number" name="Duration" value="@(examToEdit?.Duration ?? 0)" min="0" required />
                                     </div>
                                 </div>
@@ -273,12 +273,25 @@
 
                                             <td>
                                                 <div class="action-icons">
-                                                    <a href="@Url.Action("Edit", "Exam", new { id = item.ExamId })" title="Edit">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                    </a>
-                                                    <a href="@Url.Action("Delete", "Exam", new { id = item.ExamId })" title="Delete" onclick="return confirm('Are you sure you want to delete this exam?');">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </a>
+                                                    @if (item.Status == "Scheduled")
+                                                    {
+                                                        <a href="@Url.Action("Edit", "Exam", new { id = item.ExamId })" title="Edit">
+                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                        </a>
+                                                        <a href="@Url.Action("Delete", "Exam", new { id = item.ExamId })" title="Delete" onclick="return confirm('Are you sure you want to delete this exam?');">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </a>
+                                                    }
+                                                    else if (item.Status == "Completed")
+                                                    {
+                                                        <a href="@Url.Action("Delete", "Exam", new { id = item.ExamId })" title="Delete" onclick="return confirm('Are you sure you want to delete this exam?');">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </a>
+                                                    }
+                                                    else if (item.Status == "Ongoing")
+                                                    {
+                                                        <span class="text-muted"></span>
+                                                    }
                                                 </div>
                                             </td>
                                         </tr>

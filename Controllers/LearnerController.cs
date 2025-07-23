@@ -41,19 +41,25 @@ namespace ASSNlearningManagementSystem.Controllers
 
 
 
-            // ✅ Count of exams to attend
             int examCount = 0;
             using (var con = new MySqlConnection(_connectionString))
             {
                 con.Open();
                 var cmd = new MySqlCommand(@"
-            SELECT COUNT(*) FROM exam e
-            JOIN topic t ON e.topic_id = t.TopicID
-            JOIN syllabus s ON t.SyllabusID = s.SyllabusID
-            JOIN course c ON s.CourseID = c.CourseID
-            JOIN courseenrollments ce ON ce.course_id = c.CourseID
-            WHERE ce.user_id = @userId
-              AND (ce.completion_status IS NULL OR ce.completion_status = 'Enrolled')", con);
+        SELECT COUNT(*) FROM exam e
+        JOIN topic t ON e.topic_id = t.TopicID
+        JOIN syllabus s ON t.SyllabusID = s.SyllabusID
+        JOIN course c ON s.CourseID = c.CourseID
+        JOIN courseenrollments ce ON ce.course_id = c.CourseID
+        WHERE ce.user_id = @userId
+          AND (ce.completion_status IS NULL OR ce.completion_status = 'Enrolled')
+          AND NOT EXISTS (
+              SELECT 1 FROM examsubmission es
+              WHERE es.ExamID = e.exam_id 
+              AND es.user_id = ce.user_id
+              AND es.SubmissionDate IS NOT NULL
+              AND es.created_on >= ce.enrolled_on
+          )", con);
 
                 cmd.Parameters.AddWithValue("@userId", userId);
                 examCount = Convert.ToInt32(cmd.ExecuteScalar());
@@ -135,7 +141,7 @@ namespace ASSNlearningManagementSystem.Controllers
                     CourseId = Convert.ToInt32(reader["CourseID"]),
                     CourseName = reader["CourseName"]?.ToString() ?? "",
                     Description = reader["Description"]?.ToString() ?? "",
-                    Duration = "N/A" // Or get actual duration if needed
+                    Duration = "N/A"
                 });
             }
             return list;
@@ -166,7 +172,7 @@ namespace ASSNlearningManagementSystem.Controllers
             using var con = new MySqlConnection(_connectionString);
             con.Open();
 
-            // Get course name
+            // Get course
             using (var cmd = new MySqlCommand("SELECT CourseName FROM Course WHERE CourseID = @CourseID", con))
             {
                 cmd.Parameters.AddWithValue("@CourseID", courseId);
@@ -258,12 +264,12 @@ namespace ASSNlearningManagementSystem.Controllers
 
         public IActionResult CourseList()
         {
-            int userId = GetCurrentUserId(); // get current logged-in user ID
+            int userId = GetCurrentUserId();
 
             var viewModel = new ViewLearnerModel
             {
                 CourseDetails = GetAllCourseDetails(),
-                Enrollments = GetCourseEnrollments().FindAll(e => e.UserId == userId) // get current user's enrollments
+                Enrollments = GetCourseEnrollments().FindAll(e => e.UserId == userId)
             };
 
             return View("courselearner", viewModel);
@@ -376,23 +382,40 @@ namespace ASSNlearningManagementSystem.Controllers
         {
             int userId = GetCurrentUserId();
 
+            // Validate feedback text
+            if (string.IsNullOrWhiteSpace(feedback))
+            {
+                TempData["Error"] = "Please enter feedback before submitting.";
+                return RedirectToAction("MyEnrollments");
+            }
 
+            //  Validate rating range
+            if (rating < 1 || rating > 5)
+            {
+                TempData["Error"] = "Rating must be between 1 and 5.";
+                return RedirectToAction("MyEnrollments");
+            }
+
+            //  Check if enrollment exists and get courseId
             int courseId;
             using (var con = new MySqlConnection(_connectionString))
             {
                 con.Open();
-                var cmd = new MySqlCommand("SELECT course_id FROM courseenrollments WHERE enrollment_id = @EnrollmentId", con);
+                var cmd = new MySqlCommand("SELECT course_id FROM courseenrollments WHERE enrollment_id = @EnrollmentId AND user_id = @UserID", con);
                 cmd.Parameters.AddWithValue("@EnrollmentId", enrollmentId);
+                cmd.Parameters.AddWithValue("@UserID", userId);
+
                 object result = cmd.ExecuteScalar();
                 if (result == null)
                 {
-                    TempData["Error"] = "Enrollment not found.";
+                    TempData["Error"] = "Enrollment not found or unauthorized access.";
                     return RedirectToAction("MyEnrollments");
                 }
+
                 courseId = Convert.ToInt32(result);
             }
 
-
+            //  feedback & rating
             using (var con = new MySqlConnection(_connectionString))
             {
                 con.Open();
@@ -515,7 +538,7 @@ AND NOT EXISTS (
     WHERE es.ExamID = e.exam_id 
     AND es.user_id = ce.user_id
     AND es.SubmissionDate IS NOT NULL
-    AND es.created_on >= ce.enrolled_on  -- ❗ Only block if submitted *after this enrollment*
+    AND es.created_on >= ce.enrolled_on  -- ❗ Only block if submitted after this enrollment
 )";
 
 
@@ -704,6 +727,8 @@ VALUES (@SubmissionID, @QuestionID, @OptionID, @AnswerText, @UserID, NOW())", co
             var popularCourses = new Dictionary<string, int>();
 
             using var con = new MySqlConnection(_connectionString);
+
+
             con.Open();
 
             var cmd = new MySqlCommand(@"

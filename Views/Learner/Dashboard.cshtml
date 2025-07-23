@@ -56,7 +56,7 @@
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
                         <div class="details-header">
-                            <h3>Your Perfomance</h3>
+                            <center> <h3>Your Perfomance</h3></center>
                         </div>
                         <div class="chart-container" style="width:100%; height:400px;">
                             <canvas id="barChart"></canvas>
@@ -68,7 +68,7 @@
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
                         <div class="details-header">
-                            <h3>Popular Courses</h3>
+                            <center> <h3>Popular Courses</h3></center>
                         </div>
                         <div class="chart-container" style="width:100%; height:400px;">
                             <canvas id="pieChart"></canvas>
@@ -80,7 +80,7 @@
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
                         <div class="details-header">
-                            <h3>Your Active Courses</h3>
+                            <center><h3>Your Active Courses</h3></center>
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -112,7 +112,7 @@
                 <div class="motor_card_box" style="flex: 1 1 48%;">
                     <div class="details">
                         <div class="details-header">
-                            <h3>Your Exam Results</h3>
+                            <center> <h3>Your Exam Results</h3></center>
                         </div>
                         <div class="table-responsive">
                             <table class="table">
@@ -150,16 +150,16 @@
     <script>
                 // ------------------ BAR CHART: Marks Obtained vs Max Marks ------------------
                 const barLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                               Model.Results?.Select(r => r.ExamTitle) ?? new List<string>()
-               ));
+              Model.Results?.Select(r => r.ExamTitle) ?? new List<string>()
+           ));
 
         const marksObtained = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                       Model.Results?.Select(r => r.MarksObtained) ?? new List<int>()
-                ));
+          Model.Results?.Select(r => r.MarksObtained) ?? new List<int>()
+            ));
 
         const maxMarks = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                            Model.Results?.Select(r => r.MaxMarks) ?? new List<int>()
-            ));
+                    Model.Results?.Select(r => r.MaxMarks) ?? new List<int>()
+        ));
 
         const barColors = [
             'rgba(255, 99, 132, 0.7)',
@@ -211,12 +211,12 @@
 
                 // ------------------ PIE CHART: Popular Courses ------------------
                 const pieLabels = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                   Model.PopularCourses?.Keys.ToList() ?? new List<string>()
-                ));
+               Model.PopularCourses?.Keys.ToList() ?? new List<string>()
+            ));
 
         const pieData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(
-                             Model.PopularCourses?.Values.ToList() ?? new List<int>()
-             ));
+                      Model.PopularCourses?.Values.ToList() ?? new List<int>()
+         ));
 
         const pieColors = [
             'rgba(255, 99, 132, 0.7)',

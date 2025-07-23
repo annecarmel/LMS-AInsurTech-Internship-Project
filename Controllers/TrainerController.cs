@@ -73,11 +73,14 @@ namespace ASSNlearningManagementSystem.Controllers
 
             using var con = new MySqlConnection(_connectionString);
             string query = @"
-        SELECT s.session_id, t.TopicName, s.session_date, CONCAT(u.first_name, ' ', u.last_name) AS LearnerName
-        FROM session s
-        JOIN topic t ON s.topic_id = t.TopicID
-        JOIN user u ON s.instructor_id = u.user_id
-        WHERE s.instructor_id = @userId";
+        SELECT s.session_id, t.TopicName, s.session_date,
+       GROUP_CONCAT(CONCAT(u.first_name, ' ', u.last_name) SEPARATOR ', ') AS LearnerName
+FROM session s
+JOIN topic t ON s.topic_id = t.TopicID
+JOIN courseenrollments ce ON s.course_id = ce.course_id
+JOIN user u ON ce.user_id = u.user_id
+WHERE s.instructor_id = @userId
+GROUP BY s.session_id, t.TopicName, s.session_date;";
 
             var cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@userId", userId);

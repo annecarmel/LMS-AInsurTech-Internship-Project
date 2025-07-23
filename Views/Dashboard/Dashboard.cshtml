@@ -68,6 +68,14 @@
         .pink-stars {
             color: #CD2F74;
         }
+
+        .top-5-reviews table th,
+        .top-5-reviews table td,
+        .top-5-students table th,
+        .top-5-students table td {
+            text-align: center !important;
+            vertical-align: middle;
+        }
     </style>
 </head>
 
@@ -136,14 +144,15 @@
                 </div>
 
                 <div class="table_card">
+
                     <!-- Top 5 Reviews -->
-                    <div class="motor_card_box">
+                    <div class="motor_card_box top-5-reviews">
                         <div class="details">
                             <div class="details-header">
                                 <h6>Top 5 Reviews</h6>
                             </div>
                             <div class="table-responsive mt-3">
-                                <table class="table table-striped align-middle">
+                                <table class="table table-striped align-middle text-center">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Student Name</th>
@@ -193,7 +202,6 @@
                                                             }
                                                         </span>
                                                     </td>
-
                                                     <td title="@review.Comment">
                                                         @if (!string.IsNullOrEmpty(review.Comment) && review.Comment.Length > 30)
                                                         {
@@ -220,13 +228,13 @@
                     </div>
 
                     <!-- Top 5 Students -->
-                    <div class="motor_card_box">
+                    <div class="motor_card_box top-5-students">
                         <div class="details">
                             <div class="details-header">
                                 <h6>Top 5 Students</h6>
                             </div>
                             <div class="table-responsive mt-3">
-                                <table class="table table-striped align-middle">
+                                <table class="table table-striped align-middle text-center">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Student Name</th>
@@ -275,6 +283,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
 
